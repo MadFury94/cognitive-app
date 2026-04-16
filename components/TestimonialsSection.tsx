@@ -29,14 +29,14 @@ export default function TestimonialsSection() {
             author: "Emeka O.",
             role: "Parent, ADHD",
             initials: "EO",
-            color: "bg-teal-500",
+            color: "bg-orange-500",
         },
         {
             quote: "The team genuinely cares. Our son has made incredible social and academic progress.",
             author: "Chisom N.",
             role: "Parent, autism",
             initials: "CN",
-            color: "bg-teal-600",
+            color: "bg-orange-600",
         },
         {
             quote: "After years of struggling, my son can finally read with confidence. The transformation has been life-changing.",
@@ -50,7 +50,7 @@ export default function TestimonialsSection() {
             author: "Chidi M.",
             role: "Parent, ADHD",
             initials: "CM",
-            color: "bg-teal-700",
+            color: "bg-orange-700",
         },
         {
             quote: "Professional, caring, and effective. They truly understand learning difficulties and know how to help.",
@@ -64,7 +64,7 @@ export default function TestimonialsSection() {
             author: "Tunde K.",
             role: "Parent, speech disorders",
             initials: "TK",
-            color: "bg-teal-800",
+            color: "bg-orange-800",
         },
         {
             quote: "The cognitive training program exceeded our expectations. Our child is now excelling in school and at home.",

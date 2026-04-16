@@ -6,8 +6,8 @@ export default function TeamSection() {
             name: 'Dr. Ngozi Adeyemi',
             role: 'Cognitive Director · 20 yrs',
             initials: 'NA',
-            color: 'bg-teal-100',
-            textColor: 'text-teal-700',
+            color: 'bg-orange-100',
+            textColor: 'text-orange-700',
             image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
         },
         {
@@ -22,8 +22,8 @@ export default function TeamSection() {
             name: 'Mrs. Chidinma Eze',
             role: 'ADHD & Autism Therapist',
             initials: 'CE',
-            color: 'bg-teal-100',
-            textColor: 'text-teal-700',
+            color: 'bg-orange-100',
+            textColor: 'text-orange-700',
             image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop',
         },
     ];
