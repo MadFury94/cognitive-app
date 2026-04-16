@@ -9,7 +9,7 @@ export default function ProgramsPage() {
                 label="OUR IMPACT"
                 title="PROGRAMS & INITIATIVES"
                 description="Empowering youth through targeted educational support, mentorship, and civic engagement."
-                imageSrc="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&h=600&fit=crop"
+                imageSrc="https://res.cloudinary.com/dqwfjxn8g/image/upload/v1776382665/abouth_d7qv9s.jpg"
             />
             <ProgramsList />
             <CTASection />

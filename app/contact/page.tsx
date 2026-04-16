@@ -8,7 +8,7 @@ export default function ContactPage() {
                 label="GET IN TOUCH"
                 title="Let's talk about your child"
                 description="One of our specialists will reach out within 24 hours to discuss how we can help."
-                imageSrc="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=600&fit=crop"
+                imageSrc="https://res.cloudinary.com/dqwfjxn8g/image/upload/v1776382940/african-kid-standing-whiteboard_fgn0l6.jpg"
             />
             <ContactSection />
         </div>

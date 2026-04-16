@@ -12,7 +12,7 @@ export default function AboutPage() {
                 label="ABOUT US"
                 title="Transforming lives through cognitive training"
                 description="For over 20 years, we've helped Nigerian families unlock their children's true potential through evidence-based brain training programs."
-                imageSrc="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=600&fit=crop"
+                imageSrc="https://res.cloudinary.com/dqwfjxn8g/image/upload/v1776382800/program_l3y4z3.jpg"
             />
             <StatsSection />
             <TeamSection />

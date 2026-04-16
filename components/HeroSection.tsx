@@ -20,9 +20,9 @@ export default function HeroSection() {
 
     // Placeholder images - replace with actual images from your public folder
     const heroImages = [
-        { src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop', alt: 'Children learning' },
-        { src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&h=600&fit=crop', alt: 'Cognitive training session' },
-        { src: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800&h=600&fit=crop', alt: 'Educational activities' },
+        { src: 'https://res.cloudinary.com/dqwfjxn8g/image/upload/v1776381482/cognitive_kids_1_qlg5xu.jpg', alt: 'Children learning' },
+        { src: 'https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776381460/front-view-smiley-girl-making-puzzle_blmt0y.jpg', alt: 'Cognitive training session' },
+        { src: 'https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776381449/boy-doing-occupational-therapy-session_wtaz1e.jpg', alt: 'Educational activities' },
     ];
 
     const stats = [

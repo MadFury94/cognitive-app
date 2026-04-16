@@ -4,10 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     const navLinks = [
         { name: 'About', href: '/about' },
@@ -16,8 +17,13 @@ export default function Header() {
         { name: 'Contact', href: '/contact' },
     ];
 
+    const isActive = (href: string) => {
+        if (href === '/') return pathname === '/';
+        return pathname.startsWith(href);
+    };
+
     return (
-        <header className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95 shadow-sm">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-24">
                     {/* Logo */}
@@ -33,68 +39,64 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center gap-1">
+                    <div className="hidden lg:flex items-center gap-2">
                         {navLinks.map((link) => (
-                            <Button
+                            <Link
                                 key={link.name}
-                                variant="ghost"
-                                size="default"
-                                asChild
+                                href={link.href}
+                                className={`relative px-4 py-2 text-base font-semibold transition-colors ${isActive(link.href)
+                                        ? 'text-orange-600'
+                                        : 'text-gray-700 hover:text-orange-600'
+                                    }`}
                             >
-                                <Link href={link.href}>
-                                    {link.name}
-                                </Link>
-                            </Button>
-                        ))}
-                        <Button
-                            size="lg"
-                            className="ml-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full px-6"
-                            asChild
-                        >
-                            <Link href="/book-assessment">
-                                Book Free Assessment
+                                {link.name}
+                                {isActive(link.href) && (
+                                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-600" />
+                                )}
                             </Link>
-                        </Button>
+                        ))}
+                        <Link
+                            href="/book-assessment"
+                            className="ml-4 px-6 py-3 text-base font-bold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full transition-all shadow-md hover:shadow-lg"
+                        >
+                            Book Free Assessment
+                        </Link>
                     </div>
 
                     {/* Mobile menu button */}
-                    <Button
-                        variant="ghost"
-                        size="icon"
+                    <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden"
+                        className="lg:hidden p-2 text-gray-700 hover:text-orange-600"
                         aria-label="Toggle menu"
                     >
                         {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-                    </Button>
+                    </button>
                 </div>
 
                 {/* Mobile Navigation */}
                 {mobileMenuOpen && (
-                    <div className="lg:hidden border-t border-gray-100 py-4 animate-in slide-in-from-top">
+                    <div className="lg:hidden border-t border-gray-200 py-4 animate-in slide-in-from-top">
                         <div className="flex flex-col space-y-1">
                             {navLinks.map((link) => (
-                                <Button
+                                <Link
                                     key={link.name}
-                                    variant="ghost"
-                                    className="justify-start"
-                                    asChild
+                                    href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
+                                    className={`px-4 py-3 text-base font-semibold rounded-lg transition-colors ${isActive(link.href)
+                                            ? 'text-orange-600 bg-orange-50'
+                                            : 'text-gray-700 hover:text-orange-600 hover:bg-gray-50'
+                                        }`}
                                 >
-                                    <Link href={link.href}>
-                                        {link.name}
-                                    </Link>
-                                </Button>
-                            ))}
-                            <Button
-                                className="mt-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full"
-                                asChild
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                <Link href="/book-assessment">
-                                    Book Free Assessment
+                                    {link.name}
                                 </Link>
-                            </Button>
+                            ))}
+                            <Link
+                                href="/book-assessment"
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="mt-4 px-6 py-3 text-base font-bold text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full"
+                            >
+                                Book Free Assessment
+                            </Link>
                         </div>
                     </div>
                 )}

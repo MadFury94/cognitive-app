@@ -42,7 +42,7 @@ export default function AboutHero() {
                     <div className="relative">
                         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-orange-100 to-orange-50 shadow-xl">
                             <Image
-                                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop"
+                                src="https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776382027/2149091515_ejlhwz.jpg"
                                 alt="Children learning at Cogniskills"
                                 fill
                                 className="object-cover"
