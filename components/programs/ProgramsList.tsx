@@ -120,7 +120,7 @@ export default function ProgramsList() {
                                         className="bg-orange-600 hover:bg-orange-700 text-white px-8"
                                         asChild
                                     >
-                                        <Link href="/book-assessment">
+                                        <Link href="/booking">
                                             Book assessment for this program
                                         </Link>
                                     </Button>

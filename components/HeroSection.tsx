@@ -58,8 +58,8 @@ export default function HeroSection() {
                                 className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-base"
                                 asChild
                             >
-                                <Link href="/book-assessment">
-                                    Book free assessment
+                                <Link href="/booking">
+                                    Book assessment
                                 </Link>
                             </Button>
                             <Button

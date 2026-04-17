@@ -18,8 +18,8 @@ export default function CTASection() {
                         className="bg-white text-orange-700 hover:bg-gray-100 hover:text-orange-800 px-8 py-6 text-lg font-semibold w-full sm:w-auto"
                         asChild
                     >
-                        <Link href="/book-assessment">
-                            Book free assessment
+                        <Link href="/booking">
+                            Book assessment
                         </Link>
                     </Button>
                     <Button

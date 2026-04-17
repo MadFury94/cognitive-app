@@ -156,7 +156,7 @@ export default function ContactSection() {
                                 size="lg"
                                 className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 text-lg font-semibold"
                             >
-                                Request free assessment
+                                Request assessment
                             </Button>
                         </form>
                     </div>

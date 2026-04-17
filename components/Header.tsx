@@ -45,8 +45,8 @@ export default function Header() {
                                 key={link.name}
                                 href={link.href}
                                 className={`relative px-4 py-2 text-base font-semibold transition-colors ${isActive(link.href)
-                                        ? 'text-orange-600'
-                                        : 'text-gray-700 hover:text-orange-600'
+                                    ? 'text-orange-600'
+                                    : 'text-gray-700 hover:text-orange-600'
                                     }`}
                             >
                                 {link.name}
@@ -56,10 +56,10 @@ export default function Header() {
                             </Link>
                         ))}
                         <Link
-                            href="/book-assessment"
+                            href="/booking"
                             className="ml-4 px-6 py-3 text-base font-bold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full transition-all shadow-md hover:shadow-lg"
                         >
-                            Book Free Assessment
+                            Book Assessment
                         </Link>
                     </div>
 
@@ -83,19 +83,19 @@ export default function Header() {
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`px-4 py-3 text-base font-semibold rounded-lg transition-colors ${isActive(link.href)
-                                            ? 'text-orange-600 bg-orange-50'
-                                            : 'text-gray-700 hover:text-orange-600 hover:bg-gray-50'
+                                        ? 'text-orange-600 bg-orange-50'
+                                        : 'text-gray-700 hover:text-orange-600 hover:bg-gray-50'
                                         }`}
                                 >
                                     {link.name}
                                 </Link>
                             ))}
                             <Link
-                                href="/book-assessment"
+                                href="/booking"
                                 onClick={() => setMobileMenuOpen(false)}
                                 className="mt-4 px-6 py-3 text-base font-bold text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full"
                             >
-                                Book Free Assessment
+                                Book Assessment
                             </Link>
                         </div>
                     </div>
