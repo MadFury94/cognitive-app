@@ -35,7 +35,7 @@ export default function HowItWorksSection() {
                 </div>
 
                 <div className="relative max-w-6xl mx-auto">
-                    {/* Timeline Line - Desktop */}
+                    {/* Timeline Line - Desktop only */}
                     <div className="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-orange-300/50">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-50" />
                     </div>
@@ -43,11 +43,6 @@ export default function HowItWorksSection() {
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                         {steps.map((step, index) => (
                             <div key={index} className="relative flex flex-col items-center text-center">
-                                {/* Mobile Timeline Connector */}
-                                {index < steps.length - 1 && (
-                                    <div className="lg:hidden absolute left-1/2 top-24 bottom-0 w-0.5 bg-orange-300/50 -translate-x-1/2" />
-                                )}
-
                                 <div className="relative z-10">
                                     {/* Step Number Circle */}
                                     <div className="w-24 h-24 bg-white border-2 border-orange-400 rounded-full flex items-center justify-center mb-6 shadow-sm">
