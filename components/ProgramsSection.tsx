@@ -8,37 +8,37 @@ export default function ProgramsSection() {
             icon: BookOpen,
             title: 'Dyslexia',
             description: 'Structured reading and phonological training that rewires how the brain processes text.',
-            link: '/programs/dyslexia',
+            link: '/services/dyslexia',
         },
         {
             icon: Focus,
             title: 'ADHD',
             description: 'Focus and executive function training that builds self-regulation for better learning.',
-            link: '/programs/adhd',
+            link: '/services/adhd',
         },
         {
             icon: Users,
             title: 'Autism spectrum',
             description: 'Social cognition, communication, and sensory processing support tailored to each child.',
-            link: '/programs/autism',
+            link: '/services/autism',
         },
         {
             icon: MessageSquare,
             title: 'Speech disorders',
             description: 'Language processing and articulation therapy for clearer, more confident communication.',
-            link: '/programs/speech',
+            link: '/services/speech',
         },
         {
             icon: Pencil,
             title: 'Dyspraxia',
             description: 'Motor planning and coordination training to improve physical and written tasks.',
-            link: '/programs/dyspraxia',
+            link: '/services/dyspraxia',
         },
         {
             icon: Brain,
             title: 'Learning delays',
             description: 'Cognitive strengthening across memory, processing speed, and reasoning ability.',
-            link: '/programs/learning-delays',
+            link: '/services/learning-delays',
         },
     ];
 
