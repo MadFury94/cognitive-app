@@ -16,10 +16,14 @@ export default function AdminLoginPage() {
         setError('');
         setLoading(true);
 
-        // Simple hardcoded auth (in production, use proper backend auth)
-        if (username === 'admin' && password === 'Quickflow@2026') {
+        // Get credentials from environment variables
+        const validUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin';
+        const validPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'Quickflow@2026';
+        const adminToken = process.env.NEXT_PUBLIC_ADMIN_TOKEN || 'admin-token-here';
+
+        if (username === validUsername && password === validPassword) {
             // Store auth token in localStorage
-            localStorage.setItem('admin_token', 'admin-token-here');
+            localStorage.setItem('admin_token', adminToken);
             router.push('/admin/dashboard');
         } else {
             setError('Invalid username or password');

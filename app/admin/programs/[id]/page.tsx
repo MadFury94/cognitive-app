@@ -128,17 +128,19 @@ export default function EditProgramPage() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Header */}
-            <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+            {/* Admin Header */}
+            <header className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center gap-4 h-16">
-                        <Link
-                            href="/admin/dashboard"
-                            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-                        >
-                            <ArrowLeft className="w-5 h-5" />
-                            Back
-                        </Link>
+                    <div className="flex items-center justify-between h-16">
+                        <div className="flex items-center gap-4">
+                            <Link
+                                href="/admin/dashboard"
+                                className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+                            >
+                                <ArrowLeft className="w-5 h-5" />
+                                Back to Dashboard
+                            </Link>
+                        </div>
                         <h1 className="text-xl font-bold text-gray-900">
                             Edit Program
                         </h1>
