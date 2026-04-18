@@ -1,0 +1,14 @@
+name = "cogniskills-app"
+compatibility_date = "2024-01-01"
+main = "workers/index.ts"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cogniskills-db"
+database_id = "e029de59-956e-464a-84d2-3b2c675011b2"
+
+[env.production]
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "cogniskills-db"
+database_id = "e029de59-956e-464a-84d2-3b2c675011b2"

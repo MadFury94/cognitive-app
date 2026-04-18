@@ -1,80 +1,72 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { BookOpen, Focus, Users, MessageSquare, Pencil, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+interface Program {
+    id: number;
+    slug: string;
+    title: string;
+    description: string;
+    duration: string;
+    sessions_per_week: string;
+    improvement_stat: string;
+    improvement_label: string;
+}
+
 export default function ProgramsList() {
-    const programs = [
-        {
-            icon: BookOpen,
-            title: 'Dyslexia',
-            duration: '12–24 week program',
-            description: 'Our dyslexia program targets specific phonological and reading fluency deficits using the Orton–Gillingham approach combined with cognitive brain-training. Children see measurable gains in reading speed and comprehension within weeks.',
-            avgImprovement: '2-4 grade levels',
-            avgLabel: 'AVG. IMPROVEMENT',
-            sessions: '2–3 sessions',
-            sessionsLabel: 'SESSIONS PER WEEK',
-        },
-        {
-            icon: Focus,
-            title: 'ADHD',
-            duration: '8–16 week program',
-            description: 'Executive function and attention training designed to build the self-regulation skills children with ADHD need. We combine cognitive exercises with practical strategies that parents and teachers can reinforce at home and in class.',
-            avgImprovement: '62% better',
-            avgLabel: 'FOCUS IMPROVEMENT',
-            sessions: '2 sessions',
-            sessionsLabel: 'SESSIONS PER WEEK',
-        },
-        {
-            icon: Users,
-            title: 'Autism spectrum',
-            duration: '16–32 week program',
-            description: 'Social cognition, communication, and sensory processing support tailored to each child on the spectrum. Our structured approach helps children develop better social understanding and adaptive skills.',
-            avgImprovement: '3-5 milestones',
-            avgLabel: 'AVG. PROGRESS',
-            sessions: '2–3 sessions',
-            sessionsLabel: 'SESSIONS PER WEEK',
-        },
-        {
-            icon: MessageSquare,
-            title: 'Speech disorders',
-            duration: '12–20 week program',
-            description: 'Language processing and articulation therapy for clearer, more confident communication. We address both expressive and receptive language challenges with evidence-based techniques.',
-            avgImprovement: '70% clarity',
-            avgLabel: 'SPEECH IMPROVEMENT',
-            sessions: '2 sessions',
-            sessionsLabel: 'SESSIONS PER WEEK',
-        },
-        {
-            icon: Pencil,
-            title: 'Dyspraxia',
-            duration: '12–24 week program',
-            description: 'Motor planning and coordination training to improve physical and written tasks. Our program strengthens the connection between cognitive planning and physical execution.',
-            avgImprovement: '4-6 skills',
-            avgLabel: 'MOTOR SKILLS GAINED',
-            sessions: '2–3 sessions',
-            sessionsLabel: 'SESSIONS PER WEEK',
-        },
-        {
-            icon: Brain,
-            title: 'Learning delays',
-            duration: '16–28 week program',
-            description: 'Cognitive strengthening across memory, processing speed, and reasoning ability. We identify and target specific cognitive weaknesses that are holding your child back academically.',
-            avgImprovement: '2-3 grade levels',
-            avgLabel: 'AVG. IMPROVEMENT',
-            sessions: '2–3 sessions',
-            sessionsLabel: 'SESSIONS PER WEEK',
-        },
-    ];
+    const [programs, setPrograms] = useState<Program[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchPrograms();
+    }, []);
+
+    const fetchPrograms = async () => {
+        try {
+            const response = await fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/programs');
+            const data = await response.json();
+            setPrograms(data);
+        } catch (error) {
+            console.error('Error fetching programs:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getIcon = (slug: string) => {
+        const icons: Record<string, any> = {
+            'dyslexia': BookOpen,
+            'adhd': Focus,
+            'autism': Users,
+            'speech': MessageSquare,
+            'dyspraxia': Pencil,
+            'learning-delays': Brain,
+        };
+        return icons[slug] || Brain;
+    };
+
+    if (loading) {
+        return (
+            <section className="py-16 lg:py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="py-16 lg:py-24 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="space-y-12 lg:space-y-16">
-                    {programs.map((program, index) => {
-                        const Icon = program.icon;
+                    {programs.map((program) => {
+                        const Icon = getIcon(program.slug);
                         return (
                             <div
-                                key={index}
+                                key={program.id}
                                 className="grid lg:grid-cols-[300px_1fr] gap-8 lg:gap-12 items-start"
                             >
                                 {/* Left Card */}
@@ -99,18 +91,18 @@ export default function ProgramsList() {
                                     <div className="grid sm:grid-cols-2 gap-6">
                                         <div>
                                             <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-2">
-                                                {program.avgLabel}
+                                                {program.improvement_label}
                                             </p>
                                             <p className="text-2xl sm:text-3xl font-bold text-orange-700">
-                                                {program.avgImprovement}
+                                                {program.improvement_stat}
                                             </p>
                                         </div>
                                         <div>
                                             <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-2">
-                                                {program.sessionsLabel}
+                                                SESSIONS PER WEEK
                                             </p>
                                             <p className="text-2xl sm:text-3xl font-bold text-orange-700">
-                                                {program.sessions}
+                                                {program.sessions_per_week}
                                             </p>
                                         </div>
                                     </div>

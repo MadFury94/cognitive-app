@@ -1,46 +1,58 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Brain, Focus, Users, MessageSquare, Pencil, BookOpen, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
+interface Program {
+    id: number;
+    slug: string;
+    title: string;
+    description: string;
+}
+
 export default function ProgramsSection() {
-    const programs = [
-        {
-            icon: BookOpen,
-            title: 'Dyslexia',
-            description: 'Structured reading and phonological training that rewires how the brain processes text.',
-            link: '/services/dyslexia',
-        },
-        {
-            icon: Focus,
-            title: 'ADHD',
-            description: 'Focus and executive function training that builds self-regulation for better learning.',
-            link: '/services/adhd',
-        },
-        {
-            icon: Users,
-            title: 'Autism spectrum',
-            description: 'Social cognition, communication, and sensory processing support tailored to each child.',
-            link: '/services/autism',
-        },
-        {
-            icon: MessageSquare,
-            title: 'Speech disorders',
-            description: 'Language processing and articulation therapy for clearer, more confident communication.',
-            link: '/services/speech',
-        },
-        {
-            icon: Pencil,
-            title: 'Dyspraxia',
-            description: 'Motor planning and coordination training to improve physical and written tasks.',
-            link: '/services/dyspraxia',
-        },
-        {
-            icon: Brain,
-            title: 'Learning delays',
-            description: 'Cognitive strengthening across memory, processing speed, and reasoning ability.',
-            link: '/services/learning-delays',
-        },
-    ];
+    const [programs, setPrograms] = useState<Program[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchPrograms();
+    }, []);
+
+    const fetchPrograms = async () => {
+        try {
+            const response = await fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/programs');
+            const data = await response.json();
+            setPrograms(data);
+        } catch (error) {
+            console.error('Error fetching programs:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getIcon = (slug: string) => {
+        const icons: Record<string, any> = {
+            'dyslexia': BookOpen,
+            'adhd': Focus,
+            'autism': Users,
+            'speech': MessageSquare,
+            'dyspraxia': Pencil,
+            'learning-delays': Brain,
+        };
+        return icons[slug] || Brain;
+    };
+
+    if (loading) {
+        return (
+            <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50">
@@ -55,11 +67,11 @@ export default function ProgramsSection() {
                 </div>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                    {programs.map((program, index) => {
-                        const Icon = program.icon;
+                    {programs.map((program) => {
+                        const Icon = getIcon(program.slug);
                         return (
                             <div
-                                key={index}
+                                key={program.id}
                                 className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 group"
                             >
                                 <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-600 transition-colors">
@@ -76,7 +88,7 @@ export default function ProgramsSection() {
                                     className="text-orange-600 hover:text-orange-700 p-0 h-auto font-semibold group/link"
                                     asChild
                                 >
-                                    <Link href={program.link}>
+                                    <Link href={`/services/${program.slug}`}>
                                         Learn more
                                         <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
                                     </Link>
