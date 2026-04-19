@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { BookOpen, MessageSquare, LogOut, Edit, Plus, Trash2 } from 'lucide-react';
-import Link from 'next/link';
+import { BookOpen, MessageSquare, LogOut, Edit, Plus, Trash2, Users } from 'lucide-react';
+import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -33,13 +33,27 @@ interface Testimonial {
     display_order: number;
 }
 
+interface TeamMember {
+    id: number;
+    name: string;
+    role: string;
+    initials: string;
+    image_url: string | null;
+    display_order: number;
+}
+
 export default function AdminDashboard() {
     const [programs, setPrograms] = useState<Program[]>([]);
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [loading, setLoading] = useState(true);
-    const [activeTab, setActiveTab] = useState<'programs' | 'testimonials'>('programs');
+    const [activeTab, setActiveTab] = useState<'programs' | 'testimonials' | 'team'>('programs');
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isProgramDialogOpen, setIsProgramDialogOpen] = useState(false);
+    const [isTeamDialogOpen, setIsTeamDialogOpen] = useState(false);
     const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
+    const [editingProgram, setEditingProgram] = useState<Program | null>(null);
+    const [editingTeamMember, setEditingTeamMember] = useState<TeamMember | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -54,16 +68,19 @@ export default function AdminDashboard() {
 
     const loadData = async () => {
         try {
-            const [programsRes, testimonialsRes] = await Promise.all([
+            const [programsRes, testimonialsRes, teamRes] = await Promise.all([
                 fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/programs'),
-                fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/testimonials')
+                fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/testimonials'),
+                fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/team')
             ]);
 
             const programsData = await programsRes.json();
             const testimonialsData = await testimonialsRes.json();
+            const teamData = await teamRes.json();
 
             setPrograms(programsData);
             setTestimonials(testimonialsData);
+            setTeamMembers(teamData);
         } catch (error) {
             console.error('Error loading data:', error);
         } finally {
@@ -139,6 +156,108 @@ export default function AdminDashboard() {
         }
     };
 
+    const handleSaveProgram = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+
+        if (!editingProgram) return;
+
+        const data = {
+            title: formData.get('title') as string,
+            description: formData.get('description') as string,
+            duration: formData.get('duration') as string,
+            sessions_per_week: formData.get('sessions_per_week') as string,
+            improvement_stat: formData.get('improvement_stat') as string,
+            improvement_label: formData.get('improvement_label') as string,
+        };
+
+        try {
+            const response = await fetch(
+                `https://cogniskills-app.onochieazukaeme.workers.dev/api/programs/${editingProgram.id}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer admin-token-here'
+                    },
+                    body: JSON.stringify(data)
+                }
+            );
+
+            if (response.ok) {
+                alert('Program updated successfully!');
+                setIsProgramDialogOpen(false);
+                setEditingProgram(null);
+                loadData();
+            }
+        } catch (error) {
+            console.error('Error saving program:', error);
+            alert('Failed to save program');
+        }
+    };
+
+    const handleSaveTeamMember = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+
+        const data = {
+            name: formData.get('name') as string,
+            role: formData.get('role') as string,
+            initials: formData.get('initials') as string,
+            image_url: formData.get('image_url') as string || null,
+            display_order: parseInt(formData.get('display_order') as string),
+        };
+
+        try {
+            const url = editingTeamMember
+                ? `https://cogniskills-app.onochieazukaeme.workers.dev/api/team/${editingTeamMember.id}`
+                : 'https://cogniskills-app.onochieazukaeme.workers.dev/api/team';
+
+            const response = await fetch(url, {
+                method: editingTeamMember ? 'PUT' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer admin-token-here'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert(`Team member ${editingTeamMember ? 'updated' : 'added'} successfully!`);
+                setIsTeamDialogOpen(false);
+                setEditingTeamMember(null);
+                loadData();
+            }
+        } catch (error) {
+            console.error('Error saving team member:', error);
+            alert('Failed to save team member');
+        }
+    };
+
+    const handleDeleteTeamMember = async (id: number) => {
+        if (!confirm('Are you sure you want to delete this team member?')) return;
+
+        try {
+            const response = await fetch(
+                `https://cogniskills-app.onochieazukaeme.workers.dev/api/team/${id}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer admin-token-here'
+                    }
+                }
+            );
+
+            if (response.ok) {
+                alert('Team member deleted successfully!');
+                loadData();
+            }
+        } catch (error) {
+            console.error('Error deleting team member:', error);
+            alert('Failed to delete team member');
+        }
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -154,10 +273,18 @@ export default function AdminDashboard() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center gap-4">
-                            <h1 className="text-2xl font-bold text-gray-900">CogniSkills Admin</h1>
-                            <Badge variant="secondary" className="hidden sm:inline-flex">
-                                Management Portal
-                            </Badge>
+                            <Image
+                                src="/logo.png"
+                                alt="CogniSkills Logo"
+                                width={48}
+                                height={48}
+                                className="w-12 h-12"
+                            />
+                            <div className="flex items-center gap-3">
+                                <Badge variant="secondary" className="hidden sm:inline-flex">
+                                    Management Portal
+                                </Badge>
+                            </div>
                         </div>
                         <div className="flex items-center gap-3">
                             <Button variant="outline" size="sm" asChild>
@@ -195,6 +322,15 @@ export default function AdminDashboard() {
                             <div className="text-2xl font-bold">{testimonials.length}</div>
                         </CardContent>
                     </Card>
+                    <Card>
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium">Team Members</CardTitle>
+                            <Users className="h-4 w-4 text-muted-foreground" />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">{teamMembers.length}</div>
+                        </CardContent>
+                    </Card>
                 </div>
 
                 {/* Tabs */}
@@ -212,6 +348,13 @@ export default function AdminDashboard() {
                     >
                         <MessageSquare className="w-4 h-4 mr-2" />
                         Testimonials
+                    </Button>
+                    <Button
+                        variant={activeTab === 'team' ? 'default' : 'outline'}
+                        onClick={() => setActiveTab('team')}
+                    >
+                        <Users className="w-4 h-4 mr-2" />
+                        Team
                     </Button>
                 </div>
 
@@ -243,11 +386,16 @@ export default function AdminDashboard() {
                                                 <Badge variant="secondary">{program.improvement_stat}</Badge>
                                             </TableCell>
                                             <TableCell className="text-right">
-                                                <Button variant="ghost" size="sm" asChild>
-                                                    <Link href={`/admin/programs/${program.id}`}>
-                                                        <Edit className="w-4 h-4 mr-2" />
-                                                        Edit
-                                                    </Link>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        setEditingProgram(program);
+                                                        setIsProgramDialogOpen(true);
+                                                    }}
+                                                >
+                                                    <Edit className="w-4 h-4 mr-2" />
+                                                    Edit
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
@@ -257,6 +405,88 @@ export default function AdminDashboard() {
                         </CardContent>
                     </Card>
                 )}
+
+                {/* Program Edit Dialog */}
+                <Dialog open={isProgramDialogOpen} onOpenChange={setIsProgramDialogOpen}>
+                    <DialogContent className="sm:max-w-[600px]">
+                        <form onSubmit={handleSaveProgram}>
+                            <DialogHeader>
+                                <DialogTitle>Edit Program</DialogTitle>
+                                <DialogDescription>
+                                    Update program details below
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="grid gap-2">
+                                    <Label htmlFor="title">Title</Label>
+                                    <Input
+                                        id="title"
+                                        name="title"
+                                        defaultValue={editingProgram?.title}
+                                        required
+                                    />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="description">Description</Label>
+                                    <Textarea
+                                        id="description"
+                                        name="description"
+                                        defaultValue={editingProgram?.description}
+                                        rows={3}
+                                        required
+                                    />
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="duration">Duration</Label>
+                                        <Input
+                                            id="duration"
+                                            name="duration"
+                                            defaultValue={editingProgram?.duration}
+                                            placeholder="e.g. 12-24 weeks"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="sessions_per_week">Sessions/Week</Label>
+                                        <Input
+                                            id="sessions_per_week"
+                                            name="sessions_per_week"
+                                            defaultValue={editingProgram?.sessions_per_week}
+                                            placeholder="e.g. 2-3 sessions"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="improvement_stat">Improvement Stat</Label>
+                                        <Input
+                                            id="improvement_stat"
+                                            name="improvement_stat"
+                                            defaultValue={editingProgram?.improvement_stat}
+                                            placeholder="e.g. 2-4 grade levels"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="improvement_label">Improvement Label</Label>
+                                        <Input
+                                            id="improvement_label"
+                                            name="improvement_label"
+                                            defaultValue={editingProgram?.improvement_label}
+                                            placeholder="e.g. AVG. IMPROVEMENT"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit">Save Changes</Button>
+                            </DialogFooter>
+                        </form>
+                    </DialogContent>
+                </Dialog>
 
                 {/* Testimonials Tab */}
                 {activeTab === 'testimonials' && (
@@ -394,6 +624,142 @@ export default function AdminDashboard() {
                                                         variant="ghost"
                                                         size="sm"
                                                         onClick={() => handleDeleteTestimonial(testimonial.id)}
+                                                    >
+                                                        <Trash2 className="w-4 h-4 text-red-600" />
+                                                    </Button>
+                                                </div>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {/* Team Tab */}
+                {activeTab === 'team' && (
+                    <Card>
+                        <CardHeader>
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <CardTitle>Manage Team Members</CardTitle>
+                                    <CardDescription>Add, edit, or remove team members</CardDescription>
+                                </div>
+                                <Dialog open={isTeamDialogOpen} onOpenChange={setIsTeamDialogOpen}>
+                                    <DialogTrigger asChild>
+                                        <Button onClick={() => setEditingTeamMember(null)}>
+                                            <Plus className="w-4 h-4 mr-2" />
+                                            Add Team Member
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[525px]">
+                                        <form onSubmit={handleSaveTeamMember}>
+                                            <DialogHeader>
+                                                <DialogTitle>
+                                                    {editingTeamMember ? 'Edit' : 'Add'} Team Member
+                                                </DialogTitle>
+                                                <DialogDescription>
+                                                    Fill in the team member details below
+                                                </DialogDescription>
+                                            </DialogHeader>
+                                            <div className="grid gap-4 py-4">
+                                                <div className="grid gap-2">
+                                                    <Label htmlFor="team_name">Name</Label>
+                                                    <Input
+                                                        id="team_name"
+                                                        name="name"
+                                                        defaultValue={editingTeamMember?.name}
+                                                        placeholder="e.g. Dr. John Doe"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="grid gap-2">
+                                                    <Label htmlFor="team_role">Role</Label>
+                                                    <Input
+                                                        id="team_role"
+                                                        name="role"
+                                                        defaultValue={editingTeamMember?.role}
+                                                        placeholder="e.g. Cognitive Director · 20 yrs"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="grid gap-2">
+                                                    <Label htmlFor="initials">Initials</Label>
+                                                    <Input
+                                                        id="initials"
+                                                        name="initials"
+                                                        defaultValue={editingTeamMember?.initials}
+                                                        placeholder="e.g. JD"
+                                                        maxLength={3}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="grid gap-2">
+                                                    <Label htmlFor="team_image_url">Image URL (optional)</Label>
+                                                    <Input
+                                                        id="team_image_url"
+                                                        name="image_url"
+                                                        type="url"
+                                                        defaultValue={editingTeamMember?.image_url || ''}
+                                                        placeholder="https://..."
+                                                    />
+                                                </div>
+                                                <div className="grid gap-2">
+                                                    <Label htmlFor="team_display_order">Display Order</Label>
+                                                    <Input
+                                                        id="team_display_order"
+                                                        name="display_order"
+                                                        type="number"
+                                                        defaultValue={editingTeamMember?.display_order || 0}
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <DialogFooter>
+                                                <Button type="submit">Save Team Member</Button>
+                                            </DialogFooter>
+                                        </form>
+                                    </DialogContent>
+                                </Dialog>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Name</TableHead>
+                                        <TableHead>Role</TableHead>
+                                        <TableHead>Initials</TableHead>
+                                        <TableHead>Order</TableHead>
+                                        <TableHead className="text-right">Actions</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {teamMembers.map((member) => (
+                                        <TableRow key={member.id}>
+                                            <TableCell className="font-medium">{member.name}</TableCell>
+                                            <TableCell>{member.role}</TableCell>
+                                            <TableCell>
+                                                <Badge variant="secondary">{member.initials}</Badge>
+                                            </TableCell>
+                                            <TableCell>{member.display_order}</TableCell>
+                                            <TableCell className="text-right">
+                                                <div className="flex justify-end gap-2">
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        onClick={() => {
+                                                            setEditingTeamMember(member);
+                                                            setIsTeamDialogOpen(true);
+                                                        }}
+                                                    >
+                                                        <Edit className="w-4 h-4" />
+                                                    </Button>
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        onClick={() => handleDeleteTeamMember(member.id)}
                                                     >
                                                         <Trash2 className="w-4 h-4 text-red-600" />
                                                     </Button>

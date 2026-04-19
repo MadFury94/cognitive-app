@@ -173,7 +173,7 @@ export default function ContactSection() {
                                         LOCATION
                                     </p>
                                     <p className="text-gray-900 font-medium">
-                                        Lagos, Nigeria
+                                        27 Oladimeji Alo Street, Lekki Phase 1, Lagos
                                     </p>
                                 </div>
                             </div>
@@ -189,10 +189,10 @@ export default function ContactSection() {
                                         EMAIL
                                     </p>
                                     <a
-                                        href="mailto:info@cogniskillsleh.com"
+                                        href="mailto:cogniskills@gmail.com"
                                         className="text-gray-900 font-medium hover:text-orange-600 transition-colors"
                                     >
-                                        info@cogniskillsleh.com
+                                        cogniskills@gmail.com
                                     </a>
                                 </div>
                             </div>

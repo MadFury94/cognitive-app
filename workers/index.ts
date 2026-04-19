@@ -165,6 +165,80 @@ export default {
                 return jsonResponse({ success: true, message: 'Testimonial deleted' });
             }
 
+            // GET /api/team - Fetch all team members
+            if (path === '/api/team' && request.method === 'GET') {
+                const { results } = await env.DB.prepare(
+                    'SELECT * FROM team_members WHERE is_active = 1 ORDER BY display_order, id'
+                ).all();
+                return jsonResponse(results);
+            }
+
+            // POST /api/team - Create team member (admin only)
+            if (path === '/api/team' && request.method === 'POST') {
+                const data = await request.json() as any;
+
+                const authHeader = request.headers.get('Authorization');
+                if (authHeader !== 'Bearer admin-token-here') {
+                    return jsonResponse({ error: 'Unauthorized' }, 401);
+                }
+
+                const result = await env.DB.prepare(
+                    `INSERT INTO team_members (name, role, initials, image_url, display_order)
+                     VALUES (?, ?, ?, ?, ?)`
+                ).bind(
+                    data.name,
+                    data.role,
+                    data.initials,
+                    data.image_url || null,
+                    data.display_order || 0
+                ).run();
+
+                return jsonResponse({ success: true, id: result.meta.last_row_id });
+            }
+
+            // PUT /api/team/:id - Update team member (admin only)
+            if (path.startsWith('/api/team/') && request.method === 'PUT') {
+                const id = path.split('/')[3];
+                const data = await request.json() as any;
+
+                const authHeader = request.headers.get('Authorization');
+                if (authHeader !== 'Bearer admin-token-here') {
+                    return jsonResponse({ error: 'Unauthorized' }, 401);
+                }
+
+                await env.DB.prepare(
+                    `UPDATE team_members 
+                     SET name = ?, role = ?, initials = ?, image_url = ?, 
+                         display_order = ?, updated_at = CURRENT_TIMESTAMP
+                     WHERE id = ?`
+                ).bind(
+                    data.name,
+                    data.role,
+                    data.initials,
+                    data.image_url,
+                    data.display_order,
+                    id
+                ).run();
+
+                return jsonResponse({ success: true, message: 'Team member updated' });
+            }
+
+            // DELETE /api/team/:id - Delete team member (admin only)
+            if (path.startsWith('/api/team/') && request.method === 'DELETE') {
+                const id = path.split('/')[3];
+
+                const authHeader = request.headers.get('Authorization');
+                if (authHeader !== 'Bearer admin-token-here') {
+                    return jsonResponse({ error: 'Unauthorized' }, 401);
+                }
+
+                await env.DB.prepare(
+                    'UPDATE team_members SET is_active = 0 WHERE id = ?'
+                ).bind(id).run();
+
+                return jsonResponse({ success: true, message: 'Team member deleted' });
+            }
+
             // POST /api/bookings - Save booking inquiry
             if (path === '/api/bookings' && request.method === 'POST') {
                 const data = await request.json() as any;

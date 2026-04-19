@@ -116,7 +116,7 @@ export default function Footer() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3 group">
                                 <MapPin size={18} className="text-orange-500 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                                <span className="text-sm text-gray-600">Port Harcourt, Nigeria</span>
+                                <span className="text-sm text-gray-600">27 Oladimeji Alo Street, Lekki Phase 1, Lagos</span>
                             </li>
                             <li className="flex items-center gap-3 group">
                                 <Phone size={18} className="text-orange-500 flex-shrink-0 group-hover:scale-110 transition-transform" />
@@ -124,7 +124,7 @@ export default function Footer() {
                             </li>
                             <li className="flex items-center gap-3 group">
                                 <Mail size={18} className="text-orange-500 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                                <a href="mailto:info@cogniskills.com" className="text-sm text-gray-600 hover:text-orange-500 transition-colors">info@cogniskills.com</a>
+                                <a href="mailto:cogniskills@gmail.com" className="text-sm text-gray-600 hover:text-orange-500 transition-colors">cogniskills@gmail.com</a>
                             </li>
                         </ul>
                     </div>

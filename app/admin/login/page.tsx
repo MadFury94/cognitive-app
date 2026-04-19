@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AdminLoginPage() {
     const [username, setUsername] = useState('');
@@ -38,15 +39,19 @@ export default function AdminLoginPage() {
                 <div className="bg-white rounded-2xl shadow-xl p-8">
                     {/* Logo/Header */}
                     <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Lock className="w-8 h-8 text-orange-600" />
+                        <div className="flex justify-center mb-4">
+                            <Image
+                                src="/logo.png"
+                                alt="CogniSkills Logo"
+                                width={80}
+                                height={80}
+                                className="w-20 h-20"
+                            />
                         </div>
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">
                             Admin Login
                         </h1>
-                        <p className="text-gray-600">
-                            Cogniskills Management Portal
-                        </p>
+
                     </div>
 
                     {/* Error Message */}
