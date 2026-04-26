@@ -185,32 +185,29 @@ export default function BrainTestQuiz() {
     }
 
     return (
-        <section className="py-16 lg:py-24 bg-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left: 3D Brain Visualization */}
-                    <div className="hidden lg:block">
-                        <div className="h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-                            <Suspense fallback={
-                                <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
-                                    <Brain className="w-20 h-20 text-orange-600 animate-pulse" />
-                                </div>
-                            }>
-                                <ClearBrainViewer
-                                    progress={((currentQuestion + 1) / questions.length) * 100}
-                                    currentQuestion={currentQuestion}
-                                />
-                            </Suspense>
+        <section className="min-h-screen bg-white">
+            {/* Mobile: Brain strip at top, then quiz below */}
+            {/* Desktop: Side by side */}
+            <div className="lg:hidden">
+                {/* Mobile Brain Strip */}
+                <div className="h-52 w-full relative">
+                    <Suspense fallback={
+                        <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
+                            <Brain className="w-16 h-16 text-orange-600 animate-pulse" />
                         </div>
-                        <p className="text-center text-sm text-gray-600 mt-4">
-                            🖱️ Drag to rotate • Scroll to zoom • Right-click to pan
-                        </p>
-                    </div>
+                    }>
+                        <ClearBrainViewer
+                            progress={((currentQuestion + 1) / questions.length) * 100}
+                            currentQuestion={currentQuestion}
+                        />
+                    </Suspense>
+                </div>
 
-                    {/* Right: Quiz */}
-                    <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl shadow-xl p-8 lg:p-12">
+                {/* Mobile Quiz */}
+                <div className="px-4 py-8">
+                    <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl shadow-xl p-6">
                         {/* Progress Bar */}
-                        <div className="mb-8">
+                        <div className="mb-6">
                             <div className="flex justify-between items-center mb-2">
                                 <span className="text-sm font-semibold text-gray-600">
                                     Question {currentQuestion + 1} of {questions.length}
@@ -228,17 +225,14 @@ export default function BrainTestQuiz() {
                         </div>
 
                         {/* Question */}
-                        <div className="mb-8">
+                        <div className="mb-6">
                             <div className="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full mb-3">
                                 🧠 {questions[currentQuestion].cognitiveFunction}
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">
                                 {questions[currentQuestion].question}
                             </h3>
-                            <p className="text-gray-600 text-sm mb-1">
-                                {questions[currentQuestion].description}
-                            </p>
-                            <p className="text-blue-600 text-xs font-semibold">
+                            <p className="text-gray-500 text-xs">
                                 Brain Region: {questions[currentQuestion].brainRegion}
                             </p>
                         </div>
@@ -249,11 +243,87 @@ export default function BrainTestQuiz() {
                                 <button
                                     key={index}
                                     onClick={() => handleAnswer(questions[currentQuestion].scores[index])}
-                                    className="w-full text-left px-6 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all font-semibold text-gray-700 hover:text-orange-700"
+                                    className="w-full text-left px-5 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:bg-orange-50 active:bg-orange-100 transition-all font-semibold text-gray-700 hover:text-orange-700 text-sm"
                                 >
                                     {option}
                                 </button>
                             ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop: Side by side */}
+            <div className="hidden lg:block py-16 lg:py-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        {/* Left: 3D Brain */}
+                        <div>
+                            <div className="h-[560px] rounded-3xl overflow-hidden shadow-2xl">
+                                <Suspense fallback={
+                                    <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
+                                        <Brain className="w-20 h-20 text-orange-600 animate-pulse" />
+                                    </div>
+                                }>
+                                    <ClearBrainViewer
+                                        progress={((currentQuestion + 1) / questions.length) * 100}
+                                        currentQuestion={currentQuestion}
+                                    />
+                                </Suspense>
+                            </div>
+                            <p className="text-center text-sm text-gray-500 mt-3">
+                                🖱️ Drag to rotate • Scroll to zoom • Right-click to pan
+                            </p>
+                        </div>
+
+                        {/* Right: Quiz */}
+                        <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl shadow-xl p-8 lg:p-12">
+                            {/* Progress Bar */}
+                            <div className="mb-8">
+                                <div className="flex justify-between items-center mb-2">
+                                    <span className="text-sm font-semibold text-gray-600">
+                                        Question {currentQuestion + 1} of {questions.length}
+                                    </span>
+                                    <span className="text-sm font-semibold text-orange-600">
+                                        {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
+                                    </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                    <div
+                                        className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-300"
+                                        style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Question */}
+                            <div className="mb-8">
+                                <div className="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full mb-3">
+                                    🧠 {questions[currentQuestion].cognitiveFunction}
+                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                    {questions[currentQuestion].question}
+                                </h3>
+                                <p className="text-gray-600 text-sm mb-1">
+                                    {questions[currentQuestion].description}
+                                </p>
+                                <p className="text-blue-600 text-xs font-semibold">
+                                    Brain Region: {questions[currentQuestion].brainRegion}
+                                </p>
+                            </div>
+
+                            {/* Options */}
+                            <div className="space-y-3">
+                                {questions[currentQuestion].options.map((option, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => handleAnswer(questions[currentQuestion].scores[index])}
+                                        className="w-full text-left px-6 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all font-semibold text-gray-700 hover:text-orange-700"
+                                    >
+                                        {option}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
