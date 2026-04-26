@@ -17,17 +17,24 @@ export default function AdminLoginPage() {
         setError('');
         setLoading(true);
 
-        // Get credentials from environment variables
-        const validUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin';
-        const validPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'Quickflow@2026';
-        const adminToken = process.env.NEXT_PUBLIC_ADMIN_TOKEN || 'admin-token-here';
+        try {
+            // Credentials validated server-side — never exposed to browser
+            const res = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
 
-        if (username === validUsername && password === validPassword) {
-            // Store auth token in localStorage
-            localStorage.setItem('admin_token', adminToken);
-            router.push('/admin/dashboard');
-        } else {
-            setError('Invalid username or password');
+            const data = await res.json();
+
+            if (res.ok && data.token) {
+                localStorage.setItem('admin_token', data.token);
+                router.push('/admin/dashboard');
+            } else {
+                setError(data.error || 'Invalid username or password');
+            }
+        } catch {
+            setError('Connection error. Please try again.');
         }
 
         setLoading(false);

@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { MessageSquare, CheckCircle2, Clock, Users } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Speech Therapy for Children Lagos",
+    description: "Evidence-based speech and language therapy for children in Lagos. Improve articulation, expressive language, and communication confidence.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/speech" },
+};
 
 export default function SpeechPage() {
     return (

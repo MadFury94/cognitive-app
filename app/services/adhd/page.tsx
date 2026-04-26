@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Focus, CheckCircle2, Clock, Users, TrendingUp } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "ADHD Support & Training for Children Lagos",
+    description: "Cognitive training for children with ADHD in Lagos. Build attention, focus, and self-regulation skills. 62% improvement in focus on average.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/adhd" },
+};
 
 export default function ADHDPage() {
     return (

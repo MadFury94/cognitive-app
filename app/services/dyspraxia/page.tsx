@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Pencil, CheckCircle2, Clock, Users } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Dyspraxia Motor Skills Training Lagos",
+    description: "Motor planning and coordination training for children with dyspraxia in Lagos. Improve handwriting, coordination, and physical confidence.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/dyspraxia" },
+};
 
 export default function DyspraxiaPage() {
     return (

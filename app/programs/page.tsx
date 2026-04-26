@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ProgramsList from '@/components/programs/ProgramsList';
 import CTASection from '@/components/CTASection';
+
+export const metadata: Metadata = {
+    title: "Programs & Initiatives",
+    description: "Explore Cogniskills' cognitive training programs for children with dyslexia, ADHD, autism, and learning delays in Lagos, Nigeria.",
+    alternates: { canonical: "https://cogniskillsleh.com/programs" },
+};
 
 export default function ProgramsPage() {
     return (

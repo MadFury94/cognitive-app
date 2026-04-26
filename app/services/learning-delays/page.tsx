@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Brain, CheckCircle2, Clock, Users } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Learning Delays Program for Children Lagos",
+    description: "Cognitive strengthening for children with learning delays in Lagos. Target memory, processing speed, and reasoning to unlock academic potential.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/learning-delays" },
+};
 
 export default function LearningDelaysPage() {
     return (

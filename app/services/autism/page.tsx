@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Users, CheckCircle2, Clock, TrendingUp } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Autism Spectrum Support Program Lagos",
+    description: "Tailored social cognition, communication, and sensory processing support for children on the autism spectrum in Lagos, Nigeria.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/autism" },
+};
 
 export default function AutismPage() {
     return (

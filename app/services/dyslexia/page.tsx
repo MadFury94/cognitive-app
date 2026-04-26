@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { BookOpen, CheckCircle2, Clock, Users } from 'lucide-react';
+
+export const metadata: Metadata = {
+    title: "Dyslexia Treatment Program Lagos",
+    description: "Specialist dyslexia training for children in Lagos using the Orton-Gillingham approach. Children improve 2-4 grade levels on average. Book an assessment today.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/dyslexia" },
+};
 
 export default function DyslexiaPage() {
     return (

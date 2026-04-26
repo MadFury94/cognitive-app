@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import BrainTestQuiz from '@/components/brain-test/BrainTestQuiz';
+
+export const metadata: Metadata = {
+    title: "Free Brain Test for Children",
+    description: "Take our free 5-minute cognitive screening test to identify potential learning challenges in your child. Not a diagnosis — a starting point.",
+    alternates: { canonical: "https://cogniskillsleh.com/brain-test" },
+};
 
 export default function BrainTestPage() {
     return (

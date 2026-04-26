@@ -137,9 +137,11 @@ export default function ClearBrainViewer({
 }: ClearBrainViewerProps) {
     const normalizedProgress = Math.min(Math.max(progress / 100, 0), 1);
     const [webGLAvailable, setWebGLAvailable] = useState<boolean | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
     const currentRegion = BRAIN_REGIONS[currentQuestion % 5];
 
     useEffect(() => {
+        setIsMobile(window.innerWidth < 1024);
         try {
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -149,10 +151,15 @@ export default function ClearBrainViewer({
         }
     }, []);
 
-    if (webGLAvailable === false || webGLAvailable === null) {
+    // Mobile or no WebGL - simple fallback, no 3D
+    if (isMobile || webGLAvailable === false || webGLAvailable === null) {
         return (
             <div className="w-full h-full relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-                <Brain className="w-32 h-32 text-orange-600 animate-pulse" />
+                <div className="text-center px-4">
+                    <Brain className="w-20 h-20 text-orange-500 mx-auto mb-3" />
+                    <p className="text-white font-semibold text-sm">{currentRegion.function}</p>
+                    <p className="text-gray-400 text-xs mt-1">{currentRegion.name}</p>
+                </div>
             </div>
         );
     }

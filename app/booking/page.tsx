@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import BookingForm from '@/components/booking/BookingForm';
+
+export const metadata: Metadata = {
+    title: "Book a Cognitive Assessment",
+    description: "Schedule a comprehensive cognitive assessment for your child. Our specialists in Lagos will create a personalised brain training plan.",
+    alternates: { canonical: "https://cogniskillsleh.com/booking" },
+};
 
 export default function BookingPage() {
     return (

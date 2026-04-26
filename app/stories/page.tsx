@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import StoriesGrid from '@/components/stories/StoriesGrid';
 import CTASection from '@/components/CTASection';
+
+export const metadata: Metadata = {
+    title: "Success Stories",
+    description: "Read real stories from Nigerian families whose children transformed through Cogniskills' cognitive training programs.",
+    alternates: { canonical: "https://cogniskillsleh.com/stories" },
+};
 
 export default function StoriesPage() {
     return (

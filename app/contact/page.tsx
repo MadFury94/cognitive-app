@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ContactSection from '@/components/about/ContactSection';
+
+export const metadata: Metadata = {
+    title: "Contact Us",
+    description: "Get in touch with Cogniskills in Lagos. Our specialists respond within 24 hours to discuss how we can help your child thrive.",
+    alternates: { canonical: "https://cogniskillsleh.com/contact" },
+};
 
 export default function ContactPage() {
     return (

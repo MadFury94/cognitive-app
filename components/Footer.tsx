@@ -15,6 +15,7 @@ export default function Footer() {
                                     src="/logo.png"
                                     alt="Cogniskills Logo"
                                     fill
+                                    sizes="128px"
                                     className="object-contain"
                                 />
                             </div>
