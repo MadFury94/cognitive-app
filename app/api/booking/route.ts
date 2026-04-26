@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 // Basic input sanitiser
 function sanitise(str: unknown): string {
     if (typeof str !== 'string') return '';
