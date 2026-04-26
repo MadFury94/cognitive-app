@@ -1,9 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Brain, Focus, Users, MessageSquare, Pencil, BookOpen, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import dynamic from 'next/dynamic';
+
+// Dynamically import 3D component
+const FloatingShapes = dynamic(
+    () => import('@/components/three/FloatingShapes'),
+    { ssr: false }
+);
 
 interface Program {
     id: number;
@@ -55,8 +62,15 @@ export default function ProgramsSection() {
     }
 
     return (
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50 relative overflow-hidden">
+            {/* 3D Floating Shapes Background */}
+            <div className="absolute inset-0 opacity-30 pointer-events-none hidden lg:block">
+                <Suspense fallback={<div />}>
+                    <FloatingShapes />
+                </Suspense>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-12 lg:mb-16">
                     <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm mb-3">
                         What We Treat

@@ -10,6 +10,7 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
+    const isHomePage = pathname === '/';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,10 +59,10 @@ export default function Header() {
                                 key={link.name}
                                 href={link.href}
                                 className={`relative px-4 py-2 text-base font-semibold transition-colors ${isActive(link.href)
-                                        ? 'text-orange-600'
-                                        : isScrolled
-                                            ? 'text-gray-700 hover:text-orange-600'
-                                            : 'text-white hover:text-orange-400'
+                                    ? 'text-orange-600'
+                                    : isScrolled || isHomePage
+                                        ? 'text-gray-700 hover:text-orange-600'
+                                        : 'text-white hover:text-orange-400'
                                     }`}
                             >
                                 {link.name}
@@ -81,9 +82,9 @@ export default function Header() {
                     {/* Mobile menu button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className={`lg:hidden p-2 transition-colors ${isScrolled
-                                ? 'text-gray-700 hover:text-orange-600'
-                                : 'text-white hover:text-orange-400'
+                        className={`lg:hidden p-2 transition-colors ${isScrolled || isHomePage
+                            ? 'text-gray-700 hover:text-orange-600'
+                            : 'text-white hover:text-orange-400'
                             }`}
                         aria-label="Toggle menu"
                     >

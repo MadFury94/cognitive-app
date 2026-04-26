@@ -11,7 +11,14 @@ import {
     CarouselPrevious,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { useRef } from 'react';
+import { useRef, Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import 3D component to avoid SSR issues
+const BrainVisualization = dynamic(
+    () => import('@/components/three/BrainVisualization'),
+    { ssr: false }
+);
 
 export default function HeroSection() {
     const plugin = useRef(
@@ -33,8 +40,15 @@ export default function HeroSection() {
     ];
 
     return (
-        <section className="bg-gradient-to-br from-orange-50 via-white to-orange-50 pt-32 pb-16 lg:pt-40 lg:pb-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="bg-gradient-to-br from-orange-50 via-white to-orange-50 pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
+            {/* 3D Brain Background */}
+            <div className="absolute top-0 right-0 w-1/3 h-full opacity-20 pointer-events-none hidden lg:block">
+                <Suspense fallback={<div />}>
+                    <BrainVisualization />
+                </Suspense>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Left Content */}
                     <div className="space-y-8">
