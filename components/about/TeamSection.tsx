@@ -90,11 +90,19 @@ export default function TeamSection() {
                             <div key={member.id} className="group">
                                 {/* Image/Avatar */}
                                 <div className="relative aspect-square rounded-2xl overflow-hidden mb-6 bg-gradient-to-br from-gray-100 to-gray-50">
-                                    <div className={`absolute inset-0 ${colors.bg} flex items-center justify-center`}>
-                                        <span className={`text-6xl font-bold ${colors.text}`}>
-                                            {member.initials}
-                                        </span>
-                                    </div>
+                                    {member.image_url ? (
+                                        <img
+                                            src={member.image_url}
+                                            alt={member.name}
+                                            className="absolute inset-0 w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className={`absolute inset-0 ${colors.bg} flex items-center justify-center`}>
+                                            <span className={`text-6xl font-bold ${colors.text}`}>
+                                                {member.initials}
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Info */}

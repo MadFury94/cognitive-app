@@ -2,13 +2,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navLinks = [
         { name: 'About', href: '/about' },
@@ -23,7 +33,10 @@ export default function Header() {
     };
 
     return (
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/95 shadow-sm">
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+            ? 'bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-200'
+            : 'bg-transparent'
+            }`}>
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-24">
                     {/* Logo */}
@@ -45,8 +58,10 @@ export default function Header() {
                                 key={link.name}
                                 href={link.href}
                                 className={`relative px-4 py-2 text-base font-semibold transition-colors ${isActive(link.href)
-                                    ? 'text-orange-600'
-                                    : 'text-gray-700 hover:text-orange-600'
+                                        ? 'text-orange-600'
+                                        : isScrolled
+                                            ? 'text-gray-700 hover:text-orange-600'
+                                            : 'text-white hover:text-orange-400'
                                     }`}
                             >
                                 {link.name}
@@ -66,7 +81,10 @@ export default function Header() {
                     {/* Mobile menu button */}
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden p-2 text-gray-700 hover:text-orange-600"
+                        className={`lg:hidden p-2 transition-colors ${isScrolled
+                                ? 'text-gray-700 hover:text-orange-600'
+                                : 'text-white hover:text-orange-400'
+                            }`}
                         aria-label="Toggle menu"
                     >
                         {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
