@@ -173,7 +173,7 @@ export default function ContactSection() {
                                         LOCATION
                                     </p>
                                     <p className="text-gray-900 font-medium">
-                                        27 Oladimeji Alo Street, Lekki Phase 1, Lagos
+                                        25 Oladimeji Alo Street, Lekki Phase 1, Lagos
                                     </p>
                                 </div>
                             </div>
@@ -208,10 +208,16 @@ export default function ContactSection() {
                                         PHONE
                                     </p>
                                     <a
-                                        href="tel:+2348000000000"
-                                        className="text-gray-900 font-medium hover:text-orange-600 transition-colors"
+                                        href="tel:+2348038586878"
+                                        className="text-gray-900 font-medium hover:text-orange-600 transition-colors block"
                                     >
-                                        +234 800 000 0000
+                                        0803 858 6878
+                                    </a>
+                                    <a
+                                        href="tel:+2349011811088"
+                                        className="text-gray-900 font-medium hover:text-orange-600 transition-colors block"
+                                    >
+                                        0901 181 1088
                                     </a>
                                 </div>
                             </div>

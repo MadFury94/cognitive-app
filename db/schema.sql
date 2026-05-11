@@ -21,7 +21,10 @@ INSERT INTO programs (slug, title, description, duration, sessions_per_week, imp
 ('autism', 'Autism spectrum', 'Social cognition, communication, and sensory processing support tailored to each child.', '16-32 weeks', '2-3 sessions', '3-5 milestones', 'AVG. PROGRESS', 'Users'),
 ('speech', 'Speech disorders', 'Language processing and articulation therapy for clearer, more confident communication.', '12-20 weeks', '2 sessions', '70% clarity', 'SPEECH IMPROVEMENT', 'MessageSquare'),
 ('dyspraxia', 'Dyspraxia', 'Motor planning and coordination training to improve physical and written tasks.', '12-24 weeks', '2-3 sessions', '4-6 skills', 'MOTOR SKILLS GAINED', 'Pencil'),
-('learning-delays', 'Learning delays', 'Cognitive strengthening across memory, processing speed, and reasoning ability.', '16-28 weeks', '2-3 sessions', '2-3 grade levels', 'AVG. IMPROVEMENT', 'Brain');
+('learning-delays', 'Learning delays', 'Cognitive strengthening across memory, processing speed, and reasoning ability.', '16-28 weeks', '2-3 sessions', '2-3 grade levels', 'AVG. IMPROVEMENT', 'Brain'),
+('cognitive-assessment', 'Cognitive Skills Assessment', 'A comprehensive evaluation of your child''s cognitive profile — auditory processing, working memory, attention, processing speed, and more — to identify the root cause of learning difficulties.', '1-2 sessions', '1 session', 'Full profile', 'COGNITIVE PROFILE', 'Brain'),
+('teletherapy', 'Cognitive Skills Teletherapy', 'The full Cognigym training program delivered online. Same structured, evidence-based sessions — accessible from anywhere in Nigeria and beyond.', '12-24 weeks', '2-3 sessions', 'Remote access', 'FLEXIBLE DELIVERY', 'Brain'),
+('reading-spelling', 'Reading and Spelling', 'Targeted auditory and phonological training that builds the brain skills behind accurate reading and spelling — using the Auditory Integration Code (AIC) methodology.', '12-20 weeks', '2-3 sessions', '2-4 grade levels', 'AVG. IMPROVEMENT', 'BookOpen');
 
 -- Testimonials Table
 CREATE TABLE IF NOT EXISTS testimonials (

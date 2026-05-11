@@ -44,6 +44,9 @@ export default function ProgramsList() {
             'speech': MessageSquare,
             'dyspraxia': Pencil,
             'learning-delays': Brain,
+            'cognitive-assessment': Brain,
+            'teletherapy': Brain,
+            'reading-spelling': BookOpen,
         };
         return icons[slug] || Brain;
     };

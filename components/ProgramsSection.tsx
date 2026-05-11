@@ -5,6 +5,7 @@ import { Brain, Focus, Users, MessageSquare, Pencil, BookOpen, ArrowRight } from
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import dynamic from 'next/dynamic';
+import { programsSectionContent } from '@/lib/content';
 
 // Dynamically import 3D component
 const FloatingShapes = dynamic(
@@ -73,11 +74,14 @@ export default function ProgramsSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-12 lg:mb-16">
                     <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm mb-3">
-                        What We Treat
+                        {programsSectionContent.eyebrow}
                     </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-                        A specialised program<br />for every challenge
+                        {programsSectionContent.heading}
                     </h2>
+                    <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-lg">
+                        {programsSectionContent.description}
+                    </p>
                 </div>
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

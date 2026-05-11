@@ -13,8 +13,8 @@ import {
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef, Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import { heroContent } from '@/lib/content';
 
-// Dynamically import 3D component to avoid SSR issues
 const BrainVisualization = dynamic(
     () => import('@/components/three/BrainVisualization'),
     { ssr: false }
@@ -24,20 +24,6 @@ export default function HeroSection() {
     const plugin = useRef(
         Autoplay({ delay: 3000, stopOnInteraction: true })
     );
-
-    // Placeholder images - replace with actual images from your public folder
-    const heroImages = [
-        { src: 'https://res.cloudinary.com/dqwfjxn8g/image/upload/v1776381482/cognitive_kids_1_qlg5xu.jpg', alt: 'Children learning' },
-        { src: 'https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776381460/front-view-smiley-girl-making-puzzle_blmt0y.jpg', alt: 'Cognitive training session' },
-        { src: 'https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776381449/boy-doing-occupational-therapy-session_wtaz1e.jpg', alt: 'Educational activities' },
-    ];
-
-    const stats = [
-        { value: '20+', label: 'Years experience' },
-        { value: '300+', label: 'Students helped' },
-        { value: '8', label: 'Conditions treated' },
-        { value: '95%', label: 'Parent satisfaction' },
-    ];
 
     return (
         <section className="bg-gradient-to-br from-orange-50 via-white to-orange-50 pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
@@ -54,16 +40,16 @@ export default function HeroSection() {
                     <div className="space-y-8">
                         <div className="space-y-2">
                             <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm">
-                                Cognitive Skills Training · Lagos, Nigeria
+                                {heroContent.eyebrow}
                             </p>
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                                Every child deserves to{' '}
-                                <span className="text-orange-600 italic">learn without limits</span>
+                                {heroContent.headline}{' '}
+                                <span className="text-orange-600 italic">{heroContent.headlineAccent}</span>
                             </h1>
                         </div>
 
                         <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                            Scientifically grounded cognitive training for children with dyslexia, ADHD, autism, and learning delays. We train the brain, not just the subject.
+                            {heroContent.description}
                         </p>
 
                         <div className="flex flex-wrap gap-4">
@@ -72,8 +58,8 @@ export default function HeroSection() {
                                 className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-base"
                                 asChild
                             >
-                                <Link href="/booking">
-                                    Book assessment
+                                <Link href={heroContent.primaryCta.href}>
+                                    {heroContent.primaryCta.label}
                                 </Link>
                             </Button>
                             <Button
@@ -82,15 +68,15 @@ export default function HeroSection() {
                                 className="border-2 border-gray-300 hover:border-orange-600 hover:text-orange-600 px-8 py-6 text-base"
                                 asChild
                             >
-                                <Link href="/brain-test">
-                                    Take brain test
+                                <Link href={heroContent.secondaryCta.href}>
+                                    {heroContent.secondaryCta.label}
                                 </Link>
                             </Button>
                         </div>
 
                         {/* Stats Grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8">
-                            {stats.map((stat, index) => (
+                            {heroContent.stats.map((stat, index) => (
                                 <div key={index} className="space-y-1">
                                     <div className="text-3xl font-bold text-gray-900">
                                         {stat.value}
@@ -112,13 +98,14 @@ export default function HeroSection() {
                             onMouseLeave={plugin.current.reset}
                         >
                             <CarouselContent>
-                                {heroImages.map((image, index) => (
+                                {heroContent.images.map((image, index) => (
                                     <CarouselItem key={index}>
                                         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-100 to-orange-50">
                                             <Image
                                                 src={image.src}
                                                 alt={image.alt}
                                                 fill
+                                                sizes="(max-width: 1024px) 100vw, 50vw"
                                                 className="object-cover"
                                                 priority={index === 0}
                                             />
@@ -132,14 +119,12 @@ export default function HeroSection() {
 
                         {/* Stats Cards Overlay */}
                         <div className="absolute -bottom-8 left-0 right-0 grid grid-cols-2 gap-4 px-4">
-                            <div className="bg-white rounded-xl shadow-lg p-4 backdrop-blur-sm bg-white/95">
-                                <div className="text-2xl font-bold text-orange-600">20+</div>
-                                <div className="text-xs text-gray-600">Years of excellence</div>
-                            </div>
-                            <div className="bg-white rounded-xl shadow-lg p-4 backdrop-blur-sm bg-white/95">
-                                <div className="text-2xl font-bold text-orange-600">300+</div>
-                                <div className="text-xs text-gray-600">Families transformed</div>
-                            </div>
+                            {heroContent.overlayStats.map((stat, index) => (
+                                <div key={index} className="bg-white rounded-xl shadow-lg p-4 backdrop-blur-sm bg-white/95">
+                                    <div className="text-2xl font-bold text-orange-600">{stat.value}</div>
+                                    <div className="text-xs text-gray-600">{stat.label}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

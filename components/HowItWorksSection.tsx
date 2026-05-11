@@ -1,37 +1,21 @@
+import { howItWorksContent } from '@/lib/content';
+
 export default function HowItWorksSection() {
-    const steps = [
-        {
-            number: '1',
-            title: 'Free assessment',
-            description: 'Full cognitive profile mapping your child\'s strengths and gaps',
-        },
-        {
-            number: '2',
-            title: 'Custom program',
-            description: 'A personalised training plan designed around your child\'s needs',
-        },
-        {
-            number: '3',
-            title: 'Brain training',
-            description: 'Structured weekly sessions using proven cognitive methods',
-        },
-        {
-            number: '4',
-            title: 'Track progress',
-            description: 'Regular reviews with measurable results in reading and focus',
-        },
-    ];
+    const { eyebrow, heading, description, steps } = howItWorksContent;
 
     return (
         <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 lg:mb-20">
                     <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm mb-3">
-                        How It Works
+                        {eyebrow}
                     </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-                        From assessment to transformation
+                        {heading}
                     </h2>
+                    <p className="mt-4 text-gray-600 max-w-2xl text-lg">
+                        {description}
+                    </p>
                 </div>
 
                 <div className="relative max-w-6xl mx-auto">
@@ -44,14 +28,11 @@ export default function HowItWorksSection() {
                         {steps.map((step, index) => (
                             <div key={index} className="relative flex flex-col items-center text-center">
                                 <div className="relative z-10">
-                                    {/* Step Number Circle */}
                                     <div className="w-24 h-24 bg-white border-2 border-orange-400 rounded-full flex items-center justify-center mb-6 shadow-sm">
                                         <span className="text-3xl font-bold text-orange-600">
                                             {step.number}
                                         </span>
                                     </div>
-
-                                    {/* Content */}
                                     <div>
                                         <h3 className="text-xl font-bold text-gray-900 mb-3">
                                             {step.title}

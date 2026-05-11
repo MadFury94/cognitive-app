@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import { footerContent, siteContent } from '@/lib/content';
 
 export default function Footer() {
     return (
@@ -21,7 +22,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <p className="text-sm leading-relaxed text-gray-600 mb-6">
-                            Empowering children with learning difficulties through specialized cognitive skills training and educational support.
+                            {footerContent.tagline}
                         </p>
 
                         {/* Social Media */}
@@ -53,61 +54,29 @@ export default function Footer() {
                     <div>
                         <h3 className="text-gray-900 font-bold text-lg mb-6">Quick Links</h3>
                         <ul className="space-y-3">
-                            <li>
-                                <Link href="/about" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/programs" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    Our Programs
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/stories" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    Success Stories
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/contact" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    Contact Us
-                                </Link>
-                            </li>
+                            {footerContent.quickLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link href={link.href} className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
+                                        <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Programs */}
+                    {/* Services */}
                     <div>
-                        <h3 className="text-gray-900 font-bold text-lg mb-6">Our Programs</h3>
+                        <h3 className="text-gray-900 font-bold text-lg mb-6">Our Services</h3>
                         <ul className="space-y-3">
-                            <li>
-                                <Link href="/programs/cognitive-training" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    Cognitive Skills Training
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/programs/summer-brain-gym" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    Summer Brain Gym
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/programs/assessment" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    Learning Assessment
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/programs/tutoring" className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
-                                    <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
-                                    One-on-One Tutoring
-                                </Link>
-                            </li>
+                            {footerContent.serviceLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link href={link.href} className="text-gray-600 hover:text-orange-500 transition-colors text-sm flex items-center group">
+                                        <span className="w-0 group-hover:w-2 h-0.5 bg-orange-500 transition-all mr-0 group-hover:mr-2"></span>
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
@@ -117,15 +86,18 @@ export default function Footer() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3 group">
                                 <MapPin size={18} className="text-orange-500 mt-1 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                                <span className="text-sm text-gray-600">27 Oladimeji Alo Street, Lekki Phase 1, Lagos</span>
+                                <span className="text-sm text-gray-600">{siteContent.address}</span>
                             </li>
-                            <li className="flex items-center gap-3 group">
-                                <Phone size={18} className="text-orange-500 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                                <a href="tel:+234XXXXXXXXX" className="text-sm text-gray-600 hover:text-orange-500 transition-colors">+234 XXX XXX XXXX</a>
+                            <li className="flex items-start gap-3 group">
+                                <Phone size={18} className="text-orange-500 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                                <div className="flex flex-col gap-1">
+                                    <a href={`tel:${siteContent.phone}`} className="text-sm text-gray-600 hover:text-orange-500 transition-colors">{siteContent.phone}</a>
+                                    <a href={`tel:${siteContent.phone2}`} className="text-sm text-gray-600 hover:text-orange-500 transition-colors">{siteContent.phone2}</a>
+                                </div>
                             </li>
                             <li className="flex items-center gap-3 group">
                                 <Mail size={18} className="text-orange-500 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                                <a href="mailto:cogniskills@gmail.com" className="text-sm text-gray-600 hover:text-orange-500 transition-colors">cogniskills@gmail.com</a>
+                                <a href={`mailto:${siteContent.email}`} className="text-sm text-gray-600 hover:text-orange-500 transition-colors">{siteContent.email}</a>
                             </li>
                         </ul>
                     </div>
@@ -135,7 +107,7 @@ export default function Footer() {
                 <div className="border-t border-orange-200 mt-12 pt-8">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <p className="text-sm text-gray-600 text-center sm:text-left">
-                            © {new Date().getFullYear()} Cogniskills Learning Enhancement Center. All rights reserved.
+                            &copy; {new Date().getFullYear()} {siteContent.fullName}. All rights reserved.
                         </p>
                         <div className="flex gap-6 text-sm">
                             <Link href="/privacy" className="text-gray-600 hover:text-orange-500 transition-colors">Privacy Policy</Link>

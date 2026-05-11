@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Fredoka, Inter } from "next/font/google";
 import "./globals.css";
-import LayoutWrapper from "@/components/LayoutWrapper";
 
 const fredoka = Fredoka({
   weight: ["400", "500", "600", "700"],
@@ -80,10 +79,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
-  verification: {
-    // Add your Google Search Console verification token here
-    // google: "your-google-verification-token",
-  },
 };
 
 export default function RootLayout({
@@ -134,7 +129,7 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">
-        <LayoutWrapper>{children}</LayoutWrapper>
+        {children}
       </body>
     </html>
   );

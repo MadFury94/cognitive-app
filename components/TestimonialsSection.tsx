@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
+import { testimonialsSectionContent } from '@/lib/content';
 
 interface Testimonial {
     id: number;
@@ -72,15 +73,19 @@ export default function TestimonialsSection() {
         );
     }
 
+    if (testimonials.length === 0) {
+        return null;
+    }
+
     return (
         <section className="py-16 lg:py-24 bg-gray-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 lg:mb-16">
                     <p className="text-orange-400 font-semibold tracking-wide uppercase text-sm mb-3">
-                        Success Stories
+                        {testimonialsSectionContent.eyebrow}
                     </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
-                        What parents are saying
+                        {testimonialsSectionContent.heading}
                     </h2>
                 </div>
 

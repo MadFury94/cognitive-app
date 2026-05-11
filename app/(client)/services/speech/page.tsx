@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
-import { Brain, CheckCircle2, Clock, Users } from 'lucide-react';
+import { MessageSquare, CheckCircle2, Clock, Users } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: "Learning Delays Program for Children Lagos",
-    description: "Cognitive strengthening for children with learning delays in Lagos. Target memory, processing speed, and reasoning to unlock academic potential.",
-    alternates: { canonical: "https://cogniskillsleh.com/services/learning-delays" },
+    title: "Speech Disorders Program Lagos | Cognigym Auditory Processing Training",
+    description: "Cogniskills uses the Cognigym program to train auditory processing, sound blending, and language skills in children with speech disorders in Lagos.",
+    alternates: { canonical: "https://cogniskillsleh.com/services/speech" },
 };
 
-export default function LearningDelaysPage() {
+export default function SpeechPage() {
     return (
         <div className="min-h-screen">
             <PageHeader
-                label="LEARNING DELAYS PROGRAM"
-                title="Cognitive strengthening across all areas"
-                description="Target specific cognitive weaknesses in memory, processing speed, and reasoning ability."
-                imageSrc="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=600&fit=crop"
+                label="SPEECH DISORDERS PROGRAM"
+                title="Auditory processing & language training"
+                description="The Cognigym program trains the brain skills behind speech — auditory processing, sound discrimination, blending, and language comprehension — so children can communicate clearly and confidently."
+                imageSrc="https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776381460/front-view-smiley-girl-making-puzzle_blmt0y.jpg"
             />
 
             <section className="py-16 lg:py-24 bg-white">
@@ -25,10 +25,16 @@ export default function LearningDelaysPage() {
                         <div className="lg:col-span-2 space-y-12">
                             <div>
                                 <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                                    What is our Learning Delays Program?
+                                    What is our Speech Disorders Program?
                                 </h2>
                                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                                    Cognitive strengthening across memory, processing speed, and reasoning ability. We identify and target specific cognitive weaknesses that are holding your child back academically.
+                                    Speech difficulties are often rooted in how the brain processes sound. Children who struggle to speak clearly, form words, or express themselves may have underlying weaknesses in auditory processing, auditory discrimination, or sound blending — not just a speech habit.
+                                </p>
+                                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                                    The Cognigym speech program uses the Auditory Instruction Code (AIC) to drill the 17 core sounds used in language, alongside Auditory Segment Word (ASW), Auditory Blend Read (ABR), and Auditory Blend Oral (ABO) to train the brain to hear, process, and produce sounds accurately.
+                                </p>
+                                <p className="text-lg text-gray-700 leading-relaxed">
+                                    When the brain can process sounds correctly, speech and language follow naturally.
                                 </p>
                             </div>
 
@@ -41,7 +47,7 @@ export default function LearningDelaysPage() {
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Duration</h4>
-                                            <p className="text-gray-700 text-sm">16-28 week program</p>
+                                            <p className="text-gray-700 text-sm">12-20 week program</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4">
@@ -50,7 +56,7 @@ export default function LearningDelaysPage() {
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Sessions</h4>
-                                            <p className="text-gray-700 text-sm">2-3 sessions per week</p>
+                                            <p className="text-gray-700 text-sm">2 sessions per week</p>
                                         </div>
                                     </div>
                                 </div>
@@ -60,14 +66,14 @@ export default function LearningDelaysPage() {
                                 <h3 className="text-2xl font-bold text-gray-900 mb-6">What We Address</h3>
                                 <div className="space-y-4">
                                     {[
-                                        'Slow processing speed',
-                                        'Poor working memory',
-                                        'Difficulty with reasoning',
-                                        'Academic underachievement',
-                                        'Difficulty learning new concepts',
-                                        'Poor retention of information',
-                                        'Struggles across multiple subjects',
-                                        'Low academic confidence',
+                                        'Weak auditory processing — difficulty hearing and distinguishing sounds',
+                                        'Poor auditory discrimination — cannot hear differences in similar sounds',
+                                        'Difficulty blending sounds to form words',
+                                        'Difficulty segmenting words into individual sounds',
+                                        'Expressive language delays — struggles to form sentences',
+                                        'Receptive language challenges — difficulty understanding spoken language',
+                                        'Articulation difficulties and unclear speech',
+                                        'Limited vocabulary and word retrieval',
                                     ].map((item, index) => (
                                         <div key={index} className="flex items-start gap-3">
                                             <CheckCircle2 className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
@@ -79,7 +85,7 @@ export default function LearningDelaysPage() {
                         </div>
 
                         <div className="lg:col-span-1">
-                            <ServiceBookingForm serviceName="Learning Delays" serviceSlug="learning-delays" />
+                            <ServiceBookingForm serviceName="Speech Disorders" serviceSlug="speech" />
                         </div>
                     </div>
                 </div>
