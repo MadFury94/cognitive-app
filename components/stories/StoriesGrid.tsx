@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { Star, Quote } from 'lucide-react';
@@ -41,10 +41,10 @@ export default function StoriesGrid() {
 
     const getColorClass = (index: number) => {
         const colors = [
-            'bg-orange-500',
-            'bg-orange-600',
-            'bg-orange-700',
-            'bg-orange-800',
+            'bg-brand-500',
+            'bg-brand-600',
+            'bg-brand-700',
+            'bg-brand-800',
         ];
         return colors[index % colors.length];
     };
@@ -53,7 +53,7 @@ export default function StoriesGrid() {
         return (
             <section className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
             </section>
         );
@@ -69,7 +69,7 @@ export default function StoriesGrid() {
                             className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
                         >
                             {/* Quote Icon */}
-                            <Quote className="w-10 h-10 text-orange-200 mb-4" />
+                            <Quote className="w-10 h-10 text-brand-200 mb-4" />
 
                             {/* Quote */}
                             <blockquote className="text-gray-700 leading-relaxed mb-6 text-base">
@@ -98,7 +98,7 @@ export default function StoriesGrid() {
                                 {[...Array(testimonial.rating)].map((_, i) => (
                                     <Star
                                         key={i}
-                                        className="w-4 h-4 fill-orange-500 text-orange-500"
+                                        className="w-4 h-4 fill-brand-500 text-brand-500"
                                     />
                                 ))}
                             </div>

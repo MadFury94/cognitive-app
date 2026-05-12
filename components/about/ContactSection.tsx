@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,12 +28,12 @@ export default function ContactSection() {
     };
 
     return (
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-50 via-amber-50 to-brand-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
                     {/* Left - Form */}
                     <div>
-                        <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm mb-3">
+                        <p className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-3">
                             GET IN TOUCH
                         </p>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -55,7 +55,7 @@ export default function ContactSection() {
                                     value={formData.parentName}
                                     onChange={handleChange}
                                     placeholder="e.g. Adebisi Okafor"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                     required
                                 />
                             </div>
@@ -71,7 +71,7 @@ export default function ContactSection() {
                                     value={formData.phone}
                                     onChange={handleChange}
                                     placeholder="+234 800 000 0000"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                     required
                                 />
                             </div>
@@ -87,7 +87,7 @@ export default function ContactSection() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="you@example.com"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                     required
                                 />
                             </div>
@@ -101,7 +101,7 @@ export default function ContactSection() {
                                     name="childAge"
                                     value={formData.childAge}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all bg-white"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
                                     required
                                 >
                                     <option value="">Select age range</option>
@@ -122,7 +122,7 @@ export default function ContactSection() {
                                     name="condition"
                                     value={formData.condition}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all bg-white"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
                                     required
                                 >
                                     <option value="">Select condition</option>
@@ -147,14 +147,14 @@ export default function ContactSection() {
                                     onChange={handleChange}
                                     placeholder="Describe what you've noticed..."
                                     rows={4}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all resize-none"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
                                 />
                             </div>
 
                             <Button
                                 type="submit"
                                 size="lg"
-                                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 text-lg font-semibold"
+                                className="w-full bg-brand-600 hover:bg-brand-700 text-white py-6 text-lg font-semibold"
                             >
                                 Request assessment
                             </Button>
@@ -165,8 +165,8 @@ export default function ContactSection() {
                     <div className="space-y-6">
                         <div className="bg-white rounded-2xl p-6 shadow-sm">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <MapPin className="w-5 h-5 text-orange-600" />
+                                <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <MapPin className="w-5 h-5 text-brand-600" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-1">
@@ -181,8 +181,8 @@ export default function ContactSection() {
 
                         <div className="bg-white rounded-2xl p-6 shadow-sm">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Mail className="w-5 h-5 text-orange-600" />
+                                <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Mail className="w-5 h-5 text-brand-600" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-1">
@@ -190,7 +190,7 @@ export default function ContactSection() {
                                     </p>
                                     <a
                                         href="mailto:cogniskills@gmail.com"
-                                        className="text-gray-900 font-medium hover:text-orange-600 transition-colors"
+                                        className="text-gray-900 font-medium hover:text-brand-600 transition-colors"
                                     >
                                         cogniskills@gmail.com
                                     </a>
@@ -200,8 +200,8 @@ export default function ContactSection() {
 
                         <div className="bg-white rounded-2xl p-6 shadow-sm">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Phone className="w-5 h-5 text-orange-600" />
+                                <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Phone className="w-5 h-5 text-brand-600" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-1">
@@ -209,13 +209,13 @@ export default function ContactSection() {
                                     </p>
                                     <a
                                         href="tel:+2348038586878"
-                                        className="text-gray-900 font-medium hover:text-orange-600 transition-colors block"
+                                        className="text-gray-900 font-medium hover:text-brand-600 transition-colors block"
                                     >
                                         0803 858 6878
                                     </a>
                                     <a
                                         href="tel:+2349011811088"
-                                        className="text-gray-900 font-medium hover:text-orange-600 transition-colors block"
+                                        className="text-gray-900 font-medium hover:text-brand-600 transition-colors block"
                                     >
                                         0901 181 1088
                                     </a>
@@ -225,8 +225,8 @@ export default function ContactSection() {
 
                         <div className="bg-white rounded-2xl p-6 shadow-sm">
                             <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Clock className="w-5 h-5 text-orange-600" />
+                                <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Clock className="w-5 h-5 text-brand-600" />
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-1">

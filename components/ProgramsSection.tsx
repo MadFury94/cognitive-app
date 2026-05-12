@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, Suspense } from 'react';
 import { Brain, Focus, Users, MessageSquare, Pencil, BookOpen, ArrowRight } from 'lucide-react';
@@ -54,16 +54,16 @@ export default function ProgramsSection() {
 
     if (loading) {
         return (
-            <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50">
+            <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-50 via-white to-brand-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
             </section>
         );
     }
 
     return (
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50 relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-50 via-white to-brand-50 relative overflow-hidden">
             {/* 3D Floating Shapes Background */}
             <div className="absolute inset-0 opacity-30 pointer-events-none hidden lg:block">
                 <Suspense fallback={<div />}>
@@ -73,7 +73,7 @@ export default function ProgramsSection() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-12 lg:mb-16">
-                    <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm mb-3">
+                    <p className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-3">
                         {programsSectionContent.eyebrow}
                     </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
@@ -92,8 +92,8 @@ export default function ProgramsSection() {
                                 key={program.id}
                                 className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 group"
                             >
-                                <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-600 transition-colors">
-                                    <Icon className="w-6 h-6 text-orange-600 group-hover:text-white transition-colors" />
+                                <div className="w-12 h-12 bg-brand-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-600 transition-colors">
+                                    <Icon className="w-6 h-6 text-brand-600 group-hover:text-white transition-colors" />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                                     {program.title}
@@ -103,7 +103,7 @@ export default function ProgramsSection() {
                                 </p>
                                 <Button
                                     variant="link"
-                                    className="text-orange-600 hover:text-orange-700 p-0 h-auto font-semibold group/link"
+                                    className="text-brand-600 hover:text-brand-700 p-0 h-auto font-semibold group/link"
                                     asChild
                                 >
                                     <Link href={`/services/${program.slug}`}>

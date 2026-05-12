@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
@@ -162,11 +162,11 @@ export default function InteractiveBrainViewer({ progress = 0, currentQuestion =
             <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg p-3">
                 <div className="flex items-center justify-between mb-2">
                     <span className="text-white text-sm font-semibold">Brain Activity</span>
-                    <span className="text-orange-400 text-sm font-bold">{Math.round(normalizedProgress * 100)}%</span>
+                    <span className="text-brand-400 text-sm font-bold">{Math.round(normalizedProgress * 100)}%</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2">
                     <div
-                        className="bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500 h-2 rounded-full transition-all duration-500"
+                        className="bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500 h-2 rounded-full transition-all duration-500"
                         style={{ width: `${normalizedProgress * 100}%` }}
                     />
                 </div>

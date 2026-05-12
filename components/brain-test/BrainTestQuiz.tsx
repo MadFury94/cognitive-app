@@ -1,67 +1,170 @@
-'use client';
+﻿'use client';
 
-import { useState, Suspense } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { Brain } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import { Brain, CheckCircle2, AlertCircle, AlertTriangle, ChevronRight } from 'lucide-react';
 
-// Dynamically import 3D component with clear HD brain display
-const ClearBrainViewer = dynamic(
-    () => import('@/components/three/ClearBrainViewer'),
-    { ssr: false }
-);
+// Each question maps to a cognitive skill area
+interface Question {
+    id: number;
+    area: string;
+    areaLabel: string;
+    question: string;
+    options: { label: string; score: number }[];
+}
+
+const questions: Question[] = [
+    {
+        id: 1,
+        area: 'reading',
+        areaLabel: 'Reading & Phonics',
+        question: 'How does your child handle reading aloud?',
+        options: [
+            { label: 'Reads fluently with good comprehension', score: 3 },
+            { label: 'Reads slowly but manages most words', score: 2 },
+            { label: 'Struggles with many words, skips or guesses', score: 1 },
+            { label: 'Avoids reading or cannot decode basic words', score: 0 },
+        ],
+    },
+    {
+        id: 2,
+        area: 'spelling',
+        areaLabel: 'Spelling & Writing',
+        question: 'How is your child\'s spelling?',
+        options: [
+            { label: 'Spells most words correctly', score: 3 },
+            { label: 'Makes occasional errors but improving', score: 2 },
+            { label: 'Frequently misspells common words', score: 1 },
+            { label: 'Spelling is very poor or inconsistent', score: 0 },
+        ],
+    },
+    {
+        id: 3,
+        area: 'attention',
+        areaLabel: 'Attention & Focus',
+        question: 'How long can your child focus on schoolwork without getting distracted?',
+        options: [
+            { label: 'More than 20 minutes without prompting', score: 3 },
+            { label: '10–20 minutes with occasional reminders', score: 2 },
+            { label: 'Less than 10 minutes, needs constant prompting', score: 1 },
+            { label: 'Cannot sustain focus even for a few minutes', score: 0 },
+        ],
+    },
+    {
+        id: 4,
+        area: 'memory',
+        areaLabel: 'Working Memory',
+        question: 'When you give your child a sequence of instructions (e.g. "put your bag away, wash your hands, then sit down"), what happens?',
+        options: [
+            { label: 'Follows all steps without reminders', score: 3 },
+            { label: 'Usually manages but sometimes forgets the last step', score: 2 },
+            { label: 'Often forgets steps mid-way through', score: 1 },
+            { label: 'Can only follow one instruction at a time', score: 0 },
+        ],
+    },
+    {
+        id: 5,
+        area: 'processing',
+        areaLabel: 'Processing Speed',
+        question: 'How quickly does your child respond to questions or complete tasks compared to peers?',
+        options: [
+            { label: 'At the same pace or faster than peers', score: 3 },
+            { label: 'Slightly slower but catches up', score: 2 },
+            { label: 'Noticeably slower, often the last to finish', score: 1 },
+            { label: 'Very slow, struggles to complete tasks in time', score: 0 },
+        ],
+    },
+    {
+        id: 6,
+        area: 'listening',
+        areaLabel: 'Auditory Processing',
+        question: 'How well does your child follow verbal instructions given in class or at home?',
+        options: [
+            { label: 'Understands and follows instructions well', score: 3 },
+            { label: 'Occasionally mishears or needs repetition', score: 2 },
+            { label: 'Frequently misunderstands or asks for repetition', score: 1 },
+            { label: 'Often seems not to hear or process what is said', score: 0 },
+        ],
+    },
+    {
+        id: 7,
+        area: 'maths',
+        areaLabel: 'Logic & Reasoning',
+        question: 'How does your child handle problem-solving tasks like maths or puzzles?',
+        options: [
+            { label: 'Approaches problems logically and confidently', score: 3 },
+            { label: 'Manages with some support', score: 2 },
+            { label: 'Gets frustrated quickly, avoids problem-solving', score: 1 },
+            { label: 'Cannot work through problems independently', score: 0 },
+        ],
+    },
+    {
+        id: 8,
+        area: 'coordination',
+        areaLabel: 'Motor Skills & Coordination',
+        question: 'How is your child\'s handwriting and physical coordination (sports, tying laces, etc.)?',
+        options: [
+            { label: 'Age-appropriate, no concerns', score: 3 },
+            { label: 'Slightly untidy or clumsy but manageable', score: 2 },
+            { label: 'Noticeably poor handwriting or coordination', score: 1 },
+            { label: 'Significant difficulty with physical tasks', score: 0 },
+        ],
+    },
+    {
+        id: 9,
+        area: 'confidence',
+        areaLabel: 'Confidence & Motivation',
+        question: 'How does your child feel about school and learning?',
+        options: [
+            { label: 'Generally positive and motivated', score: 3 },
+            { label: 'Mixed — some subjects fine, others cause anxiety', score: 2 },
+            { label: 'Often reluctant, says they are "stupid" or "can\'t do it"', score: 1 },
+            { label: 'Refuses school, strong emotional reactions to learning', score: 0 },
+        ],
+    },
+    {
+        id: 10,
+        area: 'progress',
+        areaLabel: 'Academic Progress',
+        question: 'How is your child performing relative to their class?',
+        options: [
+            { label: 'At or above grade level', score: 3 },
+            { label: 'Slightly behind but progressing', score: 2 },
+            { label: 'Noticeably behind in one or more subjects', score: 1 },
+            { label: 'Significantly behind, teachers have raised concerns', score: 0 },
+        ],
+    },
+];
+
+// Map area keys to friendly concern labels
+const areaNames: Record<string, string> = {
+    reading: 'Reading & Phonics',
+    spelling: 'Spelling & Writing',
+    attention: 'Attention & Focus',
+    memory: 'Working Memory',
+    processing: 'Processing Speed',
+    listening: 'Auditory Processing',
+    maths: 'Logic & Reasoning',
+    coordination: 'Motor Skills',
+    confidence: 'Confidence & Motivation',
+    progress: 'Academic Progress',
+};
 
 export default function BrainTestQuiz() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [answers, setAnswers] = useState<number[]>([]);
+    const [answers, setAnswers] = useState<{ area: string; score: number }[]>([]);
     const [showResults, setShowResults] = useState(false);
+    const [selected, setSelected] = useState<number | null>(null);
 
-    const questions = [
-        {
-            question: 'Can you read this sentence without difficulty?',
-            description: 'Tests basic reading comprehension',
-            brainRegion: 'Occipital & Temporal Lobes',
-            cognitiveFunction: 'Reading & Language Processing',
-            options: ['Yes, easily', 'With some effort', 'With difficulty', 'Cannot read it'],
-            scores: [3, 2, 1, 0],
-        },
-        {
-            question: 'How long can you focus on homework without getting distracted?',
-            description: 'Tests attention span',
-            brainRegion: 'Prefrontal Cortex',
-            cognitiveFunction: 'Attention & Focus',
-            options: ['More than 30 minutes', '15-30 minutes', '5-15 minutes', 'Less than 5 minutes'],
-            scores: [3, 2, 1, 0],
-        },
-        {
-            question: 'Can you remember a list of 5 items after hearing them once?',
-            description: 'Tests working memory',
-            brainRegion: 'Hippocampus & Temporal Lobe',
-            cognitiveFunction: 'Working Memory',
-            options: ['Yes, all 5', '3-4 items', '1-2 items', 'None'],
-            scores: [3, 2, 1, 0],
-        },
-        {
-            question: 'How quickly can you solve simple math problems (like 7 + 8)?',
-            description: 'Tests processing speed',
-            brainRegion: 'Parietal Lobe',
-            cognitiveFunction: 'Processing Speed',
-            options: ['Instantly', 'Within 5 seconds', 'Need more time', 'Very difficult'],
-            scores: [3, 2, 1, 0],
-        },
-        {
-            question: 'Can you follow multi-step instructions (like "get your bag, put on shoes, and wait by the door")?',
-            description: 'Tests executive function',
-            brainRegion: 'Frontal Lobe',
-            cognitiveFunction: 'Executive Function',
-            options: ['Yes, easily', 'Usually', 'Sometimes forget steps', 'Very difficult'],
-            scores: [3, 2, 1, 0],
-        },
-    ];
+    const handleSelect = (score: number) => {
+        setSelected(score);
+    };
 
-    const handleAnswer = (score: number) => {
-        const newAnswers = [...answers, score];
+    const handleNext = () => {
+        if (selected === null) return;
+        const newAnswers = [...answers, { area: questions[currentQuestion].area, score: selected }];
         setAnswers(newAnswers);
+        setSelected(null);
 
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
@@ -70,263 +173,216 @@ export default function BrainTestQuiz() {
         }
     };
 
-    const calculateResults = () => {
-        const total = answers.reduce((sum, score) => sum + score, 0);
-        const maxScore = questions.length * 3;
-        const percentage = (total / maxScore) * 100;
-
-        if (percentage >= 80) {
-            return {
-                level: 'Excellent',
-                color: 'text-green-600',
-                bgColor: 'bg-green-50',
-                message: 'Cognitive skills appear to be developing well! Continue supporting learning with regular practice.',
-                recommendation: 'Consider our advanced enrichment programs to further enhance skills.',
-            };
-        } else if (percentage >= 60) {
-            return {
-                level: 'Good',
-                color: 'text-blue-600',
-                bgColor: 'bg-blue-50',
-                message: 'Cognitive skills are developing, but there may be areas for improvement.',
-                recommendation: 'A comprehensive assessment could identify specific areas to strengthen.',
-            };
-        } else if (percentage >= 40) {
-            return {
-                level: 'Needs Attention',
-                color: 'text-orange-600',
-                bgColor: 'bg-orange-50',
-                message: 'Some cognitive challenges detected. Early intervention can make a significant difference.',
-                recommendation: 'We strongly recommend booking a full cognitive assessment.',
-            };
-        } else {
-            return {
-                level: 'Requires Support',
-                color: 'text-red-600',
-                bgColor: 'bg-red-50',
-                message: 'Significant cognitive challenges detected. Professional assessment is highly recommended.',
-                recommendation: 'Please book an assessment as soon as possible. Early intervention is crucial.',
-            };
-        }
-    };
-
     const resetTest = () => {
         setCurrentQuestion(0);
         setAnswers([]);
         setShowResults(false);
+        setSelected(null);
     };
 
     if (showResults) {
-        const results = calculateResults();
-        const total = answers.reduce((sum, score) => sum + score, 0);
+        const total = answers.reduce((sum, a) => sum + a.score, 0);
         const maxScore = questions.length * 3;
+        const percentage = (total / maxScore) * 100;
+
+        // Identify weak areas (score 0 or 1)
+        const concerns = answers
+            .filter(a => a.score <= 1)
+            .map(a => areaNames[a.area]);
+
+        // Identify moderate areas (score 2)
+        const moderate = answers
+            .filter(a => a.score === 2)
+            .map(a => areaNames[a.area]);
+
+        const severity = percentage >= 70 ? 'low' : percentage >= 45 ? 'moderate' : 'high';
+
+        const summaryMap = {
+            low: {
+                icon: <CheckCircle2 className="w-10 h-10 text-green-600" />,
+                bg: 'bg-green-50 border-green-200',
+                badge: 'bg-green-100 text-green-800',
+                label: 'Mostly on track',
+                headline: 'Your child appears to be developing well in most areas.',
+                body: concerns.length > 0
+                    ? `There are a few areas worth keeping an eye on. Early support can prevent small gaps from becoming bigger ones.`
+                    : `No significant concerns were flagged. If you still have worries, a full assessment will give you certainty.`,
+            },
+            moderate: {
+                icon: <AlertTriangle className="w-10 h-10 text-amber-500" />,
+                bg: 'bg-amber-50 border-amber-200',
+                badge: 'bg-amber-100 text-amber-800',
+                label: 'Some areas need attention',
+                headline: 'Your answers suggest your child may be struggling in several cognitive areas.',
+                body: `These kinds of gaps don't fix themselves with more tutoring — they need targeted brain training. A full cognitive assessment will tell you exactly what's going on.`,
+            },
+            high: {
+                icon: <AlertCircle className="w-10 h-10 text-red-500" />,
+                bg: 'bg-red-50 border-red-200',
+                badge: 'bg-red-100 text-red-800',
+                label: 'Significant challenges detected',
+                headline: 'Your answers indicate your child is facing real cognitive challenges that need professional attention.',
+                body: `The good news: these are trainable brain skills, not fixed limitations. The Cognigym program has helped hundreds of children in similar situations. The sooner you act, the better the outcome.`,
+            },
+        };
+
+        const summary = summaryMap[severity];
 
         return (
-            <section className="py-16 lg:py-24 bg-white">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl shadow-xl p-8 lg:p-12">
-                        <div className="text-center mb-8">
-                            <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <Brain className="w-10 h-10 text-orange-600" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                                Test Complete!
-                            </h2>
-                            <p className="text-gray-600">
-                                Here are your results
-                            </p>
+            <section className="py-16 lg:py-24 bg-gray-50">
+                <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Brain className="w-8 h-8 text-brand-600" />
                         </div>
-
-                        <div className={`${results.bgColor} rounded-2xl p-8 mb-8`}>
-                            <div className="text-center mb-6">
-                                <p className="text-sm font-semibold text-gray-600 mb-2">
-                                    Score: {total} / {maxScore}
-                                </p>
-                                <h3 className={`text-4xl font-bold ${results.color} mb-4`}>
-                                    {results.level}
-                                </h3>
-                                <p className="text-gray-700 text-lg leading-relaxed">
-                                    {results.message}
-                                </p>
-                            </div>
-
-                            <div className="bg-white rounded-xl p-6">
-                                <p className="font-semibold text-gray-900 mb-2">
-                                    Our Recommendation:
-                                </p>
-                                <p className="text-gray-700">
-                                    {results.recommendation}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="space-y-4">
-                            <Link
-                                href="/booking"
-                                className="block w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-bold py-4 px-8 rounded-lg text-center text-lg transition-all shadow-lg hover:shadow-xl"
-                            >
-                                Book Full Assessment
-                            </Link>
-                            <button
-                                onClick={resetTest}
-                                className="block w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-4 px-8 rounded-lg text-center transition-all"
-                            >
-                                Retake Test
-                            </button>
-                        </div>
-
-                        <p className="text-sm text-gray-600 text-center mt-6">
-                            Note: This is a basic screening tool and not a diagnostic assessment. For accurate evaluation, please book a comprehensive assessment with our specialists.
-                        </p>
+                        <h2 className="text-3xl font-bold text-gray-900 mb-2">Screening complete</h2>
+                        <p className="text-gray-500 text-sm">Based on your answers about your child</p>
                     </div>
+
+                    {/* Summary card */}
+                    <div className={`rounded-2xl border p-6 mb-6 ${summary.bg}`}>
+                        <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0 mt-0.5">{summary.icon}</div>
+                            <div>
+                                <span className={`inline-block text-xs font-bold px-2 py-0.5 rounded-full mb-2 ${summary.badge}`}>
+                                    {summary.label}
+                                </span>
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">{summary.headline}</h3>
+                                <p className="text-gray-700 text-sm leading-relaxed">{summary.body}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Flagged areas */}
+                    {concerns.length > 0 && (
+                        <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-4">
+                            <h4 className="font-bold text-gray-900 mb-3 text-sm uppercase tracking-wide">
+                                Areas of concern
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                                {concerns.map(area => (
+                                    <span key={area} className="bg-red-50 text-red-700 text-sm font-semibold px-3 py-1 rounded-full border border-red-200">
+                                        {area}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {moderate.length > 0 && (
+                        <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                            <h4 className="font-bold text-gray-900 mb-3 text-sm uppercase tracking-wide">
+                                Areas to monitor
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                                {moderate.map(area => (
+                                    <span key={area} className="bg-amber-50 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full border border-amber-200">
+                                        {area}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* What next */}
+                    <div className="bg-brand-600 rounded-2xl p-6 mb-4 text-white">
+                        <h4 className="font-bold text-lg mb-2">What happens next?</h4>
+                        <p className="text-brand-100 text-sm leading-relaxed mb-4">
+                            A full cognitive assessment at Cogniskills takes about 60–90 minutes and gives you a precise map of your child's brain skills — not a guess, a profile. From there, we build a personalised Cognigym training plan.
+                        </p>
+                        <Link
+                            href="/booking"
+                            className="inline-flex items-center gap-2 bg-white text-brand-700 font-bold px-6 py-3 rounded-xl hover:bg-brand-50 transition-colors text-sm"
+                        >
+                            Book a full assessment
+                            <ChevronRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+
+                    {/* Disclaimer + retake */}
+                    <p className="text-xs text-gray-400 text-center mb-4">
+                        This screening is based on parent observation and is not a clinical diagnosis. A full assessment by our specialists is required for an accurate cognitive profile.
+                    </p>
+                    <button
+                        onClick={resetTest}
+                        className="w-full text-center text-sm text-gray-500 hover:text-gray-700 underline underline-offset-2 transition-colors"
+                    >
+                        Retake the screening
+                    </button>
                 </div>
             </section>
         );
     }
 
+    const q = questions[currentQuestion];
+    const progress = ((currentQuestion) / questions.length) * 100;
+
     return (
-        <section className="min-h-screen bg-white">
-            {/* Mobile: Brain strip at top, then quiz below */}
-            {/* Desktop: Side by side */}
-            <div className="lg:hidden">
-                {/* Mobile Brain Strip */}
-                <div className="h-52 w-full relative">
-                    <Suspense fallback={
-                        <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
-                            <Brain className="w-16 h-16 text-orange-600 animate-pulse" />
-                        </div>
-                    }>
-                        <ClearBrainViewer
-                            progress={((currentQuestion + 1) / questions.length) * 100}
-                            currentQuestion={currentQuestion}
+        <section className="py-16 lg:py-24 bg-gray-50">
+            <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                {/* Progress */}
+                <div className="mb-8">
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-gray-500">
+                            Question {currentQuestion + 1} of {questions.length}
+                        </span>
+                        <span className="text-sm font-semibold text-brand-600">
+                            {Math.round(progress)}% complete
+                        </span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                        <div
+                            className="bg-brand-600 h-1.5 rounded-full transition-all duration-500"
+                            style={{ width: `${progress}%` }}
                         />
-                    </Suspense>
-                </div>
-
-                {/* Mobile Quiz */}
-                <div className="px-4 py-8">
-                    <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl shadow-xl p-6">
-                        {/* Progress Bar */}
-                        <div className="mb-6">
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-sm font-semibold text-gray-600">
-                                    Question {currentQuestion + 1} of {questions.length}
-                                </span>
-                                <span className="text-sm font-semibold text-orange-600">
-                                    {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
-                                </span>
-                            </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
-                                <div
-                                    className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-300"
-                                    style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Question */}
-                        <div className="mb-6">
-                            <div className="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                🧠 {questions[currentQuestion].cognitiveFunction}
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">
-                                {questions[currentQuestion].question}
-                            </h3>
-                            <p className="text-gray-500 text-xs">
-                                Brain Region: {questions[currentQuestion].brainRegion}
-                            </p>
-                        </div>
-
-                        {/* Options */}
-                        <div className="space-y-3">
-                            {questions[currentQuestion].options.map((option, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => handleAnswer(questions[currentQuestion].scores[index])}
-                                    className="w-full text-left px-5 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:bg-orange-50 active:bg-orange-100 transition-all font-semibold text-gray-700 hover:text-orange-700 text-sm"
-                                >
-                                    {option}
-                                </button>
-                            ))}
-                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Desktop: Side by side */}
-            <div className="hidden lg:block py-16 lg:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        {/* Left: 3D Brain */}
-                        <div>
-                            <div className="h-[560px] rounded-3xl overflow-hidden shadow-2xl">
-                                <Suspense fallback={
-                                    <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
-                                        <Brain className="w-20 h-20 text-orange-600 animate-pulse" />
-                                    </div>
-                                }>
-                                    <ClearBrainViewer
-                                        progress={((currentQuestion + 1) / questions.length) * 100}
-                                        currentQuestion={currentQuestion}
-                                    />
-                                </Suspense>
-                            </div>
-                            <p className="text-center text-sm text-gray-500 mt-3">
-                                🖱️ Drag to rotate • Scroll to zoom • Right-click to pan
-                            </p>
-                        </div>
+                {/* Question card */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                    {/* Area badge */}
+                    <span className="inline-block bg-brand-50 text-brand-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        {q.areaLabel}
+                    </span>
 
-                        {/* Right: Quiz */}
-                        <div className="bg-gradient-to-br from-orange-50 to-white rounded-3xl shadow-xl p-8 lg:p-12">
-                            {/* Progress Bar */}
-                            <div className="mb-8">
-                                <div className="flex justify-between items-center mb-2">
-                                    <span className="text-sm font-semibold text-gray-600">
-                                        Question {currentQuestion + 1} of {questions.length}
-                                    </span>
-                                    <span className="text-sm font-semibold text-orange-600">
-                                        {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
-                                    </span>
-                                </div>
-                                <div className="w-full bg-gray-200 rounded-full h-2">
-                                    <div
-                                        className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full transition-all duration-300"
-                                        style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-                                    />
-                                </div>
-                            </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 leading-snug">
+                        {q.question}
+                    </h3>
 
-                            {/* Question */}
-                            <div className="mb-8">
-                                <div className="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                                    🧠 {questions[currentQuestion].cognitiveFunction}
-                                </div>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                                    {questions[currentQuestion].question}
-                                </h3>
-                                <p className="text-gray-600 text-sm mb-1">
-                                    {questions[currentQuestion].description}
-                                </p>
-                                <p className="text-blue-600 text-xs font-semibold">
-                                    Brain Region: {questions[currentQuestion].brainRegion}
-                                </p>
-                            </div>
-
-                            {/* Options */}
-                            <div className="space-y-3">
-                                {questions[currentQuestion].options.map((option, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => handleAnswer(questions[currentQuestion].scores[index])}
-                                        className="w-full text-left px-6 py-4 bg-white border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all font-semibold text-gray-700 hover:text-orange-700"
-                                    >
-                                        {option}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
+                    {/* Options */}
+                    <div className="space-y-3 mb-8">
+                        {q.options.map((option, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleSelect(option.score)}
+                                className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all font-medium text-sm leading-snug
+                                    ${selected === option.score
+                                        ? 'border-brand-600 bg-brand-50 text-brand-800'
+                                        : 'border-gray-200 bg-white text-gray-700 hover:border-brand-300 hover:bg-brand-50 hover:text-gray-900'
+                                    }`}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
                     </div>
+
+                    {/* Next button */}
+                    <button
+                        onClick={handleNext}
+                        disabled={selected === null}
+                        className="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 disabled:bg-gray-200 disabled:text-gray-400 text-white font-bold py-4 px-8 rounded-xl transition-all"
+                    >
+                        {currentQuestion < questions.length - 1 ? 'Next question' : 'See results'}
+                        <ChevronRight className="w-5 h-5" />
+                    </button>
                 </div>
+
+                <p className="text-xs text-gray-400 text-center mt-4">
+                    Answer based on what you observe at home and from school feedback.
+                </p>
             </div>
         </section>
     );

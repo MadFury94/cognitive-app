@@ -95,7 +95,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/logo.png" />
-        <meta name="theme-color" content="#ea580c" />
+        <meta name="theme-color" content="#7c3aed" />
         {/* Local Business Schema */}
         <script
           type="application/ld+json"

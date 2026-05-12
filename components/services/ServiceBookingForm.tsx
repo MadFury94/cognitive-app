@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { Calendar, Phone, Mail, User } from 'lucide-react';
@@ -54,7 +54,7 @@ export default function ServiceBookingForm({ serviceName, serviceSlug }: Service
                         value={formData.parentName}
                         onChange={handleChange}
                         placeholder="Your full name"
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-sm"
                         required
                     />
                 </div>
@@ -70,7 +70,7 @@ export default function ServiceBookingForm({ serviceName, serviceSlug }: Service
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+234 800 000 0000"
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-sm"
                         required
                     />
                 </div>
@@ -86,7 +86,7 @@ export default function ServiceBookingForm({ serviceName, serviceSlug }: Service
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@example.com"
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-sm"
                         required
                     />
                 </div>
@@ -100,7 +100,7 @@ export default function ServiceBookingForm({ serviceName, serviceSlug }: Service
                         name="childAge"
                         value={formData.childAge}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all bg-white text-sm"
+                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white text-sm"
                         required
                     >
                         <option value="">Select age</option>
@@ -122,7 +122,7 @@ export default function ServiceBookingForm({ serviceName, serviceSlug }: Service
                         name="preferredDate"
                         value={formData.preferredDate}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-sm"
+                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all text-sm"
                         required
                     />
                 </div>
@@ -138,13 +138,13 @@ export default function ServiceBookingForm({ serviceName, serviceSlug }: Service
                         onChange={handleChange}
                         placeholder="Tell us about your concerns..."
                         rows={3}
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all resize-none text-sm"
+                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none text-sm"
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl"
+                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl"
                 >
                     Request Assessment
                 </button>

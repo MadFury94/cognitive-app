@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -53,7 +53,7 @@ export default function InteractiveBrain({ progress = 0, isActive = false }: Int
     const normalizedProgress = Math.min(Math.max(progress / 100, 0), 1);
 
     return (
-        <div className="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-orange-50 to-orange-100">
+        <div className="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-brand-50 to-brand-100">
             <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[10, 10, 5]} intensity={1} />

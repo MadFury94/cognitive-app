@@ -4,8 +4,8 @@ import BrainTestQuiz from '@/components/brain-test/BrainTestQuiz';
 import { brainTestPageContent } from '@/lib/content';
 
 export const metadata: Metadata = {
-    title: "Free Brain Test for Children | Cogniskills Lagos",
-    description: "Take our free 5-minute cognitive screening test to identify potential learning challenges in your child. Not a diagnosis, a starting point.",
+    title: "Free Child Learning Screening | Cogniskills Lagos",
+    description: "Answer 10 questions about your child's learning and behaviour. Find out which cognitive skills may be holding them back — free, takes 3 minutes.",
     alternates: { canonical: "https://cogniskillsleh.com/brain-test" },
 };
 

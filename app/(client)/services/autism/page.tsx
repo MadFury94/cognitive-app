@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Users, CheckCircle2, Clock, TrendingUp } from 'lucide-react';
@@ -38,12 +38,12 @@ export default function AutismPage() {
                                 </p>
                             </div>
 
-                            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8">
+                            <div className="bg-gradient-to-br from-brand-50 to-amber-50 rounded-2xl p-8">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Program Highlights</h3>
                                 <div className="grid sm:grid-cols-2 gap-6">
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Clock className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Clock className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Duration</h4>
@@ -51,8 +51,8 @@ export default function AutismPage() {
                                         </div>
                                     </div>
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Users className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Users className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Sessions</h4>
@@ -76,7 +76,7 @@ export default function AutismPage() {
                                         'Emotional regulation and transitions',
                                     ].map((item, index) => (
                                         <div key={index} className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
+                                            <CheckCircle2 className="w-6 h-6 text-brand-600 flex-shrink-0 mt-0.5" />
                                             <span className="text-gray-700 text-lg">{item}</span>
                                         </div>
                                     ))}
@@ -86,19 +86,19 @@ export default function AutismPage() {
                             <div>
                                 <h3 className="text-2xl font-bold text-gray-900 mb-6">How It Works</h3>
                                 <div className="space-y-6">
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">1. Cognitive Profile Assessment</h4>
                                         <p className="text-gray-700">We map comprehension, visualization, reasoning, and processing skills to identify exactly where the gaps are.</p>
                                     </div>
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">2. Cognigym Reasoning & Comprehension Training</h4>
                                         <p className="text-gray-700">CDI, RVC, and RST procedures build the cognitive foundations for understanding language, context, and social situations.</p>
                                     </div>
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">3. Structured, Predictable Sessions</h4>
                                         <p className="text-gray-700">Sessions follow a consistent structure that children on the spectrum can anticipate and feel safe in, reducing anxiety and maximising engagement.</p>
                                     </div>
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">4. Family Progress Updates</h4>
                                         <p className="text-gray-700">Regular reports on cognitive skill development, with practical guidance for parents on reinforcing skills at home.</p>
                                     </div>

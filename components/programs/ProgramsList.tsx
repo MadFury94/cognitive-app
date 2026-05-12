@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { BookOpen, Focus, Users, MessageSquare, Pencil, Brain } from 'lucide-react';
@@ -55,7 +55,7 @@ export default function ProgramsList() {
         return (
             <section className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
             </section>
         );
@@ -75,12 +75,12 @@ export default function ProgramsList() {
                                 {/* Left Card */}
                                 <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 lg:sticky lg:top-8">
                                     <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6">
-                                        <Icon className="w-6 h-6 text-orange-600" />
+                                        <Icon className="w-6 h-6 text-brand-600" />
                                     </div>
                                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                                         {program.title}
                                     </h3>
-                                    <p className="text-sm text-orange-700 font-medium">
+                                    <p className="text-sm text-brand-700 font-medium">
                                         {program.duration}
                                     </p>
                                 </div>
@@ -96,7 +96,7 @@ export default function ProgramsList() {
                                             <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-2">
                                                 {program.improvement_label}
                                             </p>
-                                            <p className="text-2xl sm:text-3xl font-bold text-orange-700">
+                                            <p className="text-2xl sm:text-3xl font-bold text-brand-700">
                                                 {program.improvement_stat}
                                             </p>
                                         </div>
@@ -104,7 +104,7 @@ export default function ProgramsList() {
                                             <p className="text-xs text-gray-500 font-semibold tracking-wide uppercase mb-2">
                                                 SESSIONS PER WEEK
                                             </p>
-                                            <p className="text-2xl sm:text-3xl font-bold text-orange-700">
+                                            <p className="text-2xl sm:text-3xl font-bold text-brand-700">
                                                 {program.sessions_per_week}
                                             </p>
                                         </div>
@@ -112,7 +112,7 @@ export default function ProgramsList() {
 
                                     <Button
                                         size="lg"
-                                        className="bg-orange-600 hover:bg-orange-700 text-white px-8"
+                                        className="bg-brand-600 hover:bg-brand-700 text-white px-8"
                                         asChild
                                     >
                                         <Link href="/booking">

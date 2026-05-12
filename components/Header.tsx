@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,6 +11,13 @@ export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
     const isHomePage = pathname === '/';
+
+    // On homepage: header is transparent over a light hero, use colour logo
+    // On other pages: header is transparent over a dark PageHeader, use white logo
+    // When scrolled (white bg): always use colour logo
+    const logoSrc = isScrolled || mobileMenuOpen || isHomePage
+        ? '/logo.png'
+        : '/logo-white.png';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,11 +51,12 @@ export default function Header() {
                     <Link href="/" className="flex items-center gap-3 group">
                         <div className="relative w-28 h-28 sm:w-32 sm:h-32 transition-transform group-hover:scale-105">
                             <Image
-                                src="/logo.png"
+                                src={logoSrc}
                                 alt="Cogniskills Logo"
                                 fill
                                 sizes="128px"
                                 className="object-contain"
+                                unoptimized
                             />
                         </div>
                     </Link>
@@ -60,21 +68,21 @@ export default function Header() {
                                 key={link.name}
                                 href={link.href}
                                 className={`relative px-4 py-2 text-base font-semibold transition-colors ${isActive(link.href)
-                                    ? 'text-orange-600'
+                                    ? 'text-brand-600'
                                     : isScrolled || isHomePage
-                                        ? 'text-gray-700 hover:text-orange-600'
-                                        : 'text-white hover:text-orange-400'
+                                        ? 'text-gray-700 hover:text-brand-600'
+                                        : 'text-white hover:text-brand-400'
                                     }`}
                             >
                                 {link.name}
                                 {isActive(link.href) && (
-                                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-600" />
+                                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-600" />
                                 )}
                             </Link>
                         ))}
                         <Link
                             href="/booking"
-                            className="ml-4 px-6 py-3 text-base font-bold bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full transition-all shadow-md hover:shadow-lg"
+                            className="ml-4 px-6 py-3 text-base font-bold bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full transition-all shadow-md hover:shadow-lg"
                         >
                             Book Assessment
                         </Link>
@@ -84,8 +92,8 @@ export default function Header() {
                     <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         className={`lg:hidden p-2 transition-colors ${isScrolled || isHomePage
-                            ? 'text-gray-700 hover:text-orange-600'
-                            : 'text-white hover:text-orange-400'
+                            ? 'text-gray-700 hover:text-brand-600'
+                            : 'text-white hover:text-brand-400'
                             }`}
                         aria-label="Toggle menu"
                     >
@@ -103,8 +111,8 @@ export default function Header() {
                                     href={link.href}
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`px-4 py-3 text-base font-semibold rounded-lg transition-colors ${isActive(link.href)
-                                        ? 'text-orange-600 bg-orange-50'
-                                        : 'text-gray-700 hover:text-orange-600 hover:bg-gray-50'
+                                        ? 'text-brand-600 bg-brand-50'
+                                        : 'text-gray-700 hover:text-brand-600 hover:bg-gray-50'
                                         }`}
                                 >
                                     {link.name}
@@ -113,7 +121,7 @@ export default function Header() {
                             <Link
                                 href="/booking"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="mt-4 px-6 py-3 text-base font-bold text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full"
+                                className="mt-4 px-6 py-3 text-base font-bold text-center bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-full"
                             >
                                 Book Assessment
                             </Link>

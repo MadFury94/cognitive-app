@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { Calendar, Clock, User, Phone, Mail, MessageSquare } from 'lucide-react';
@@ -54,7 +54,7 @@ export default function BookingForm() {
     };
 
     return (
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-orange-50 via-white to-orange-50">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-50 via-white to-brand-50">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
 
@@ -89,7 +89,7 @@ export default function BookingForm() {
                                 {/* Parent Information */}
                                 <div className="space-y-6">
                                     <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                                        <User className="w-5 h-5 text-orange-600" />
+                                        <User className="w-5 h-5 text-brand-600" />
                                         Parent/Guardian Information
                                     </h3>
 
@@ -105,7 +105,7 @@ export default function BookingForm() {
                                                 value={formData.parentName}
                                                 onChange={handleChange}
                                                 placeholder="e.g. Adebisi Okafor"
-                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                                 required
                                             />
                                         </div>
@@ -121,7 +121,7 @@ export default function BookingForm() {
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 placeholder="+234 800 000 0000"
-                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                                 required
                                             />
                                         </div>
@@ -138,7 +138,7 @@ export default function BookingForm() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             placeholder="you@example.com"
-                                            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                             required
                                         />
                                     </div>
@@ -162,7 +162,7 @@ export default function BookingForm() {
                                                 value={formData.childName}
                                                 onChange={handleChange}
                                                 placeholder="Child's full name"
-                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                                 required
                                             />
                                         </div>
@@ -176,7 +176,7 @@ export default function BookingForm() {
                                                 name="childAge"
                                                 value={formData.childAge}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all bg-white"
+                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
                                                 required
                                             >
                                                 <option value="">Select age</option>
@@ -198,7 +198,7 @@ export default function BookingForm() {
                                             name="program"
                                             value={formData.program}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all bg-white"
+                                            className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
                                             required
                                         >
                                             <option value="">Select a program</option>
@@ -216,7 +216,7 @@ export default function BookingForm() {
                                 {/* Scheduling */}
                                 <div className="space-y-6 pt-6 border-t border-gray-200">
                                     <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                                        <Calendar className="w-5 h-5 text-orange-600" />
+                                        <Calendar className="w-5 h-5 text-brand-600" />
                                         Preferred Schedule
                                     </h3>
 
@@ -231,7 +231,7 @@ export default function BookingForm() {
                                                 name="preferredDate"
                                                 value={formData.preferredDate}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all"
+                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                                 required
                                             />
                                         </div>
@@ -245,7 +245,7 @@ export default function BookingForm() {
                                                 name="preferredTime"
                                                 value={formData.preferredTime}
                                                 onChange={handleChange}
-                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all bg-white"
+                                                className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
                                                 required
                                             >
                                                 <option value="">Select time</option>
@@ -269,7 +269,7 @@ export default function BookingForm() {
                                         onChange={handleChange}
                                         placeholder="Tell us about your child's specific challenges or any questions you have..."
                                         rows={4}
-                                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all resize-none"
+                                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
                                     />
                                 </div>
 
@@ -277,7 +277,7 @@ export default function BookingForm() {
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
+                                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
                                 >
                                     {submitting ? 'Submitting...' : 'Confirm Booking'}
                                 </button>

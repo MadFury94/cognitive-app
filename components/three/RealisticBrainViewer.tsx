@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useEffect, useState, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
@@ -204,7 +204,7 @@ function FallbackVisualization({ progress, currentQuestion }: RealisticBrainView
         <div className="w-full h-full relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-2xl flex items-center justify-center">
             <div className="absolute inset-0 opacity-20">
                 <div
-                    className="absolute inset-0 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500"
+                    className="absolute inset-0 bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500"
                     style={{
                         transform: `rotate(${rotation}deg) scale(1.5)`,
                         filter: 'blur(60px)',
@@ -215,7 +215,7 @@ function FallbackVisualization({ progress, currentQuestion }: RealisticBrainView
             <div className="relative w-64 h-64">
                 <div className="absolute inset-0 flex items-center justify-center">
                     <Brain
-                        className="w-48 h-48 text-orange-500 animate-pulse"
+                        className="w-48 h-48 text-brand-500 animate-pulse"
                         style={{
                             filter: `drop-shadow(0 0 ${20 + normalizedProgress * 30}px rgba(251, 146, 60, ${0.5 + normalizedProgress * 0.5}))`,
                             transform: `scale(${1 + normalizedProgress * 0.2})`,
@@ -226,7 +226,7 @@ function FallbackVisualization({ progress, currentQuestion }: RealisticBrainView
                 {[0, 1, 2].map((i) => (
                     <div
                         key={i}
-                        className="absolute inset-0 rounded-full border-2 border-orange-500/30 animate-ping"
+                        className="absolute inset-0 rounded-full border-2 border-brand-500/30 animate-ping"
                         style={{
                             animationDelay: `${i * 0.5}s`,
                             animationDuration: '3s',
@@ -238,11 +238,11 @@ function FallbackVisualization({ progress, currentQuestion }: RealisticBrainView
             <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-2">
                     <span className="text-white text-sm font-semibold">Neural Activity</span>
-                    <span className="text-orange-400 text-sm font-bold">{Math.round(normalizedProgress * 100)}%</span>
+                    <span className="text-brand-400 text-sm font-bold">{Math.round(normalizedProgress * 100)}%</span>
                 </div>
                 <div className="w-full bg-gray-700/50 rounded-full h-2.5 overflow-hidden">
                     <div
-                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500"
+                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500"
                         style={{ width: `${normalizedProgress * 100}%` }}
                     />
                 </div>
@@ -276,7 +276,7 @@ export default function RealisticBrainViewer({
     if (webGLAvailable === null) {
         return (
             <div className="w-full h-full relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-2xl flex items-center justify-center">
-                <Brain className="w-20 h-20 text-orange-600 animate-pulse" />
+                <Brain className="w-20 h-20 text-brand-600 animate-pulse" />
             </div>
         );
     }
@@ -328,13 +328,13 @@ export default function RealisticBrainViewer({
             <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-2">
                     <span className="text-white text-sm font-semibold">Neural Activity</span>
-                    <span className="text-orange-400 text-sm font-bold">
+                    <span className="text-brand-400 text-sm font-bold">
                         {Math.round(normalizedProgress * 100)}%
                     </span>
                 </div>
                 <div className="w-full bg-gray-700/50 rounded-full h-2.5 overflow-hidden">
                     <div
-                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500"
+                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500"
                         style={{ width: `${normalizedProgress * 100}%` }}
                     />
                 </div>
@@ -357,7 +357,7 @@ export default function RealisticBrainViewer({
             {/* Region indicator with detailed info */}
             <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md rounded-xl p-4 border border-white/10 max-w-xs">
                 <p className="text-gray-400 text-xs font-semibold mb-1">TESTING:</p>
-                <p className="text-orange-400 text-base font-bold mb-2">
+                <p className="text-brand-400 text-base font-bold mb-2">
                     {BRAIN_REGIONS[currentQuestion % 5].function}
                 </p>
                 <p className="text-white text-xs font-semibold mb-1">Brain Region:</p>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -19,7 +19,7 @@ const WORKER_URL = process.env.NEXT_PUBLIC_WORKER_URL || 'https://cogniskills-ap
 
 const categoryColors: Record<string, string> = {
     'Learning & Development': 'bg-blue-100 text-blue-700',
-    'ADHD': 'bg-orange-100 text-orange-700',
+    'ADHD': 'bg-brand-100 text-brand-700',
     'Dyslexia': 'bg-purple-100 text-purple-700',
     'Autism': 'bg-green-100 text-green-700',
     'Dyspraxia': 'bg-pink-100 text-pink-700',
@@ -53,7 +53,7 @@ export default function BlogGrid() {
         return (
             <section className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto" />
                 </div>
             </section>
         );
@@ -82,8 +82,8 @@ export default function BlogGrid() {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${activeCategory === cat
-                                    ? 'bg-orange-600 text-white'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-orange-50 hover:text-orange-600'
+                                    ? 'bg-brand-600 text-white'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-brand-50 hover:text-brand-600'
                                 }`}
                         >
                             {cat}
@@ -94,8 +94,8 @@ export default function BlogGrid() {
                 {/* Featured post */}
                 {featured && (
                     <Link href={`/blog/${featured.slug}`} className="group block mb-12">
-                        <div className="grid lg:grid-cols-2 gap-8 bg-gradient-to-br from-orange-50 to-amber-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                            <div className="aspect-[16/9] lg:aspect-auto bg-gradient-to-br from-orange-200 to-orange-100 relative overflow-hidden">
+                        <div className="grid lg:grid-cols-2 gap-8 bg-gradient-to-br from-brand-50 to-amber-50 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+                            <div className="aspect-[16/9] lg:aspect-auto bg-gradient-to-br from-brand-200 to-brand-100 relative overflow-hidden">
                                 {featured.cover_image ? (
                                     <img
                                         src={featured.cover_image}
@@ -115,7 +115,7 @@ export default function BlogGrid() {
                                     </span>
                                     <span className="text-xs text-gray-500 font-semibold uppercase tracking-wide">Featured</span>
                                 </div>
-                                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-orange-600 transition-colors">
+                                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-brand-600 transition-colors">
                                     {featured.title}
                                 </h2>
                                 <p className="text-gray-600 leading-relaxed mb-6">
@@ -131,7 +131,7 @@ export default function BlogGrid() {
                                         {formatDate(featured.published_at)}
                                     </span>
                                 </div>
-                                <span className="flex items-center gap-2 text-orange-600 font-semibold group-hover:gap-3 transition-all">
+                                <span className="flex items-center gap-2 text-brand-600 font-semibold group-hover:gap-3 transition-all">
                                     Read article <ArrowRight className="w-4 h-4" />
                                 </span>
                             </div>
@@ -145,7 +145,7 @@ export default function BlogGrid() {
                         {rest.map(post => (
                             <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
                                 <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
-                                    <div className="aspect-[16/9] bg-gradient-to-br from-orange-100 to-amber-50 relative overflow-hidden">
+                                    <div className="aspect-[16/9] bg-gradient-to-br from-brand-100 to-amber-50 relative overflow-hidden">
                                         {post.cover_image ? (
                                             <img
                                                 src={post.cover_image}
@@ -162,7 +162,7 @@ export default function BlogGrid() {
                                         <span className={`text-xs font-bold px-3 py-1 rounded-full self-start mb-3 ${categoryColors[post.category] || categoryColors['General']}`}>
                                             {post.category}
                                         </span>
-                                        <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors flex-grow">
+                                        <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors flex-grow">
                                             {post.title}
                                         </h3>
                                         <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">

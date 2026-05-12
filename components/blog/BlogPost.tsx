@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -45,7 +45,7 @@ export default function BlogPost({ slug }: { slug: string }) {
         return (
             <section className="py-24 bg-white">
                 <div className="max-w-3xl mx-auto px-4 text-center">
-                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto" />
                 </div>
             </section>
         );
@@ -69,13 +69,13 @@ export default function BlogPost({ slug }: { slug: string }) {
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Back link */}
-                <Link href="/blog" className="inline-flex items-center gap-2 text-orange-600 font-semibold text-sm mb-8 hover:gap-3 transition-all">
+                <Link href="/blog" className="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm mb-8 hover:gap-3 transition-all">
                     <ArrowLeft className="w-4 h-4" />
                     Back to blog
                 </Link>
 
                 {/* Category */}
-                <span className="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                <span className="inline-block bg-brand-100 text-brand-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
                     {post.category}
                 </span>
 
@@ -98,7 +98,7 @@ export default function BlogPost({ slug }: { slug: string }) {
 
                 {/* Cover image */}
                 {post.cover_image && (
-                    <div className="aspect-[16/9] rounded-2xl overflow-hidden mb-10 bg-orange-50">
+                    <div className="aspect-[16/9] rounded-2xl overflow-hidden mb-10 bg-brand-50">
                         <img src={post.cover_image} alt={post.title} className="w-full h-full object-cover" />
                     </div>
                 )}
@@ -110,13 +110,13 @@ export default function BlogPost({ slug }: { slug: string }) {
                         prose-p:text-gray-700 prose-p:leading-relaxed
                         prose-li:text-gray-700
                         prose-strong:text-gray-900
-                        prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline"
+                        prose-a:text-brand-600 prose-a:no-underline hover:prose-a:underline"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
 
                 {/* CTA */}
-                <div className="mt-16 bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8 text-center">
-                    <BookOpen className="w-10 h-10 text-orange-600 mx-auto mb-4" />
+                <div className="mt-16 bg-gradient-to-br from-brand-50 to-amber-50 rounded-2xl p-8 text-center">
+                    <BookOpen className="w-10 h-10 text-brand-600 mx-auto mb-4" />
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                         Think your child may need support?
                     </h3>
@@ -125,7 +125,7 @@ export default function BlogPost({ slug }: { slug: string }) {
                     </p>
                     <Button
                         size="lg"
-                        className="bg-orange-600 hover:bg-orange-700 text-white px-8"
+                        className="bg-brand-600 hover:bg-brand-700 text-white px-8"
                         asChild
                     >
                         <Link href="/booking">Book assessment</Link>

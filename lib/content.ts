@@ -85,24 +85,32 @@ export const howItWorksContent = {
             title: 'Cognitive assessment',
             description:
                 "We map your child's full cognitive profile: auditory processing, memory, attention, processing speed, and more.",
+            image: '/how%20it%20works/step1.jpg',
+            imageAlt: 'Child during a cognitive assessment session',
         },
         {
             number: '2',
             title: 'Cognigym program',
             description:
                 "A personalised Cognigym training plan built around your child's specific cognitive gaps.",
+            image: '/how%20it%20works/step2.jpg',
+            imageAlt: 'Specialist building a personalised training plan',
         },
         {
             number: '3',
             title: 'Structured sessions',
             description:
                 'One-on-one sessions using the Cognigym toolkit. Metronome-paced, intensive, and measurable.',
+            image: '/how%20it%20works/step3.jpg',
+            imageAlt: 'Child in a one-on-one Cognigym training session',
         },
         {
             number: '4',
             title: 'Track and report',
             description:
                 'Regular progress reviews with clear metrics shared with parents and teachers.',
+            image: '/how%20it%20works/step4.jpg',
+            imageAlt: 'Parent reviewing child progress report with specialist',
         },
     ],
 };
@@ -227,10 +235,10 @@ export const bookingPageContent = {
 
 export const brainTestPageContent = {
     header: {
-        label: 'COGNITIVE SCREENING',
-        title: 'Quick brain test for your child',
+        label: 'FREE CHILD SCREENING',
+        title: 'Is your child struggling to learn?',
         description:
-            'A free 5-minute screening across 5 key cognitive skills. This is not a diagnosis, but a useful starting point for understanding where your child may need support.',
+            "Answer 10 quick questions about your child's behaviour and learning. We'll identify which cognitive skills may need support and what to do next.",
     },
 };
 

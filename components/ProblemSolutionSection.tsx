@@ -1,4 +1,4 @@
-import { CheckCircle2, XCircle } from 'lucide-react';
+﻿import { CheckCircle2, XCircle } from 'lucide-react';
 import { problemSolutionContent } from '@/lib/content';
 
 export default function ProblemSolutionSection() {
@@ -9,7 +9,7 @@ export default function ProblemSolutionSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Problems Card */}
-                    <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 lg:p-12 shadow-lg">
+                    <div className="bg-gradient-to-br from-red-50 to-brand-50 rounded-3xl p-8 lg:p-12 shadow-lg">
                         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
                             {problemsHeading}
                         </h2>
@@ -28,7 +28,7 @@ export default function ProblemSolutionSection() {
                     </div>
 
                     {/* Solutions Card */}
-                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-8 lg:p-12 shadow-lg">
+                    <div className="bg-gradient-to-br from-brand-50 to-brand-100 rounded-3xl p-8 lg:p-12 shadow-lg">
                         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
                             {solutionsHeading}
                         </h2>
@@ -36,7 +36,7 @@ export default function ProblemSolutionSection() {
                             {solutions.map((solution, index) => (
                                 <li key={index} className="flex items-start gap-4">
                                     <div className="flex-shrink-0 mt-1">
-                                        <CheckCircle2 className="w-6 h-6 text-orange-600" />
+                                        <CheckCircle2 className="w-6 h-6 text-brand-600" />
                                     </div>
                                     <p className="text-gray-700 text-lg leading-relaxed">
                                         {solution}

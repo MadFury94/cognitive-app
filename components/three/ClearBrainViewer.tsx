@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useEffect, useState, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -156,7 +156,7 @@ export default function ClearBrainViewer({
         return (
             <div className="w-full h-full relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
                 <div className="text-center px-4">
-                    <Brain className="w-20 h-20 text-orange-500 mx-auto mb-3" />
+                    <Brain className="w-20 h-20 text-brand-500 mx-auto mb-3" />
                     <p className="text-white font-semibold text-sm">{currentRegion.function}</p>
                     <p className="text-gray-400 text-xs mt-1">{currentRegion.name}</p>
                 </div>

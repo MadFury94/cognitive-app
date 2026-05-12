@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useEffect, useMemo, Suspense, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
@@ -267,11 +267,11 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
     }, []);
 
     const regions = [
-        { name: 'Left Hemisphere', color: 'from-orange-500 to-orange-600' },
-        { name: 'Right Hemisphere', color: 'from-orange-400 to-orange-500' },
-        { name: 'Cerebellum', color: 'from-yellow-500 to-orange-500' },
-        { name: 'Brain Stem', color: 'from-orange-600 to-red-500' },
-        { name: 'Corpus Callosum', color: 'from-yellow-400 to-orange-400' },
+        { name: 'Left Hemisphere', color: 'from-brand-500 to-brand-600' },
+        { name: 'Right Hemisphere', color: 'from-brand-400 to-brand-500' },
+        { name: 'Cerebellum', color: 'from-yellow-500 to-brand-500' },
+        { name: 'Brain Stem', color: 'from-brand-600 to-red-500' },
+        { name: 'Corpus Callosum', color: 'from-yellow-400 to-brand-400' },
     ];
 
     return (
@@ -279,7 +279,7 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
             {/* Animated background */}
             <div className="absolute inset-0 opacity-20">
                 <div
-                    className="absolute inset-0 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500"
+                    className="absolute inset-0 bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500"
                     style={{
                         transform: `rotate(${rotation}deg) scale(1.5)`,
                         filter: 'blur(60px)',
@@ -292,7 +292,7 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
                 {/* Main brain shape */}
                 <div className="absolute inset-0 flex items-center justify-center">
                     <Brain
-                        className="w-48 h-48 text-orange-500 animate-pulse"
+                        className="w-48 h-48 text-brand-500 animate-pulse"
                         style={{
                             filter: `drop-shadow(0 0 ${20 + normalizedProgress * 30}px rgba(251, 146, 60, ${0.5 + normalizedProgress * 0.5}))`,
                             transform: `scale(${1 + normalizedProgress * 0.2})`,
@@ -304,7 +304,7 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
                 {[0, 1, 2].map((i) => (
                     <div
                         key={i}
-                        className="absolute inset-0 rounded-full border-2 border-orange-500/30 animate-ping"
+                        className="absolute inset-0 rounded-full border-2 border-brand-500/30 animate-ping"
                         style={{
                             animationDelay: `${i * 0.5}s`,
                             animationDuration: '3s',
@@ -323,7 +323,7 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
                     return (
                         <div
                             key={i}
-                            className={`absolute w-3 h-3 rounded-full transition-all duration-300 ${isActive ? 'bg-yellow-400 scale-150' : 'bg-orange-500'
+                            className={`absolute w-3 h-3 rounded-full transition-all duration-300 ${isActive ? 'bg-yellow-400 scale-150' : 'bg-brand-500'
                                 }`}
                             style={{
                                 left: '50%',
@@ -341,13 +341,13 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
             <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-2">
                     <span className="text-white text-sm font-semibold">Neural Activity</span>
-                    <span className="text-orange-400 text-sm font-bold">
+                    <span className="text-brand-400 text-sm font-bold">
                         {Math.round(normalizedProgress * 100)}%
                     </span>
                 </div>
                 <div className="w-full bg-gray-700/50 rounded-full h-2.5 overflow-hidden">
                     <div
-                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500"
+                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500"
                         style={{ width: `${normalizedProgress * 100}%` }}
                     />
                 </div>
@@ -363,7 +363,7 @@ function FallbackBrainVisualization({ progress, currentQuestion }: Comprehensive
             {/* Region indicator */}
             <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md rounded-lg p-3 border border-white/10">
                 <p className="text-white text-xs font-semibold mb-1">Active Region:</p>
-                <p className="text-orange-400 text-sm">
+                <p className="text-brand-400 text-sm">
                     {regions[currentQuestion % 5].name}
                 </p>
             </div>
@@ -406,7 +406,7 @@ export default function ComprehensiveBrainViewer({
     if (webGLAvailable === null) {
         return (
             <div className="w-full h-full relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 shadow-2xl flex items-center justify-center">
-                <Brain className="w-20 h-20 text-orange-600 animate-pulse" />
+                <Brain className="w-20 h-20 text-brand-600 animate-pulse" />
             </div>
         );
     }
@@ -467,13 +467,13 @@ export default function ComprehensiveBrainViewer({
             <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md rounded-xl p-4 border border-white/10">
                 <div className="flex items-center justify-between mb-2">
                     <span className="text-white text-sm font-semibold">Neural Activity</span>
-                    <span className="text-orange-400 text-sm font-bold">
+                    <span className="text-brand-400 text-sm font-bold">
                         {Math.round(normalizedProgress * 100)}%
                     </span>
                 </div>
                 <div className="w-full bg-gray-700/50 rounded-full h-2.5 overflow-hidden">
                     <div
-                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-orange-500 via-yellow-500 to-green-500"
+                        className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-brand-500 via-yellow-500 to-green-500"
                         style={{ width: `${normalizedProgress * 100}%` }}
                     />
                 </div>
@@ -497,7 +497,7 @@ export default function ComprehensiveBrainViewer({
             {/* Region indicator */}
             <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md rounded-lg p-3 border border-white/10">
                 <p className="text-white text-xs font-semibold mb-1">Active Region:</p>
-                <p className="text-orange-400 text-sm">
+                <p className="text-brand-400 text-sm">
                     {['Left Hemisphere', 'Right Hemisphere', 'Cerebellum', 'Brain Stem', 'Corpus Callosum'][currentQuestion % 5]}
                 </p>
             </div>

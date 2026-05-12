@@ -28,6 +28,13 @@ const nextConfig: NextConfig = {
         source: '/(.*)',
         headers: securityHeaders,
       },
+      {
+        // Force browsers to revalidate the logo on every request
+        source: '/logo.png',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, must-revalidate' },
+        ],
+      },
     ];
   },
 };

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Focus, CheckCircle2, Clock, Users, TrendingUp } from 'lucide-react';
@@ -41,14 +41,14 @@ export default function ADHDPage() {
                             </div>
 
                             {/* Key Features */}
-                            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8">
+                            <div className="bg-gradient-to-br from-brand-50 to-amber-50 rounded-2xl p-8">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
                                     Program Highlights
                                 </h3>
                                 <div className="grid sm:grid-cols-2 gap-6">
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Clock className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Clock className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Duration</h4>
@@ -56,8 +56,8 @@ export default function ADHDPage() {
                                         </div>
                                     </div>
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Users className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Users className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Sessions</h4>
@@ -65,8 +65,8 @@ export default function ADHDPage() {
                                         </div>
                                     </div>
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <TrendingUp className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <TrendingUp className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Improvement</h4>
@@ -74,8 +74,8 @@ export default function ADHDPage() {
                                         </div>
                                     </div>
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Focus className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Focus className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Focus</h4>
@@ -102,7 +102,7 @@ export default function ADHDPage() {
                                         'Slow processing speed under pressure',
                                     ].map((item, index) => (
                                         <div key={index} className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
+                                            <CheckCircle2 className="w-6 h-6 text-brand-600 flex-shrink-0 mt-0.5" />
                                             <span className="text-gray-700 text-lg">{item}</span>
                                         </div>
                                     ))}
@@ -115,7 +115,7 @@ export default function ADHDPage() {
                                     How It Works
                                 </h3>
                                 <div className="space-y-6">
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">
                                             1. Attention Assessment
                                         </h4>
@@ -123,7 +123,7 @@ export default function ADHDPage() {
                                             We measure your child's current sustained, selective, and divided attention levels — establishing a precise baseline to train from.
                                         </p>
                                     </div>
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">
                                             2. Cognigym Attention Training
                                         </h4>
@@ -131,7 +131,7 @@ export default function ADHDPage() {
                                             Targeted MDA, OMC, OMF, and IFB procedures progressively extend focus time, add distractions, and layer mental tasks — building all three attention types.
                                         </p>
                                     </div>
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">
                                             3. The Focus Game
                                         </h4>
@@ -139,7 +139,7 @@ export default function ADHDPage() {
                                             We time how long your child stays on task, tell them exactly what caused them to lose focus, and set incremental goals to extend their attention span session by session.
                                         </p>
                                     </div>
-                                    <div className="border-l-4 border-orange-600 pl-6">
+                                    <div className="border-l-4 border-brand-600 pl-6">
                                         <h4 className="text-xl font-bold text-gray-900 mb-2">
                                             4. Parent & Teacher Briefing
                                         </h4>
@@ -153,7 +153,7 @@ export default function ADHDPage() {
                             {/* Success Story */}
                             <div className="bg-gray-50 rounded-2xl p-8">
                                 <div className="flex items-start gap-4 mb-4">
-                                    <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center flex-shrink-0">
                                         <span className="text-white font-bold">CN</span>
                                     </div>
                                     <div>

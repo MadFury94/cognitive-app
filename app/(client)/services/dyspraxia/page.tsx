@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import PageHeader from '@/components/PageHeader';
 import ServiceBookingForm from '@/components/services/ServiceBookingForm';
 import { Pencil, CheckCircle2, Clock, Users } from 'lucide-react';
@@ -38,12 +38,12 @@ export default function DyspraxiaPage() {
                                 </p>
                             </div>
 
-                            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8">
+                            <div className="bg-gradient-to-br from-brand-50 to-amber-50 rounded-2xl p-8">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Program Highlights</h3>
                                 <div className="grid sm:grid-cols-2 gap-6">
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Clock className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Clock className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Duration</h4>
@@ -51,8 +51,8 @@ export default function DyspraxiaPage() {
                                         </div>
                                     </div>
                                     <div className="flex gap-4">
-                                        <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                            <Users className="w-6 h-6 text-orange-600" />
+                                        <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <Users className="w-6 h-6 text-brand-600" />
                                         </div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Sessions</h4>
@@ -76,7 +76,7 @@ export default function DyspraxiaPage() {
                                         'Low confidence in physical and written activities',
                                     ].map((item, index) => (
                                         <div key={index} className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-6 h-6 text-orange-600 flex-shrink-0 mt-0.5" />
+                                            <CheckCircle2 className="w-6 h-6 text-brand-600 flex-shrink-0 mt-0.5" />
                                             <span className="text-gray-700 text-lg">{item}</span>
                                         </div>
                                     ))}

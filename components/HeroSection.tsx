@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,7 +26,7 @@ export default function HeroSection() {
     );
 
     return (
-        <section className="bg-gradient-to-br from-orange-50 via-white to-orange-50 pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
+        <section className="bg-gradient-to-br from-brand-50 via-white to-brand-50 pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
             {/* 3D Brain Background */}
             <div className="absolute top-0 right-0 w-1/3 h-full opacity-20 pointer-events-none hidden lg:block">
                 <Suspense fallback={<div />}>
@@ -39,12 +39,12 @@ export default function HeroSection() {
                     {/* Left Content */}
                     <div className="space-y-8">
                         <div className="space-y-2">
-                            <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm">
+                            <p className="text-brand-600 font-semibold tracking-wide uppercase text-sm">
                                 {heroContent.eyebrow}
                             </p>
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                                 {heroContent.headline}{' '}
-                                <span className="text-orange-600 italic">{heroContent.headlineAccent}</span>
+                                <span className="text-brand-600 italic">{heroContent.headlineAccent}</span>
                             </h1>
                         </div>
 
@@ -55,7 +55,7 @@ export default function HeroSection() {
                         <div className="flex flex-wrap gap-4">
                             <Button
                                 size="lg"
-                                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-base"
+                                className="bg-brand-600 hover:bg-brand-700 text-white px-8 py-6 text-base"
                                 asChild
                             >
                                 <Link href={heroContent.primaryCta.href}>
@@ -65,7 +65,7 @@ export default function HeroSection() {
                             <Button
                                 size="lg"
                                 variant="outline"
-                                className="border-2 border-gray-300 hover:border-orange-600 hover:text-orange-600 px-8 py-6 text-base"
+                                className="border-2 border-gray-300 hover:border-brand-600 hover:text-brand-600 px-8 py-6 text-base"
                                 asChild
                             >
                                 <Link href={heroContent.secondaryCta.href}>
@@ -100,7 +100,7 @@ export default function HeroSection() {
                             <CarouselContent>
                                 {heroContent.images.map((image, index) => (
                                     <CarouselItem key={index}>
-                                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-orange-100 to-orange-50">
+                                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-brand-100 to-brand-50">
                                             <Image
                                                 src={image.src}
                                                 alt={image.alt}
@@ -121,7 +121,7 @@ export default function HeroSection() {
                         <div className="absolute -bottom-8 left-0 right-0 grid grid-cols-2 gap-4 px-4">
                             {heroContent.overlayStats.map((stat, index) => (
                                 <div key={index} className="bg-white rounded-xl shadow-lg p-4 backdrop-blur-sm bg-white/95">
-                                    <div className="text-2xl font-bold text-orange-600">{stat.value}</div>
+                                    <div className="text-2xl font-bold text-brand-600">{stat.value}</div>
                                     <div className="text-xs text-gray-600">{stat.label}</div>
                                 </div>
                             ))}

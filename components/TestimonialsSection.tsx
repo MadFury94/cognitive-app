@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
@@ -55,10 +55,10 @@ export default function TestimonialsSection() {
 
     const getColorClass = (index: number) => {
         const colors = [
-            'bg-orange-500',
-            'bg-orange-600',
-            'bg-orange-700',
-            'bg-orange-800',
+            'bg-brand-500',
+            'bg-brand-600',
+            'bg-brand-700',
+            'bg-brand-800',
         ];
         return colors[index % colors.length];
     };
@@ -67,7 +67,7 @@ export default function TestimonialsSection() {
         return (
             <section className="py-16 lg:py-24 bg-gray-900">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
             </section>
         );
@@ -81,7 +81,7 @@ export default function TestimonialsSection() {
         <section className="py-16 lg:py-24 bg-gray-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 lg:mb-16">
-                    <p className="text-orange-400 font-semibold tracking-wide uppercase text-sm mb-3">
+                    <p className="text-brand-400 font-semibold tracking-wide uppercase text-sm mb-3">
                         {testimonialsSectionContent.eyebrow}
                     </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
@@ -109,7 +109,7 @@ export default function TestimonialsSection() {
                                         {[...Array(testimonial.rating)].map((_, i) => (
                                             <Star
                                                 key={i}
-                                                className="w-5 h-5 fill-orange-500 text-orange-500"
+                                                className="w-5 h-5 fill-brand-500 text-brand-500"
                                             />
                                         ))}
                                     </div>

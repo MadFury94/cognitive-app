@@ -1,4 +1,4 @@
-import Image from 'next/image';
+﻿import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -10,7 +10,7 @@ export default function AboutHero() {
                     {/* Left Content */}
                     <div className="space-y-8">
                         <div className="space-y-4">
-                            <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm">
+                            <p className="text-brand-600 font-semibold tracking-wide uppercase text-sm">
                                 Our Story
                             </p>
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
@@ -29,7 +29,7 @@ export default function AboutHero() {
 
                         <Button
                             size="lg"
-                            className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-base"
+                            className="bg-brand-600 hover:bg-brand-700 text-white px-8 py-6 text-base"
                             asChild
                         >
                             <Link href="/team">
@@ -40,7 +40,7 @@ export default function AboutHero() {
 
                     {/* Right Image */}
                     <div className="relative">
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-orange-100 to-orange-50 shadow-xl">
+                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50 shadow-xl">
                             <Image
                                 src="https://res.cloudinary.com/dqwfjxn8g/image/upload/q_auto/f_auto/v1776382027/2149091515_ejlhwz.jpg"
                                 alt="Children learning at Cogniskills"

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 
@@ -38,9 +38,9 @@ export default function TeamSection() {
 
     const getColorClasses = (index: number) => {
         const colors = [
-            { bg: 'bg-orange-100', text: 'text-orange-700' },
+            { bg: 'bg-brand-100', text: 'text-brand-700' },
             { bg: 'bg-blue-100', text: 'text-blue-700' },
-            { bg: 'bg-orange-100', text: 'text-orange-700' },
+            { bg: 'bg-brand-100', text: 'text-brand-700' },
             { bg: 'bg-purple-100', text: 'text-purple-700' },
             { bg: 'bg-green-100', text: 'text-green-700' },
         ];
@@ -52,7 +52,7 @@ export default function TeamSection() {
             <section className="py-16 lg:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center">
-                        <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                     </div>
                 </div>
             </section>
@@ -75,7 +75,7 @@ export default function TeamSection() {
         <section className="py-16 lg:py-24 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-12 lg:mb-16">
-                    <p className="text-orange-600 font-semibold tracking-wide uppercase text-sm mb-3">
+                    <p className="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-3">
                         Our Specialists
                     </p>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">

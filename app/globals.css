@@ -5,6 +5,20 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* ── Brand colour scale ─────────────────────────────────────────────────
+     Change these six values to retheme the entire site.
+     Current: Purple / Violet
+  ──────────────────────────────────────────────────────────────────────── */
+  --color-brand-50: oklch(0.97 0.03 300);
+  --color-brand-100: oklch(0.93 0.06 300);
+  --color-brand-200: oklch(0.87 0.10 300);
+  --color-brand-300: oklch(0.76 0.15 300);
+  --color-brand-400: oklch(0.65 0.20 300);
+  --color-brand-500: oklch(0.55 0.24 300);
+  --color-brand-600: oklch(0.47 0.26 300);
+  --color-brand-700: oklch(0.39 0.24 300);
+  --color-brand-800: oklch(0.32 0.20 300);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -128,6 +142,20 @@
 
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+
+  /* Ensure text stays white whenever a brand-coloured background is active */
+  .bg-brand-500,
+  .bg-brand-600,
+  .bg-brand-700,
+  .bg-brand-800,
+  .hover\:bg-brand-600:hover,
+  .hover\:bg-brand-700:hover,
+  .hover\:bg-brand-800:hover {
+    color: white;
   }
 }
 
