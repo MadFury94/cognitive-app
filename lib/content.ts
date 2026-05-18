@@ -85,7 +85,7 @@ export const howItWorksContent = {
             title: 'Cognitive assessment',
             description:
                 "We map your child's full cognitive profile: auditory processing, memory, attention, processing speed, and more.",
-            image: '/how%20it%20works/step1.jpg',
+            image: '/how-it-works/step1.jpg',
             imageAlt: 'Child during a cognitive assessment session',
         },
         {
@@ -93,7 +93,7 @@ export const howItWorksContent = {
             title: 'Cognigym program',
             description:
                 "A personalised Cognigym training plan built around your child's specific cognitive gaps.",
-            image: '/how%20it%20works/step2.jpg',
+            image: '/how-it-works/step2.jpg',
             imageAlt: 'Specialist building a personalised training plan',
         },
         {
@@ -101,7 +101,7 @@ export const howItWorksContent = {
             title: 'Structured sessions',
             description:
                 'One-on-one sessions using the Cognigym toolkit. Metronome-paced, intensive, and measurable.',
-            image: '/how%20it%20works/step3.jpg',
+            image: '/how-it-works/step3.jpg',
             imageAlt: 'Child in a one-on-one Cognigym training session',
         },
         {
@@ -109,7 +109,7 @@ export const howItWorksContent = {
             title: 'Track and report',
             description:
                 'Regular progress reviews with clear metrics shared with parents and teachers.',
-            image: '/how%20it%20works/step4.jpg',
+            image: '/how-it-works/step4.jpg',
             imageAlt: 'Parent reviewing child progress report with specialist',
         },
     ],

@@ -50,10 +50,10 @@ export const metadata: Metadata = {
       "Scientifically grounded cognitive training for children with dyslexia, ADHD, autism, and learning delays. We train the brain, not just the subject.",
     images: [
       {
-        url: "/logo.png",
-        width: 800,
-        height: 800,
-        alt: "Cogniskills - Cognitive Skills Training for Children",
+        url: `${BASE_URL}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Cogniskills - Cognitive Skills Training for Children in Lagos",
       },
     ],
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "Cogniskills | Cognitive Skills Training for Children in Lagos",
     description:
       "Scientifically grounded cognitive training for children with dyslexia, ADHD, autism, and learning delays.",
-    images: ["/logo.png"],
+    images: [`${BASE_URL}/opengraph-image.png`],
     creator: "@cogniskills",
   },
   robots: {
@@ -79,6 +79,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+    shortcut: '/icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -93,8 +98,6 @@ export default function RootLayout({
       className={`${fredoka.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/logo.png" />
         <meta name="theme-color" content="#7c3aed" />
         {/* Local Business Schema */}
         <script
