@@ -55,10 +55,10 @@ export default function TestimonialsSection() {
 
     const getColorClass = (index: number) => {
         const colors = [
-            'bg-brand-500',
-            'bg-brand-600',
-            'bg-brand-700',
-            'bg-brand-800',
+            'bg-slate-600',
+            'bg-slate-700',
+            'bg-gray-600',
+            'bg-gray-700',
         ];
         return colors[index % colors.length];
     };

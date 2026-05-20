@@ -6,12 +6,12 @@ export default function CTASection() {
     const { heading, description, primaryCta, secondaryCta } = ctaContent;
 
     return (
-        <section className="py-20 lg:py-32 bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800">
+        <section className="py-20 lg:py-32 bg-gradient-to-br from-slate-800 via-slate-900 to-gray-900">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
                     {heading}
                 </h2>
-                <p className="text-xl text-brand-100 mb-10 max-w-2xl mx-auto">
+                <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
                     {description}
                 </p>
 

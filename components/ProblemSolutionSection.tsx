@@ -28,7 +28,7 @@ export default function ProblemSolutionSection() {
                     </div>
 
                     {/* Solutions Card */}
-                    <div className="bg-gradient-to-br from-brand-50 to-brand-100 rounded-3xl p-8 lg:p-12 shadow-lg">
+                    <div className="bg-gradient-to-br from-slate-50 to-gray-100 rounded-3xl p-8 lg:p-12 shadow-lg">
                         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8">
                             {solutionsHeading}
                         </h2>

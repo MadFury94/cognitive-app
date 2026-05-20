@@ -26,7 +26,7 @@ export default function HeroSection() {
     );
 
     return (
-        <section className="bg-gradient-to-br from-brand-50 via-white to-brand-50 pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
+        <section className="bg-gradient-to-br from-slate-50 via-white to-slate-50 pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
             {/* 3D Brain Background */}
             <div className="absolute top-0 right-0 w-1/3 h-full opacity-20 pointer-events-none hidden lg:block">
                 <Suspense fallback={<div />}>
@@ -100,7 +100,7 @@ export default function HeroSection() {
                             <CarouselContent>
                                 {heroContent.images.map((image, index) => (
                                     <CarouselItem key={index}>
-                                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-brand-100 to-brand-50">
+                                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-100 to-slate-50">
                                             <Image
                                                 src={image.src}
                                                 alt={image.alt}

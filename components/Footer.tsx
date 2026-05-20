@@ -5,7 +5,7 @@ import { footerContent, siteContent } from '@/lib/content';
 
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-br from-brand-50 via-white to-brand-50 text-gray-800 border-t border-brand-100">
+        <footer className="bg-gradient-to-br from-slate-50 via-white to-slate-50 text-gray-800 border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                     {/* About Section */}
@@ -105,7 +105,7 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-brand-200 mt-12 pt-8">
+                <div className="border-t border-gray-200 mt-12 pt-8">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <p className="text-sm text-gray-600 text-center sm:text-left">
                             &copy; {new Date().getFullYear()} {siteContent.fullName}. All rights reserved.

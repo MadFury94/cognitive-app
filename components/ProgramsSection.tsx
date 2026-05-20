@@ -54,7 +54,7 @@ export default function ProgramsSection() {
 
     if (loading) {
         return (
-            <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-50 via-white to-brand-50">
+            <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
                 </div>
@@ -63,7 +63,7 @@ export default function ProgramsSection() {
     }
 
     return (
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-brand-50 via-white to-brand-50 relative overflow-hidden">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden">
             {/* 3D Floating Shapes Background */}
             <div className="absolute inset-0 opacity-30 pointer-events-none hidden lg:block">
                 <Suspense fallback={<div />}>
