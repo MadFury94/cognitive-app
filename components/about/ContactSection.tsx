@@ -14,10 +14,42 @@ export default function ContactSection() {
         message: '',
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission
-        console.log('Form submitted:', formData);
+        setSubmitting(true);
+        setSubmitError('');
+
+        try {
+            const res = await fetch('/api/booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    parentName: formData.parentName,
+                    phone: formData.phone,
+                    email: formData.email,
+                    childName: '',
+                    childAge: formData.childAge,
+                    program: formData.condition,
+                    message: formData.message,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setSubmitted(true);
+            } else {
+                setSubmitError(data.error || 'Something went wrong. Please try again.');
+            }
+        } catch {
+            setSubmitError('Connection error. Please try again.');
+        }
+
+        setSubmitting(false);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -37,128 +69,147 @@ export default function ContactSection() {
                             GET IN TOUCH
                         </p>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                            Let's talk about your child
+                            Let&apos;s talk about your child
                         </h2>
                         <p className="text-gray-600 mb-8">
                             One of our specialists will reach out within 24 hours.
                         </p>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div>
-                                <label htmlFor="parentName" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Parent / guardian name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="parentName"
-                                    name="parentName"
-                                    value={formData.parentName}
-                                    onChange={handleChange}
-                                    placeholder="e.g. Adebisi Okafor"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
-                                    required
-                                />
+                        {submitted ? (
+                            <div className="text-center py-12">
+                                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 mb-2">Message received!</h3>
+                                <p className="text-gray-600">One of our specialists will reach out within 24 hours.</p>
                             </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                {submitError && (
+                                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                                        {submitError}
+                                    </div>
+                                )}
 
-                            <div>
-                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Phone number
-                                </label>
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    name="phone"
-                                    value={formData.phone}
-                                    onChange={handleChange}
-                                    placeholder="+234 800 000 0000"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
-                                    required
-                                />
-                            </div>
+                                <div>
+                                    <label htmlFor="parentName" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Parent / guardian name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="parentName"
+                                        name="parentName"
+                                        value={formData.parentName}
+                                        onChange={handleChange}
+                                        placeholder="e.g. Adebisi Okafor"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                                        required
+                                    />
+                                </div>
 
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    placeholder="you@example.com"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
-                                    required
-                                />
-                            </div>
+                                <div>
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Phone number
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        placeholder="+234 800 000 0000"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                                        required
+                                    />
+                                </div>
 
-                            <div>
-                                <label htmlFor="childAge" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Child's age
-                                </label>
-                                <select
-                                    id="childAge"
-                                    name="childAge"
-                                    value={formData.childAge}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
-                                    required
+                                <div>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        placeholder="you@example.com"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                                        required
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="childAge" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Child&apos;s age
+                                    </label>
+                                    <select
+                                        id="childAge"
+                                        name="childAge"
+                                        value={formData.childAge}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
+                                        required
+                                    >
+                                        <option value="">Select age range</option>
+                                        <option value="3-5">3-5 years</option>
+                                        <option value="6-8">6-8 years</option>
+                                        <option value="9-12">9-12 years</option>
+                                        <option value="13-16">13-16 years</option>
+                                        <option value="17+">17+ years</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="condition" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Main concern
+                                    </label>
+                                    <select
+                                        id="condition"
+                                        name="condition"
+                                        value={formData.condition}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
+                                        required
+                                    >
+                                        <option value="">Select condition</option>
+                                        <option value="dyslexia">Dyslexia</option>
+                                        <option value="adhd">ADHD</option>
+                                        <option value="autism">Autism spectrum</option>
+                                        <option value="speech">Speech disorders</option>
+                                        <option value="dyspraxia">Dyspraxia</option>
+                                        <option value="learning-delays">Learning delays</option>
+                                        <option value="other">Other / Not sure</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                                        Tell us more (optional)
+                                    </label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        placeholder="Describe what you've noticed..."
+                                        rows={4}
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
+                                    />
+                                </div>
+
+                                <Button
+                                    type="submit"
+                                    size="lg"
+                                    disabled={submitting}
+                                    className="w-full bg-brand-600 hover:bg-brand-700 text-white py-6 text-lg font-semibold disabled:opacity-50"
                                 >
-                                    <option value="">Select age range</option>
-                                    <option value="3-5">3-5 years</option>
-                                    <option value="6-8">6-8 years</option>
-                                    <option value="9-12">9-12 years</option>
-                                    <option value="13-16">13-16 years</option>
-                                    <option value="17+">17+ years</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label htmlFor="condition" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Main concern
-                                </label>
-                                <select
-                                    id="condition"
-                                    name="condition"
-                                    value={formData.condition}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
-                                    required
-                                >
-                                    <option value="">Select condition</option>
-                                    <option value="dyslexia">Dyslexia</option>
-                                    <option value="adhd">ADHD</option>
-                                    <option value="autism">Autism spectrum</option>
-                                    <option value="speech">Speech disorders</option>
-                                    <option value="dyspraxia">Dyspraxia</option>
-                                    <option value="learning-delays">Learning delays</option>
-                                    <option value="other">Other / Not sure</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                                    Tell us more (optional)
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    placeholder="Describe what you've noticed..."
-                                    rows={4}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
-                                />
-                            </div>
-
-                            <Button
-                                type="submit"
-                                size="lg"
-                                className="w-full bg-brand-600 hover:bg-brand-700 text-white py-6 text-lg font-semibold"
-                            >
-                                Request assessment
-                            </Button>
-                        </form>
+                                    {submitting ? 'Sending...' : 'Request assessment'}
+                                </Button>
+                            </form>
+                        )}
                     </div>
 
                     {/* Right - Contact Info */}
