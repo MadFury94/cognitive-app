@@ -7,11 +7,12 @@ import Footer from '@/components/Footer';
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
 
-    // Check if current path is an admin page
-    const isAdminPage = pathname?.startsWith('/admin');
+    // Pages with their own standalone layout (no header/footer)
+    const isStandalonePage =
+        pathname?.startsWith('/admin') ||
+        pathname?.startsWith('/cognigym-test');
 
-    // Admin pages have their own layout
-    if (isAdminPage) {
+    if (isStandalonePage) {
         return <>{children}</>;
     }
 
