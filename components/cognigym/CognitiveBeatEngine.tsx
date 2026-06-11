@@ -155,33 +155,40 @@ export default function BeatRunnerCognigym() {
     const beatIntervalMs = useMemo(() => 60000 / currentLevel.bpm, [currentLevel.bpm]);
     const targetEveryBeats = beatMode === 'every-beat' ? 1 : 2;
 
-    const ensureAudio = useCallback(() => {
+    const ensureAudio = useCallback(async () => {
         if (typeof window === 'undefined') return null;
         const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         if (!audioRef.current) audioRef.current = new AudioCtx();
-        if (audioRef.current.state === 'suspended') audioRef.current.resume();
+        // iOS/Android suspend the context until a user gesture — resume it
+        if (audioRef.current.state === 'suspended') {
+            await audioRef.current.resume();
+        }
         return audioRef.current;
     }, []);
 
     const playBeat = useCallback((accent = false) => {
-        const ctx = ensureAudio();
-        if (!ctx) return;
+        const ctx = audioRef.current;
+        if (!ctx || ctx.state !== 'running') return;
         const now = ctx.currentTime;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         const freqs: Record<SoundMode, number> = {
-            drum: accent ? 180 : 120, clap: accent ? 900 : 700,
-            robot: accent ? 420 : 320, piano: accent ? 660 : 520, soft: accent ? 520 : 420,
+            drum: accent ? 180 : 120,
+            clap: accent ? 900 : 700,
+            robot: accent ? 420 : 320,
+            piano: accent ? 660 : 520,
+            soft: accent ? 520 : 420,
         };
         osc.type = soundMode === 'robot' ? 'square' : soundMode === 'soft' ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(freqs[soundMode], now);
-        gain.gain.setValueAtTime(accent ? 0.13 : 0.075, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + (soundMode === 'piano' ? 0.12 : 0.06));
+        // Boosted gain — mobile speakers need more headroom
+        gain.gain.setValueAtTime(accent ? 0.35 : 0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + (soundMode === 'piano' ? 0.18 : 0.10));
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(now);
-        osc.stop(now + 0.14);
-    }, [ensureAudio, soundMode]);
+        osc.stop(now + 0.20);
+    }, [soundMode]);
 
     const stopTimers = useCallback(() => {
         if (intervalRef.current) window.clearInterval(intervalRef.current);
@@ -193,8 +200,8 @@ export default function BeatRunnerCognigym() {
 
     // Plays a soft feedback sound — separate from the metronome beat sound
     const playFeedbackSound = useCallback((quality: Quality) => {
-        const ctx = ensureAudio();
-        if (!ctx) return;
+        const ctx = audioRef.current;
+        if (!ctx || ctx.state !== 'running') return;
         if (quality === 'miss' || quality === 'wrong') return; // no punishment sound
 
         const now = ctx.currentTime;
@@ -204,11 +211,11 @@ export default function BeatRunnerCognigym() {
         gain.connect(ctx.destination);
 
         if (quality === 'perfect') {
-            // Soft two-tone "ding"
+            // Soft two-tone "ding" — boosted for mobile speakers
             osc.type = 'sine';
             osc.frequency.setValueAtTime(880, now);
             osc.frequency.setValueAtTime(1100, now + 0.04);
-            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.setValueAtTime(0.3, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
             osc.start(now);
             osc.stop(now + 0.23);
@@ -216,12 +223,12 @@ export default function BeatRunnerCognigym() {
             // good / early / late — softer single tone
             osc.type = 'sine';
             osc.frequency.setValueAtTime(660, now);
-            gain.gain.setValueAtTime(0.07, now);
+            gain.gain.setValueAtTime(0.18, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
             osc.start(now);
             osc.stop(now + 0.15);
         }
-    }, [ensureAudio]);
+    }, []);
 
     const showFeedback = useCallback((quality: Quality) => {
         setFeedback(quality);
@@ -317,9 +324,9 @@ export default function BeatRunnerCognigym() {
         rafRef.current = requestAnimationFrame(animate);
     }, []);
 
-    const startGame = useCallback(() => {
+    const startGame = useCallback(async () => {
         stopTimers();
-        ensureAudio();
+        await ensureAudio(); // must resolve before interval fires — critical on iOS/Android
         scoreRef.current = comboRef.current = completedRef.current = beatCountRef.current = 0;
         nextTargetIdRef.current = 1;
         lastArrowRef.current = targetRef.current = null;
