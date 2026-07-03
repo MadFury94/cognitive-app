@@ -10,7 +10,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     // Pages with their own standalone layout (no header/footer)
     const isStandalonePage =
         pathname?.startsWith('/admin') ||
-        pathname?.startsWith('/cognigym-test');
+        pathname?.startsWith('/cognigym-test') ||
+        pathname?.startsWith('/path-finder');
 
     if (isStandalonePage) {
         return <>{children}</>;
