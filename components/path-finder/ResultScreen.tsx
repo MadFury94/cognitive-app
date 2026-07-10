@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import type { PathResult } from './types';
+import { PASS_STARS } from './types';
 
 interface ResultScreenProps {
     result: PathResult;
@@ -9,6 +10,8 @@ interface ResultScreenProps {
     maxLevel: number;
     onPlayAgain: () => void;
     onNextLevel: () => void;
+    /** Called when the player should drop back one level (stars too low). */
+    onPrevLevel: () => void;
 }
 
 function StatBar({ label, value, colour }: { label: string; value: number; colour: string }) {
@@ -53,9 +56,29 @@ function confettiColours() {
     return ['#10b981', '#6366f1', '#f59e0b', '#ec4899', '#3b82f6'];
 }
 
-export default function ResultScreen({ result, level, maxLevel, onPlayAgain, onNextLevel }: ResultScreenProps) {
+export default function ResultScreen({ result, level, maxLevel, onPlayAgain, onNextLevel, onPrevLevel }: ResultScreenProps) {
     const isExcellent = result.stars >= 4;
     const headline = result.stars === 5 ? 'Perfect!' : result.stars >= 4 ? 'Excellent!' : result.stars >= 3 ? 'Good work!' : 'Keep going!';
+
+    // Determine progression outcome
+    const canAdvance = result.stars > PASS_STARS && level < maxLevel;
+    const mustRepeat = result.stars === PASS_STARS;
+    const dropBack = result.stars < PASS_STARS;
+
+    // Label + hint for the primary action button
+    const primaryLabel = canAdvance
+        ? 'Next Level →'
+        : mustRepeat
+            ? 'Try Again ↺'
+            : 'Back a Level ↩';
+
+    const progressionHint = canAdvance
+        ? null
+        : mustRepeat
+            ? 'Reach 4+ stars to advance to the next level.'
+            : `Score too low — going back to level ${Math.max(1, level - 1)} to practise.`;
+
+    const handlePrimary = canAdvance ? onNextLevel : mustRepeat ? onPlayAgain : onPrevLevel;
 
     return (
         <motion.div
@@ -119,24 +142,38 @@ export default function ResultScreen({ result, level, maxLevel, onPlayAgain, onN
                     <span className="text-sm font-bold text-gray-900">{result.completionTimeSec}s</span>
                 </div>
 
+                {/* Progression hint */}
+                {progressionHint && (
+                    <p className="text-xs text-center text-amber-600 font-medium bg-amber-50 border border-amber-200 rounded-2xl px-3 py-2">
+                        {progressionHint}
+                    </p>
+                )}
+
                 {/* Buttons */}
                 <div className="flex gap-3">
+                    {/* Secondary: always "Play Again" (repeat current level) */}
+                    {canAdvance && (
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={onPlayAgain}
+                            className="flex-1 border-2 border-brand-600 text-brand-600 font-bold py-3 rounded-2xl transition-colors hover:bg-brand-50"
+                        >
+                            Play Again
+                        </motion.button>
+                    )}
+                    {/* Primary: context-aware */}
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.97 }}
-                        onClick={onPlayAgain}
-                        className="flex-1 border-2 border-brand-600 text-brand-600 font-bold py-3 rounded-2xl transition-colors hover:bg-brand-50"
+                        onClick={handlePrimary}
+                        className={`flex-1 font-bold py-3 rounded-2xl transition-colors shadow-lg text-white
+                            ${dropBack
+                                ? 'bg-amber-500 hover:bg-amber-600 shadow-amber-500/25'
+                                : 'bg-brand-600 hover:bg-brand-700 shadow-brand-600/25'
+                            }`}
                     >
-                        Play Again
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.97 }}
-                        onClick={onNextLevel}
-                        disabled={level >= maxLevel}
-                        className="flex-1 bg-brand-600 hover:bg-brand-700 disabled:opacity-40 text-white font-bold py-3 rounded-2xl transition-colors shadow-lg shadow-brand-600/25"
-                    >
-                        {level >= maxLevel ? 'Complete!' : 'Next Level →'}
+                        {primaryLabel}
                     </motion.button>
                 </div>
             </div>

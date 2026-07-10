@@ -177,9 +177,34 @@ export default function PathFinderGame() {
         const next = Math.min(levelIndex + 1, LEVELS.length - 1);
         clearTimers();
         setLevelIndex(next);
-        // Use timeout so levelIndex state propagates before startCountdown reads it
         setTimeout(() => {
             prepareLevel(next);
+            initAudio();
+            setCountdownVal(3);
+            setPhase('countdown');
+            let c = 3;
+            sounds.countdown();
+            timerRef.current = setInterval(() => {
+                c -= 1;
+                if (c > 0) { sounds.countdown(); setCountdownVal(c); }
+                else {
+                    setCountdownVal(0);
+                    sounds.countdownGo();
+                    clearInterval(timerRef.current!);
+                    timerRef.current = null;
+                    setTimeout(() => startStudy(), 700);
+                }
+            }, 1000);
+        }, 80);
+    }, [levelIndex, clearTimers, prepareLevel, startStudy]);
+
+    /** Drop back one level when the player scores too low. */
+    const handlePrevLevel = useCallback(() => {
+        const prev = Math.max(levelIndex - 1, 0);
+        clearTimers();
+        setLevelIndex(prev);
+        setTimeout(() => {
+            prepareLevel(prev);
             initAudio();
             setCountdownVal(3);
             setPhase('countdown');
@@ -390,6 +415,7 @@ export default function PathFinderGame() {
                                 maxLevel={LEVELS.length}
                                 onPlayAgain={handlePlayAgain}
                                 onNextLevel={handleNextLevel}
+                                onPrevLevel={handlePrevLevel}
                             />
                         </motion.div>
                     )}
