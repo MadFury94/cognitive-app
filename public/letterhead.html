@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cogniskills — Official Letterhead</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:    #320070;
+      --purple-mid:#6d28d9;
+      --purple-lt: #ede9fe;
+      --purple-xs: #f5f3ff;
+      --fuchsia:   #cc00cc;
+      --blue-lt:   #6699ff;
+      --white:     #ffffff;
+      --gray-50:   #f9fafb;
+      --gray-100:  #f3f4f6;
+      --gray-200:  #e5e7eb;
+      --gray-400:  #9ca3af;
+      --gray-500:  #6b7280;
+      --gray-600:  #4b5563;
+      --gray-800:  #1f2937;
+      --gray-900:  #111827;
+      --body-font: 'Inter', 'Segoe UI', Arial, sans-serif;
+      --head-font: 'Fredoka One', 'Inter', sans-serif;
+    }
+
+    html { font-size: 15px; }
+
+    body {
+      font-family: var(--body-font);
+      background: var(--gray-100);
+      color: var(--gray-800);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Outer shell (screen preview) ───────────────────────── */
+    .sheet-wrapper {
+      padding: 32px 16px 48px;
+    }
+
+    .sheet {
+      position: relative;
+      width: 100%;
+      max-width: 794px;   /* ~A4 at 96 dpi */
+      min-height: 1123px; /* ~A4 height    */
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 8px 48px rgba(50,0,112,.15), 0 2px 8px rgba(50,0,112,.08);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOP HEADER BAND ─────────────────────────────────────── */
+    .header-band {
+      background: var(--purple);
+      padding: 28px 40px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .logo-box {
+      width: 68px;
+      height: 68px;
+      flex-shrink: 0;
+    }
+
+    .logo-box svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .org-name {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .org-name .wordmark {
+      font-family: var(--head-font);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: .01em;
+      line-height: 1;
+    }
+
+    .org-name .tagline {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      line-height: 1;
+    }
+
+    /* Right-hand contact pill */
+    .header-contact {
+      text-align: right;
+      color: rgba(255,255,255,.80);
+      font-size: 11.5px;
+      line-height: 1.9;
+    }
+
+    .header-contact a {
+      color: rgba(255,255,255,.90);
+      text-decoration: none;
+    }
+
+    .header-contact a:hover { text-decoration: underline; }
+
+    /* ── COLOUR STRIPE ───────────────────────────────────────── */
+    .stripe {
+      height: 5px;
+      background: linear-gradient(90deg, var(--fuchsia) 0%, var(--blue-lt) 50%, var(--purple-mid) 100%);
+    }
+
+    /* ── ADDRESS BAR ─────────────────────────────────────────── */
+    .address-bar {
+      background: var(--purple-xs);
+      border-bottom: 1px solid var(--purple-lt);
+      padding: 9px 40px;
+      font-size: 11px;
+      color: var(--gray-600);
+      letter-spacing: .02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .address-bar .sep {
+      color: var(--purple-mid);
+      font-weight: 700;
+      margin: 0 4px;
+    }
+
+    /* ── BODY ────────────────────────────────────────────────── */
+    .body {
+      flex: 1;
+      padding: 40px 40px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Date + ref row */
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .meta-row .date { font-weight: 500; color: var(--gray-800); }
+    .meta-row .ref  { font-weight: 600; color: var(--purple); letter-spacing: .04em; }
+
+    /* Addressee */
+    .addressee {
+      margin-bottom: 28px;
+    }
+
+    .block-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+      margin-bottom: 6px;
+    }
+
+    .addressee address {
+      font-style: normal;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--gray-800);
+    }
+
+    .addressee address strong {
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    /* Subject line */
+    .subject-row {
+      display: flex;
+      align-items: stretch;
+      margin-bottom: 28px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--purple-lt);
+    }
+
+    .subject-accent {
+      width: 5px;
+      flex-shrink: 0;
+      background: linear-gradient(180deg, var(--purple) 0%, var(--purple-mid) 100%);
+    }
+
+    .subject-inner {
+      padding: 12px 16px;
+      background: var(--purple-xs);
+      flex: 1;
+    }
+
+    .subject-inner .sub-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+      margin-bottom: 3px;
+    }
+
+    .subject-inner .sub-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.3;
+    }
+
+    /* Letter text */
+    .letter-text {
+      font-size: 13.5px;
+      color: var(--gray-700);
+      line-height: 1.9;
+      flex: 1;
+    }
+
+    .letter-text p { margin-bottom: 16px; }
+    .letter-text p:last-child { margin-bottom: 0; }
+
+    .salutation { margin-bottom: 16px; font-weight: 500; color: var(--gray-900); }
+
+    /* Signature */
+    .signature-block {
+      margin-top: 44px;
+    }
+
+    .closing {
+      font-size: 13.5px;
+      color: var(--gray-700);
+      margin-bottom: 52px;
+    }
+
+    .sig-name  { font-size: 15px; font-weight: 700; color: var(--gray-900); line-height: 1.2; }
+    .sig-title { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+
+    .official-stamp {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 5px 14px;
+      border: 2px solid var(--purple);
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+
+    /* ── FOOTER BAND ─────────────────────────────────────────── */
+    .footer-stripe {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple) 0%, var(--fuchsia) 50%, var(--blue-lt) 100%);
+    }
+
+    .footer-band {
+      background: var(--purple);
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 10.5px;
+      color: rgba(255,255,255,.55);
+    }
+
+    .footer-band .brand {
+      font-family: var(--head-font);
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,.75);
+      letter-spacing: .02em;
+    }
+
+    .footer-band .page-no {
+      font-weight: 600;
+      color: rgba(255,255,255,.7);
+    }
+
+    /* ── Watermark ───────────────────────────────────────────── */
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-38deg);
+      font-family: var(--head-font);
+      font-size: 96px;
+      color: rgba(50, 0, 112, 0.032);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      letter-spacing: .05em;
+    }
+
+    /* content stacks above watermark */
+    .header-band, .stripe, .address-bar,
+    .body, .footer-stripe, .footer-band { position: relative; z-index: 1; }
+
+    /* ── Responsive tweaks ───────────────────────────────────── */
+    @media (max-width: 640px) {
+      html { font-size: 13px; }
+      .sheet-wrapper { padding: 0; }
+      .sheet { box-shadow: none; border-radius: 0; min-height: 100vh; }
+      .header-band  { flex-direction: column; align-items: flex-start; padding: 24px 20px 20px; }
+      .header-contact { text-align: left; }
+      .address-bar  { padding: 8px 20px; flex-wrap: wrap; }
+      .body         { padding: 28px 20px 24px; }
+      .meta-row     { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .footer-band  { flex-direction: column; gap: 4px; padding: 12px 20px; text-align: center; }
+    }
+
+    /* ── Print / PDF ─────────────────────────────────────────── */
+    @media print {
+      html, body { background: white; font-size: 13px; }
+      .sheet-wrapper { padding: 0; }
+
+      .sheet {
+        width: 100%;
+        max-width: 100%;
+        min-height: 100vh;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      /* keep header + at least a few lines on same page */
+      .header-band, .stripe, .address-bar { page-break-after: avoid; }
+      .footer-stripe, .footer-band        { page-break-before: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="sheet-wrapper">
+<div class="sheet">
+
+  <!-- WATERMARK -->
+  <div class="watermark" aria-hidden="true">Cogniskills</div>
+
+  <!-- ════════════ HEADER ════════════ -->
+  <header class="header-band">
+    <div class="logo-lockup">
+      <div class="logo-box">
+        <!-- SVG embedded inline so it renders with no path dependency -->
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 1080 1080" style="shape-rendering:geometricPrecision;fill-rule:evenodd;clip-rule:evenodd">
+          <defs><style>.f0{fill:#320070}.f1{fill:white;fill-rule:nonzero;fill-opacity:.902}.f2{fill:#FAFAFA;fill-opacity:.902}.f3{fill:#6699FF;fill-opacity:.902}.f4{fill:#7709FF;fill-opacity:.902}.f5{fill:fuchsia;fill-opacity:.902}.f6{fill:white;fill-opacity:.902}</style></defs>
+          <rect class="f0" width="1080" height="1080"/>
+          <path class="f2" d="M540 262.538c120.454,0 218.101,97.648 218.101,218.101 0,120.454 -97.647,218.102 -218.101,218.102 -120.454,0 -218.101,-97.648 -218.101,-218.102 0,-120.453 97.647,-218.101 218.101,-218.101zm0 19.702c109.573,0 198.399,88.826 198.399,198.399 0,109.574 -88.826,198.4 -198.399,198.4 -109.573,0 -198.399,-88.826 -198.399,-198.4 0,-109.573 88.826,-198.399 198.399,-198.399z"/>
+          <path class="f3" d="M540.208 464.447c3.568,-0.858 5.738,-3.093 12.487,-2.866 23.228,0.779 29.911,32.568 11.771,43.841 -5.587,3.472 -11.564,4.835 -18.33,2.917 -2.082,-0.591 -3.863,-1.501 -5.747,-2.005 -0.381,5.313 -0.008,10.545 -0.07,15.885 -0.06,5.169 -0.192,9.993 3.061,12.944 3.709,3.364 7.889,2.75 13.634,2.674 3.55,-0.048 13.342,0.786 16.031,-0.075 -4.134,-8.716 -4.601,-15.304 0.555,-23.366 10.699,-16.732 42.772,-13.832 44.45,10.735 0.364,5.337 -1.095,7.589 -2.359,11.596 12.288,-3.263 20.771,-15.305 28.747,-24.502 10.606,-15.946 17.554,-34.625 19.616,-54.784l0 -25.031c-9.088,0 -50.18,1.518 -57.73,-1.485 -5.106,-2.031 -9.246,-7.097 -7.369,-14.424 1.434,-5.601 6.825,-11.8 0.777,-16.382 -4.934,-3.738 -13.828,-0.351 -14.34,5.108 -0.486,5.169 5.895,9.521 3.659,18.061 -0.774,2.959 -2.781,5.086 -4.831,6.429 -7.855,5.147 -21.3,2.393 -30.843,2.911 -8.121,0.439 -11.348,2.599 -12.773,10.074 -1.004,5.275 -0.73,16.157 -0.396,21.745z"/>
+          <path class="f4" d="M540.313 343.291c1.487,0.05 5.521,-2.903 12.163,-2.745 19.049,0.451 28.594,22.863 17.953,38.341 -3.575,5.201 -10.713,9.008 -17.514,9.286 -5.852,0.239 -8.006,-1.555 -12.583,-2.907 -0.223,5.386 0.03,10.572 -0.012,15.946 -0.097,12.243 1.809,15.998 16.012,16.234 5.562,0.094 10.985,0.307 16.548,-0.033 -0.135,-2.185 -7.265,-11.308 0.797,-23.502 8.801,-13.308 30.787,-14.523 40.532,-0.646 2.082,2.965 3.59,7.143 3.788,11.515 0.231,5.1 -1.117,8.434 -2.717,12.45 3.09,0.627 10.857,0.035 14.48,0.016 1.636,-0.01 3.317,0.038 4.967,0.009l0 0.006 26.696 0 0 -0.675c-1.72,-7.283 -4.09,-14.308 -7.044,-21.007 -1.34,-3.037 -2.799,-6.006 -4.372,-8.903 -20.193,-36.083 -58.777,-60.481 -103.066,-60.481 -2.158,0 -4.302,0.062 -6.431,0.177 -0.608,4.281 -0.199,15.669 0.082,18.563z"/>
+          <path class="f5" d="M431.226 417.361c3.138,0.551 14.935,0.384 18.366,0.028 -0.095,-0.903 -1.554,-3.796 -1.997,-5.159 -7.61,-23.441 26.93,-40.776 43.261,-18.825 1.936,2.601 3.748,7.267 3.928,11.374 0.243,5.526 -1.753,8.521 -2.827,12.493 4.319,0.183 8.439,0.156 12.769,0.06 4.4,-0.097 8.545,0.421 12.609,-0.838 3.594,-1.113 5.452,-2.942 6.442,-6.613 3.261,-12.083 -4.182,-38.352 11.688,-40.733 4.158,-0.624 7.743,0.934 11.08,2.16 3.646,1.339 6.703,2.503 10.085,0.051 5.125,-3.718 2.956,-16.526 -5.249,-15.606 -2.799,0.314 -6.802,2.554 -9.908,3.399 -8.859,2.41 -14.179,-2.54 -15.986,-9.354 -1.99,-7.506 -0.619,-17.269 -0.87,-25.247 -39.092,3.441 -73.889,26.7 -88.078,63.498 -3.177,8.239 -6.347,20.503 -5.313,29.312z"/>
+          <path class="f6" d="M529.172 618.796c0.033,-0.043 0.064,-0.09 0.091,-0.146 1.243,-2.561 2.562,-5.077 3.952,-7.544l0.012 -0.005c1.94,-3.44 4.015,-6.788 6.228,-10.031l-0.006 0c4.669,-6.845 9.925,-13.229 15.694,-19.073 13.603,-13.781 30.052,-24.558 48.347,-31.29l-1.34 -1.92c-1.26,-1.767 -3.293,-3.081 -3.636,-7.359 -0.254,-3.153 0.964,-6.324 2.052,-8.811 1.101,-2.513 2.614,-5.5 1.7,-8.635 -2.689,-9.23 -20.969,-4.467 -16.199,5.211 2.349,4.765 5.136,11.366 1.928,16.975 -3.147,5.497 -9.835,7.016 -17.342,6.995l-36.191 -0.102 -9.531 -0.027 9.529 0.027c-4.548,-0.375 -8.302,-3.554 -9.529,-7.804l0 -23.211c0.004,-0.388 0.006,-0.777 0.008,-1.167 0,-0.506 -0.003,-1.016 -0.008,-1.528l0 -13.368c0.197,-2.799 0.626,-5.508 1.49,-8.007 2.149,-6.219 8.117,-9.687 16.272,-7.013 4.455,1.46 14.181,6.857 16.413,-2.833 1.15,-4.988 -1.114,-14.421 -11.848,-10.1 -4.743,1.91 -9.154,4.347 -14.8,1.773 -15.143,-6.905 -2.306,-36.673 -11.616,-44.406 -8.506,-7.063 -33.917,1.869 -42.488,-7.389 -6.098,-6.588 -1.952,-13.388 0.056,-18.486 3.773,-9.574 -6.116,-12.804 -12.071,-9.838 -2.334,1.163 -5.149,4.044 -4.161,7.796 0.467,1.773 2.677,5.208 3.572,9.027 1.855,7.92 -2.899,13.531 -9.072,15.213 -6.906,1.881 -16.367,0.926 -23.837,0.968 0.142,3.337 -0.24,5.986 -0.981,8.343l0 0.001c-1.687,4.014 -17.814,26.622 -21.397,32.106 -2.408,3.689 -5.869,8.355 -5.2,12.565 -0.084,0.315 -0.127,0.587 -0.112,0.794 0.127,0.106 0.256,0.208 0.387,0.305 0.487,1.401 1.507,2.736 3.261,3.946 9.109,6.284 17.276,0.933 17.706,9.079 0.309,5.859 -2.844,7.212 -2.788,10.826 0.054,3.427 11.665,5.389 14.586,6.325 -1.075,2.431 -13.001,4.757 -10.883,9.101 0.133,0.274 0.33,0.547 0.573,0.82l-0.004 0.009 2.639 2.22c2.073,1.847 3.095,2.48 4.571,5.33 0.636,18.552 0.09,17.68 0.636,18.552 -0.749,7.391 -1.58,9.869 3.811,13.484 11.359,7.618 35.57,0.708 51.118,5.168 5.146,1.476 8.787,4.216 11.364,7.37 6.245,7.644 7.027,20.996 7.812,32.558 0.051,0.738 0.143,1.72 0.24,2.708 -0.005,0.144 -0.009,0.288 -0.009,0.433 0,0.895 0.103,1.764 0.297,2.595l0 0.004c0.015,0.197 0.06,0.359 0.128,0.492 1.227,4.369 4.993,7.55 9.449,7.55 4.117,0 7.645,-2.716 9.127,-6.576z"/>
+          <g><path class="f1" d="M365.689 795.464c11.339,0 22.192,-6.008 27.037,-16.184l-11.532 -6.492c-3.004,5.62 -8.237,9.206 -16.086,9.206 -10.951,0 -18.703,-8.625 -18.703,-20.448 0,-11.822 7.849,-20.447 18.703,-20.447 7.849,0 12.889,3.585 16.086,9.206l11.532 -6.492c-4.845,-10.176 -15.698,-16.184 -27.037,-16.184 -18.993,0 -33.82,15.021 -33.82,33.917 0,18.897 14.827,33.918 33.82,33.918zm49.558 -0.097c14.73,0 26.068,-11.435 26.068,-25.39 0,-13.761 -11.241,-25.293 -26.068,-25.293 -14.633,0 -25.971,11.435 -25.971,25.293 0,13.955 11.241,25.39 25.971,25.39zm0 -12.889c-7.074,0 -12.21,-5.62 -12.21,-12.404 0,-6.783 5.136,-12.404 12.21,-12.404 7.075,0 12.308,5.621 12.308,12.404 0,6.784 -5.233,12.404 -12.308,12.404zm49.365 34.984c15.602,0 27.231,-11.047 27.231,-28.104l0 -19.381c0,-14.439 -11.048,-25.195 -26.068,-25.195 -14.73,0 -25.971,11.337 -25.971,25.195 0,14.245 10.756,24.711 24.226,24.711 6.783,0 11.435,-2.519 14.052,-5.814l0 0.872c0,9.4 -5.524,15.118 -13.664,15.118 -6.493,0 -10.466,-3.295 -12.598,-7.462l-11.435 6.202c4.361,8.915 12.986,13.858 24.227,13.858zm0.969 -35.759c-6.784,0 -12.21,-5.136 -12.21,-12.017 0,-6.88 5.426,-11.919 12.21,-11.919 6.88,0 12.307,5.039 12.307,11.919 0,6.881 -5.427,12.017 -12.307,12.017zm54.597 -23.549c7.85,0 11.435,6.299 11.435,13.665l0 22.288 13.761 0 0 -23.936c0,-14.052 -8.431,-25.389 -25.196,-25.389 -16.765,0 -25.002,11.434 -25.002,25.389l0 23.936 13.761 0 0 -22.288c0,-7.366 3.489,-13.665 11.241,-13.665zm37.348 -19.187c4.652,0 8.431,-3.779 8.431,-8.528 0,-4.651 -3.779,-8.528 -8.431,-8.528 -4.651,0 -8.528,3.877 -8.528,8.528 0,4.749 3.877,8.528 8.528,8.528zm-6.88 7.171l0 47.969 13.761 0 0 -47.969 -13.761 0z"/><path class="f1" d="M592.548 794.883c12.404,0 21.901,-7.366 21.901,-18.413 0,-12.986 -10.951,-15.893 -20.738,-18.025 -8.528,-1.841 -16.474,-3.585 -16.474,-12.113 0,-6.784 6.589,-11.726 14.245,-11.726 7.656,0 13.373,3.489 16.28,9.788l5.136 -2.713c-3.585,-8.528 -11.919,-12.986 -21.222,-12.986 -11.241,0 -20.642,7.656 -20.642,17.831 0,12.888 11.145,15.796 20.932,17.927 8.528,1.745 16.281,3.393 16.281,12.017 0,7.946 -6.784,12.501 -15.699,12.501 -8.334,0 -14.73,-3.586 -17.54,-9.981l-5.233 2.616c3.585,8.528 12.501,13.277 22.773,13.277zm35.264 -0.776l0 -21.029 6.88 0c0.485,1.454 1.26,2.907 2.52,4.167l16.765 16.862 7.849 0 -20.447 -20.641c-0.969,-0.969 -1.551,-1.938 -1.551,-2.907 0,-1.066 0.582,-1.938 1.551,-2.907l20.544 -20.544 -7.558 0 -16.959 16.958c-1.163,1.163 -2.035,2.423 -2.52,3.682l-7.074 0 0 -42.348 -6.008 0 0 68.707 6.008 0zm41.757 -58.338c2.422,0 4.264,-1.938 4.264,-4.457 0,-2.52 -1.842,-4.458 -4.264,-4.458 -2.423,0 -4.361,1.938 -4.361,4.458 0,2.519 1.938,4.457 4.361,4.457zm-3.004 11.339l0 46.999 6.008 0 0 -46.999 -6.008 0zm16.367 -21.611l0 68.61 6.009 0 0 -68.61 -6.009 0zm17.046 0l0 68.61 6.009 0 0 -68.61 -6.009 0zm30.807 69.482c9.303,0 17.346,-5.329 17.346,-13.857 0,-17.831 -27.909,-9.982 -27.909,-21.417 0,-4.845 5.039,-7.655 10.272,-7.655 4.942,0 9.013,1.356 11.532,6.104l4.942 -2.809c-3.101,-5.621 -8.915,-8.916 -16.571,-8.916 -9.012,0 -16.183,5.524 -16.183,13.373 0,17.831 27.909,9.594 27.909,21.417 0,5.427 -5.233,8.139 -11.532,8.139 -5.718,0 -10.078,-1.937 -12.889,-7.364l-4.942 2.713c3.488,6.881 10.078,10.272 18.025,10.272z"/></g>
+        </svg>
+      </div><!-- /.logo-box -->
+      <div class="org-name">
+        <span class="wordmark">Cogniskills</span>
+        <span class="tagline">Learning Enhancement Center</span>
+      </div>
+    </div><!-- /.logo-lockup -->
+
+    <div class="header-contact">
+      <a href="tel:+2348038586878">0803 858 6878</a> &nbsp;·&nbsp; <a href="tel:+2349011811088">0901 181 1088</a><br />
+      <a href="mailto:cogniskills@gmail.com">cogniskills@gmail.com</a><br />
+      <a href="https://cogniskillsleh.com" target="_blank">cogniskillsleh.com</a>
+    </div>
+  </header>
+
+  <div class="stripe"></div>
+
+  <!-- ADDRESS BAR -->
+  <div class="address-bar">
+    25 Oladimeji Alo Street<span class="sep">·</span>Lekki Phase 1<span class="sep">·</span>Lagos, Nigeria<span class="sep">·</span>Est. 2004
+  </div>
+
+  <!-- ════════════ BODY ════════════ -->
+  <main class="body">
+
+    <!-- Date + Ref -->
+    <div class="meta-row">
+      <span>Date: <span class="date" id="letter-date"></span></span>
+      <span>Ref: <span class="ref">CS / LTR / <span id="letter-ref">001</span></span></span>
+    </div>
+
+    <!-- Addressee -->
+    <div class="addressee">
+      <p class="block-label">To</p>
+      <address>
+        <strong>[Recipient Full Name]</strong><br />
+        [Title / Designation]<br />
+        [Organisation / School / Clinic]<br />
+        [Address Line 1]<br />
+        [City, State]
+      </address>
+    </div>
+
+    <!-- Subject -->
+    <div class="subject-row">
+      <div class="subject-accent"></div>
+      <div class="subject-inner">
+        <div class="sub-label">Subject</div>
+        <div class="sub-text">
+          [e.g. Cognitive Assessment Report — [Child's Full Name] | DOB: DD/MM/YYYY]
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter text -->
+    <div class="letter-text">
+      <p class="salutation">Dear [Sir / Ma / Name],</p>
+
+      <p>
+        We write with respect to the above-referenced matter on behalf of
+        <strong>Cogniskills Learning Enhancement Center</strong>, Lagos' leading
+        specialist in evidence-based cognitive skills training for children presenting with
+        dyslexia, ADHD, autism spectrum disorder, dyspraxia, speech difficulties, and
+        related learning differences.
+      </p>
+
+      <p>
+        [Insert the primary purpose of this letter here. Clearly state the context —
+        whether this is an assessment report, a referral, a progress update, or
+        an official recommendation — and reference any relevant dates, sessions, or
+        supporting documents as appropriate.]
+      </p>
+
+      <p>
+        [Continue with your findings, observations, or recommendations. Use formal,
+        clinical language appropriate to the recipient. Where useful, reference specific
+        cognitive domains: auditory processing, working memory, attention, processing
+        speed, visual-spatial reasoning, or sensory-motor integration.]
+      </p>
+
+      <p>
+        Should you require any further information or wish to discuss this matter in
+        greater detail, please do not hesitate to contact our office directly. We remain
+        fully committed to the best outcomes for every child in our care and look forward
+        to your continued collaboration.
+      </p>
+    </div>
+
+    <!-- Signature -->
+    <div class="signature-block">
+      <p class="closing">Yours sincerely,</p>
+      <p class="sig-name">[Authorised Signatory]</p>
+      <p class="sig-title">[Title] — Cogniskills Learning Enhancement Center</p>
+      <span class="official-stamp">Official Correspondence</span>
+    </div>
+
+  </main><!-- /.body -->
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <div class="footer-stripe"></div>
+  <footer class="footer-band">
+    <span class="brand">Cogniskills Learning Enhancement Center</span>
+    <span>Lagos, Nigeria &nbsp;·&nbsp; cogniskills@gmail.com &nbsp;·&nbsp; cogniskillsleh.com</span>
+    <span class="page-no">Page 1 of 1</span>
+  </footer>
+
+</div><!-- /.sheet -->
+</div><!-- /.sheet-wrapper -->
+
+<script>
+  // Auto-fill date
+  document.getElementById('letter-date').textContent =
+    new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+</script>
+</body>
+</html>

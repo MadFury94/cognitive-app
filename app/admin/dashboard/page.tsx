@@ -57,21 +57,26 @@ export default function AdminDashboard() {
     const router = useRouter();
 
     useEffect(() => {
-        const token = localStorage.getItem('admin_token');
-        if (!token) {
-            router.push('/admin/login');
-            return;
-        }
-
+        // Auth is enforced by middleware via httpOnly cookie —
+        // if we reach this page the cookie is already valid.
         loadData();
     }, [router]);
+
+    // Auth for Worker write calls. The session cookie (httpOnly) proves the user is
+    // authenticated to this Next.js app. Calls to the Cloudflare Worker need their
+    // own credential. Store NEXT_PUBLIC_WORKER_WRITE_TOKEN in .env.local (no NEXT_PUBLIC
+    // prefix if you proxy via a Next.js API route instead — recommended for production).
+    const getToken = (): string => {
+        if (typeof window === 'undefined') return '';
+        return sessionStorage.getItem('worker_token') ?? '';
+    };
 
     const loadData = async () => {
         try {
             const [programsRes, testimonialsRes, teamRes] = await Promise.all([
                 fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/programs'),
                 fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/testimonials'),
-                fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/team')
+                fetch('https://cogniskills-app.onochieazukaeme.workers.dev/api/team'),
             ]);
 
             const programsData = await programsRes.json();
@@ -88,8 +93,8 @@ export default function AdminDashboard() {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('admin_token');
+    const handleLogout = async () => {
+        await fetch('/api/admin/login', { method: 'DELETE', credentials: 'same-origin' });
         router.push('/admin/login');
     };
 
@@ -102,7 +107,7 @@ export default function AdminDashboard() {
                 {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': 'Bearer admin-token-here'
+                        'Authorization': `Bearer ${getToken()}`
                     }
                 }
             );
@@ -139,7 +144,7 @@ export default function AdminDashboard() {
                 method: editingTestimonial ? 'PUT' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer admin-token-here'
+                    'Authorization': `Bearer ${getToken()}`
                 },
                 body: JSON.stringify(data)
             });
@@ -178,7 +183,7 @@ export default function AdminDashboard() {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer admin-token-here'
+                        'Authorization': `Bearer ${getToken()}`
                     },
                     body: JSON.stringify(data)
                 }
@@ -217,7 +222,7 @@ export default function AdminDashboard() {
                 method: editingTeamMember ? 'PUT' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer admin-token-here'
+                    'Authorization': `Bearer ${getToken()}`
                 },
                 body: JSON.stringify(data)
             });
@@ -243,7 +248,7 @@ export default function AdminDashboard() {
                 {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': 'Bearer admin-token-here'
+                        'Authorization': `Bearer ${getToken()}`
                     }
                 }
             );

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Deep purple rounded square -->
+  <rect width="32" height="32" rx="7" fill="#320070"/>
+
+  <!-- Gradient accent ring — adds depth at larger sizes -->
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cc00cc"/>
+      <stop offset="100%" stop-color="#6699ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="32" height="4" rx="2" fill="url(#g)" opacity="0.85"/>
+
+  <!--
+    Bold "C" drawn as a thick arc path so it renders
+    cleanly at 16 × 16 with no font dependency.
+
+    Circle centre (16, 17), outer r=11, inner r=6.
+    Arc spans from ~40° to ~320° (gap faces right).
+  -->
+  <path
+    d="
+      M 24.43 10.86
+      A 11 11 0 1 0 24.43 23.14
+      L 21.13 20.45
+      A 7 7 0 1 1 21.13 13.55
+      Z
+    "
+    fill="white"
+  />
+</svg>

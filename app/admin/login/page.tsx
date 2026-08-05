@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock } from 'lucide-react';
 import Image from 'next/image';
 
 export default function AdminLoginPage() {
@@ -18,17 +17,18 @@ export default function AdminLoginPage() {
         setLoading(true);
 
         try {
-            // Credentials validated server-side — never exposed to browser
+            // Credentials validated server-side. On success the API sets an
+            // httpOnly session cookie — no token is ever stored in JS land.
             const res = await fetch('/api/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
+                credentials: 'same-origin',
             });
 
             const data = await res.json();
 
-            if (res.ok && data.token) {
-                localStorage.setItem('admin_token', data.token);
+            if (res.ok && data.success) {
                 router.push('/admin/dashboard');
             } else {
                 setError(data.error || 'Invalid username or password');
@@ -58,7 +58,6 @@ export default function AdminLoginPage() {
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">
                             Admin Login
                         </h1>
-
                     </div>
 
                     {/* Error Message */}
@@ -82,6 +81,7 @@ export default function AdminLoginPage() {
                                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                 placeholder="Enter username"
                                 required
+                                autoComplete="username"
                             />
                         </div>
 
@@ -97,6 +97,7 @@ export default function AdminLoginPage() {
                                 className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
                                 placeholder="Enter password"
                                 required
+                                autoComplete="current-password"
                             />
                         </div>
 

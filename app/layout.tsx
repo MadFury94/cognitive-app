@@ -80,9 +80,12 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
-    shortcut: '/logo.png',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
+      { url: '/logo.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: { url: '/logo.png', sizes: '180x180' },
+    shortcut: '/favicon.svg',
   },
 };
 
@@ -98,7 +101,9 @@ export default function RootLayout({
       className={`${fredoka.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/logo.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/logo.png" sizes="180x180" />
         <link rel="apple-touch-icon" href="/logo.png" />
         <meta name="theme-color" content="#7c3aed" />
         {/* Local Business Schema */}
