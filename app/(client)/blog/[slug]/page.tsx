@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     description: 'Articles on cognitive skills, learning difficulties, and brain training for children.',
 };
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-    return <BlogPost slug={params.slug} />;
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    return <BlogPost slug={slug} />;
 }
